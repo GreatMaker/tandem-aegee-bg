@@ -1,0 +1,5 @@
+<?php
+/*
+ * Main View File
+ */
+?>
