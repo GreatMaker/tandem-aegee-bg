@@ -1,13 +1,17 @@
 <?php
 /*
  * Database Base Model Class
+ * 
+ * @author Andrea Visinoni <andrea.visinoni@aegeebergamo.eu>
  */
+
+require_once 'db_base_class.php';
 
 Abstract class ExtensionBridge
 {
     // array containing all the extended classes
     private $_exts = array();
-    public $_this;
+    public  $_this;
 
     function __construct() {$_this = $this;}
 
@@ -45,8 +49,8 @@ class database_tables extends ExtensionBridge
     {
         $this->base = $parent;
 
-        // add table classes
-        //parent::addExt(new database_customers_table($this->base), "database_customers_table");
+        // add table users
+        parent::addExt(new users_table($this->base), "users_table");
     }
 }
 
