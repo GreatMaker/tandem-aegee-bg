@@ -1,11 +1,11 @@
 <?php
-    /*
-     * Database Configuration for Model
-     */
-    define("DATABASE_VER", 0);
+/*
+ * Database Configuration for Model
+ */
+define("DB_VER", 0);
 
-    $db_username       = "prog058";
-    $db_password       = "prog058";
-    $db_hostname       = "localhost";
-    $db_name           = "prog058";
+define("DB_USERNAME", "tandem");
+define("DB_PASSWORD", "tandem");
+define("DB_HOSTNAME", "127.0.0.1");
+define("DB_NAME",     "tandem");
 ?>

@@ -6,6 +6,7 @@
  */
 
 require_once 'db_base_class.php';
+require_once 'db_users_class.php';
 
 Abstract class ExtensionBridge
 {
@@ -35,7 +36,7 @@ Abstract class ExtensionBridge
         foreach($this->_exts as $name => $ext)
         {
             if (method_exists($ext, $method))
-                return call_user_method_array($method, $ext, $args);
+                return call_user_func_array(array($ext, $method), $args);
         }
         throw new Exception("This Method {$method} doesn't exists");
     }
@@ -57,6 +58,7 @@ class database_tables extends ExtensionBridge
 class db_base extends PDO
 {
     private $db_tables;
+	private $error_str = "";
 
     public function __construct($dbusername, $dbpasswd, $dbhostname, $dbname, $dbversion)
     {
@@ -97,6 +99,22 @@ class db_base extends PDO
         {
             throw new PDOException($e);
         }
+    }
+
+	public function SetError($str_err)
+    {
+        $this->error_str = $str_err;
+    }
+
+    public function GetError(&$str_err)
+    {
+        if ($this->error_str == "")
+            return false;
+
+        $str_err = $this->error_str;
+
+        $this->error_str = "";
+        return true;
     }
 }
 ?>

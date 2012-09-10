@@ -179,7 +179,7 @@ li ol, li ul {
 
 
 #container {
-	width: 960px;
+	width: 1000px; /* 960 */
 	margin: 50px auto 0;
 	padding: 0;
 }
@@ -213,7 +213,7 @@ li ol, li ul {
 
 #nav {
 	height: 45px;
-	width: 960px;
+	width: 1000px; /* 960 */
 	background-color: #111;
 }
 
@@ -251,13 +251,13 @@ li ol, li ul {
 	background: none;
 	margin:0 auto;
 	padding: 12px;
-	width: 936px;
+	width: 976px; /* 936 */
 	background-color: #ddd;
 }
 
 #content {
 	float: left;
-	width: 615px;
+	width: 635px; /* 615 */
 	margin: 0;
 	padding: 10px;
 	background-color: #fff;
@@ -267,7 +267,7 @@ li ol, li ul {
 }
 
 .sidebar {
-	width: 280px;
+	width: 300px; /* 280 */
 	padding: 0;
 	float: right;
 }
@@ -344,7 +344,7 @@ li ol, li ul {
 #footer {
 	margin:0 auto 60px;
 	border-top: 10px solid #1A1A1A;
-	width: 960px;
+	width: 1000px; /* 960 */
 }
 
 #footer p {

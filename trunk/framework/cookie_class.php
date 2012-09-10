@@ -14,7 +14,7 @@ class cookie_class
         session_start();
 
         // controllo esistenza cookie
-        if (!isset($_COOKIE['tandem']['u']) || !isset($_COOKIE['tandem']['p']))
+        if (!isset($_COOKIE['tandem']['u']))
         {
             $this->do_login = true;
             return;
@@ -38,13 +38,12 @@ class cookie_class
     public function SetData($userdata)
     {
         $this->SetUsername($userdata['username']);
-        $this->SetPassword($userdata['password']);
-        $this->SetScreenResolution($userdata['screen_resolution']);
+        //$this->SetPassword($userdata['password']);
     }
 
     public function GetUsername()
     {
-        return $_COOKIE['tandem']['u'];
+        return isset($_COOKIE['tandem']['u']) ? $_COOKIE['tandem']['u'] : false;
     }
 
     public function SetUsername($username)
@@ -62,35 +61,25 @@ class cookie_class
         setcookie("tandem[p]", trim(md5($password)), time() + (3600 * 24)); // giÃ  in MD5
     }
 
-    public function GetScreenResolution()
-    {
-        return $_COOKIE['tandem']['res'];
-    }
-
-    public function SetScreenResolution($screen_res)
-    {
-        setcookie("tandem[res]", $screen_res, time() + (3600 * 24));
-    }
-
     public function GetLanguage()
     {
-        return $_COOKIE['tandem']['lang'];
+        return isset($_COOKIE['tandem']['lang']) ? $_COOKIE['tandem']['lang'] : false;
     }
 
     protected function UpdateCookies()
     {
         // cookie scadenza +24 ore
-        setcookie("tandem[u]",   $_COOKIE['tandem']['u'],   time() + (3600 * 24));
-        setcookie("tandem[p]",   $_COOKIE['tandem']['p'],   time() + (3600 * 24));
-        setcookie("tandem[res]", $_COOKIE['tandem']['res'], time() + (3600 * 24));
+        setcookie("tandem[u]",    $_COOKIE['tandem']['u'],   time() + (3600 * 24));
+        //setcookie("tandem[p]",    $_COOKIE['tandem']['p'],   time() + (3600 * 24));
+        //setcookie("tandem[lang]", $_COOKIE['tandem']['lang'], time() + (3600 * 24));
     }
 
     public function Logout()
     {
         // elimina cookie
         setcookie ("tandem[u]",   "", time() - 3600);
-        setcookie ("tandem[p]",   "", time() - 3600);
-        setcookie ("tandem[res]", "", time() - 3600);
+        //setcookie ("tandem[p]",   "", time() - 3600);
+        //setcookie ("tandem[lang]", "", time() - 3600);
     }
 }
 ?>

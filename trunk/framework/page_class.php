@@ -7,12 +7,19 @@
 
 require('config.php');
 require('cookie_class.php');
+require('language_class.php');
+require('page_list.php');
+require('model/db_base_class.php');
 
 require('box_class.php');
 
 class page_class
 {
     protected   $pCookie;
+	protected	$pLang;
+	protected	$pConnection;
+
+	private		$bLoginNeeded = false;
 
     private     $page_html;
     private     $page_title;
@@ -22,17 +29,38 @@ class page_class
     private     $page_body_extra;
     private     $page_menu;
     private     $page_body;
-    private     $page_version;
     private     $page_footer;
     private     $page_logo;
     private     $page_company;
     private     $page_req;
     private     $page_sidebar;
+	private		$page_jquery;
 
     public function __construct()
     {
         // Init cookie
-        //$this->pCookie = new cookie_class();
+        $this->pCookie = new cookie_class();
+
+		// set login needed flag
+		if ($this->pCookie->LoginNeeded())
+			$this->bLoginNeeded = true;
+
+		// Init language
+        $this->pLang = new language_class($this->pCookie->GetLanguage());
+
+		try
+		{
+			// Connessione a DB
+			$this->pConn = new db_base(DB_USERNAME, DB_PASSWORD, DB_HOSTNAME, DB_NAME, DB_VER);
+		}
+		catch (PDOException $e)
+        {
+            
+        }
+        catch (Exception $e)
+        {
+            
+        }
     }
 
     public function set_template($tpl_name)
@@ -43,6 +71,11 @@ class page_class
         else
             die('Template file not found!');
     }
+
+	public function set_required_page($page)
+	{
+		$this->page_req = $page;
+	}
 
     // Set page title
     public function set_title($title)
@@ -56,7 +89,7 @@ class page_class
         if (isset($this->page_js))
             $this->page_js .= "\n";
 
-        $this->page_js .= "\t<script type=\"text/javascript\" src=\"js/".$js."\"></script>";
+        $this->page_js .= "<script type=\"text/javascript\" src=\"include/js/".$js."\"></script>";
     }
     
     // Push CSS into the page
@@ -65,7 +98,16 @@ class page_class
         if (isset($this->page_css))
             $this->page_css .= "\n";
 
-        $this->page_css .= "\t<link rel=\"stylesheet\" href=\"css/".$css."\" type=\"text/css\" />";
+        $this->page_css .= "<link rel=\"stylesheet\" href=\"css/".$css."\" type=\"text/css\" />";
+    }
+
+	// Push jquery init into the page
+    public function AddJQuery($data)
+    {
+        if (isset($this->page_jquery))
+            $this->page_jquery .= "\n";
+
+        $this->page_jquery .= "\t".$data;
     }
 
     // populate sidebar
@@ -77,6 +119,24 @@ class page_class
         $this->page_sidebar .= $box;
     }
 
+	private function add_sidebar_login_box()
+	{
+		// create login box
+		$box = new login_box_class(_("Login"), "login", $this);
+
+		// append data
+		self::add_sidebar_box($box->get_box_data());
+	}
+
+	private function add_sidebar_facebook()
+	{
+		// create login box
+		$box = new facebook_box_class(_("Facebook"), $this);
+
+		// append data
+		self::add_sidebar_box($box->get_box_data());
+	}
+
     // display page
     public function display()
     {
@@ -85,12 +145,19 @@ class page_class
         $this->AddJS('hoverIntent.js');
 	$this->AddJS('superfish.js');
         $this->AddJS('supersubs.js');*/
+		
+		// Insert login sidebar box if needed
+		if ($this->bLoginNeeded == true && $this->page_req != REGISTER)
+			$this->add_sidebar_login_box();
 
-        // Impostazione titolo
+		// Insert facebook sidebar box
+		$this->add_sidebar_facebook();
+
+        // Set page title
         $this->page_html = str_replace("<%TITLE>", $this->page_title, $this->page_html);
-        // Impostazione CSS
+        // Set CSS
         $this->page_html = str_replace("<%CSS>", $this->page_css, $this->page_html);
-        // Impostazione JS
+        // Set JS
         $this->page_html = str_replace("<%JS>", $this->page_js, $this->page_html);
         // Impostazione JS
         $this->page_html = str_replace("<%FOOTJS>", $this->page_foot_js, $this->page_html);
@@ -102,14 +169,14 @@ class page_class
         $this->page_html = str_replace("<%MENU>", $this->page_menu, $this->page_html);
         // Impostazione Body
         $this->page_html = str_replace("<%MAIN>", $this->page_body, $this->page_html);
-        // Impostazione Versione
-        $this->page_html = str_replace("<%VERSION>", $this->page_version, $this->page_html);
         // Impostazione Footer
         $this->page_html = str_replace("<%FOOTER>", $this->page_footer, $this->page_html);
         // Impostazione Nome societÃ 
         $this->page_html = str_replace("<%COMPANY>", $this->page_company, $this->page_html);
         // Sidebar
         $this->page_html = str_replace("<%SIDEBAR>", $this->page_sidebar, $this->page_html);
+		// jQuery on load
+		$this->page_html = str_replace("<%JQUERY>", $this->page_jquery, $this->page_html);
 
         // Output pagina
         echo $this->page_html;
