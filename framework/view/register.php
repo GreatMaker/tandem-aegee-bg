@@ -1,6 +1,6 @@
 <?php
 /**
- * Main View File
+ * Register View File
  *
  * @author Andrea Visinoni <andrea.visinoni@aegeebergamo.eu>
  */
@@ -9,5 +9,5 @@
 $page->set_template('framework/templates/main.tpl');
 
 // set page title
-$page->set_title('Home');
+$page->set_title('Register');
 ?>

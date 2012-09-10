@@ -5,7 +5,14 @@
     <title><%TITLE></title>
     <link rel="stylesheet" href="include/css/style.css" type="text/css" />
 	<%CSS>
+	<script src="include/js/jquery-1.7.2.min.js" type="text/javascript"></script>
 	<%JS>
+	<script>
+		$(document).ready(function()
+		{
+			<%JQUERY>
+		});
+	</script>
 </head>
 <body>
 <div id="container">

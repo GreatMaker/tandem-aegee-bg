@@ -7,7 +7,9 @@
 
     // Show main if no page is specified
     $page_req = (!isset($_GET['page'])) ? HOME : $_GET['page'];
-    //$page->SetRequiredPage($page_req);
+
+	// page requested
+    $page->set_required_page($page_req);
 
     // Get page path
     $path_base = './framework/view/'; 
