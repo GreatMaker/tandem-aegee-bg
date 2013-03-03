@@ -7,6 +7,7 @@
 	<%CSS>
 	<script src="include/js/jquery-1.7.2.min.js" type="text/javascript"></script>
 	<%JS>
+	<%HEAD>
 	<script>
 		$(document).ready(function()
 		{
@@ -34,7 +35,7 @@
 
 	<div id="body">
 		<div id="content">
-			<h2>Introduction</h2>
+			<%MAIN>
 		</div> <!-- content -->
 
 		<div class="sidebar">

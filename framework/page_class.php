@@ -25,6 +25,7 @@ class page_class
     private     $page_title;
     private     $page_css;
     private     $page_js;
+	private		$page_head;
     private     $page_foot_js;
     private     $page_body_extra;
     private     $page_menu;
@@ -98,7 +99,7 @@ class page_class
         if (isset($this->page_css))
             $this->page_css .= "\n";
 
-        $this->page_css .= "<link rel=\"stylesheet\" href=\"css/".$css."\" type=\"text/css\" />";
+        $this->page_css .= "<link rel=\"stylesheet\" href=\"include/css/".$css."\" type=\"text/css\" />";
     }
 
 	// Push jquery init into the page
@@ -108,6 +109,19 @@ class page_class
             $this->page_jquery .= "\n";
 
         $this->page_jquery .= "\t".$data;
+    }
+
+	public function AddHead($data)
+	{
+		if (isset($this->page_head))
+            $this->page_head .= "\n";
+
+        $this->page_head .= "\t".$data;
+	}
+
+	public function AddToBody($str)
+    {
+        $this->page_body .= $str;
     }
 
     // populate sidebar
@@ -137,6 +151,23 @@ class page_class
 		self::add_sidebar_box($box->get_box_data());
 	}
 
+	private function add_sidebar_userdetails()
+	{
+		// create login box
+		$box = new userdetails_box_class(_("User"), $this);
+
+		// append data
+		self::add_sidebar_box($box->get_box_data());
+	}
+
+	public function get_user_data()
+	{
+		// username
+		$username = $this->pCookie->GetUsername();
+
+		return $this->pConn->user_get_data($username);
+	}
+
     // display page
     public function display()
     {
@@ -149,6 +180,8 @@ class page_class
 		// Insert login sidebar box if needed
 		if ($this->bLoginNeeded == true && $this->page_req != REGISTER)
 			$this->add_sidebar_login_box();
+		else
+			$this->add_sidebar_userdetails();
 
 		// Insert facebook sidebar box
 		$this->add_sidebar_facebook();
@@ -159,6 +192,8 @@ class page_class
         $this->page_html = str_replace("<%CSS>", $this->page_css, $this->page_html);
         // Set JS
         $this->page_html = str_replace("<%JS>", $this->page_js, $this->page_html);
+		// Set Head
+        $this->page_html = str_replace("<%HEAD>", $this->page_head, $this->page_html);
         // Impostazione JS
         $this->page_html = str_replace("<%FOOTJS>", $this->page_foot_js, $this->page_html);
         // Impostazione logo

@@ -48,7 +48,7 @@ class cookie_class
 
     public function SetUsername($username)
     {
-        setcookie("tandem[u]", trim(md5($username)), time() + (3600 * 24));
+        setcookie("tandem[u]", trim(md5($username)), time() + (3600 * 24), "/new", "tandem.unibg.it");
     }
 
     public function GetPassword()
@@ -58,7 +58,7 @@ class cookie_class
 
     public function SetPassword($password)
     {
-        setcookie("tandem[p]", trim(md5($password)), time() + (3600 * 24)); // giÃ  in MD5
+        setcookie("tandem[p]", trim(md5($password)), time() + (3600 * 24), "/new", "tandem.unibg.it"); // già  in MD5
     }
 
     public function GetLanguage()
@@ -69,7 +69,7 @@ class cookie_class
     protected function UpdateCookies()
     {
         // cookie scadenza +24 ore
-        setcookie("tandem[u]",    $_COOKIE['tandem']['u'],   time() + (3600 * 24));
+        setcookie("tandem[u]",    $_COOKIE['tandem']['u'],   time() + (3600 * 24), "/new", "tandem.unibg.it");
         //setcookie("tandem[p]",    $_COOKIE['tandem']['p'],   time() + (3600 * 24));
         //setcookie("tandem[lang]", $_COOKIE['tandem']['lang'], time() + (3600 * 24));
     }
@@ -77,7 +77,7 @@ class cookie_class
     public function Logout()
     {
         // elimina cookie
-        setcookie ("tandem[u]",   "", time() - 3600);
+        setcookie ("tandem[u]",   "", time() - 3600, "/new", "tandem.unibg.it");
         //setcookie ("tandem[p]",   "", time() - 3600);
         //setcookie ("tandem[lang]", "", time() - 3600);
     }

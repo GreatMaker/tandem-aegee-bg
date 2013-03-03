@@ -17,4 +17,5 @@ define("PAGE_TITLE_PREFIX", "Tandem Project Bergamo");
 
 // LDAP Login
 define("LDAP_LOGIN_SERVER", "193.204.255.31");
+define("LDAP_ENABLE",		true);
 ?>

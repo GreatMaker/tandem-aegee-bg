@@ -12,6 +12,7 @@ class ldap_login
     private $login_type = 0;
     private $ldapconn;
     private $ldap_uname = "";
+	private $ldap_data;
     
 	// Login type
     const LOGIN_MATRICOLA		= 0;
@@ -33,6 +34,7 @@ class ldap_login
             $this->login_type = self::LOGIN_USERNAME;
 
         $this->ldap_uname = $username;
+		$this->ldap_data  = array();
     }
 
     public function connect()
@@ -64,7 +66,14 @@ class ldap_login
                 if ($ret[0])
                 {
                     if (ldap_bind($this->ldapconn, $ret[0]['dn'], $password))
+					{
+						$this->ldap_data['id']			= $ret[0]['uid'][0];
+						$this->ldap_data['username']	= substr($ret[0]['mail'][0] , 0, strrpos($ret[0]['mail'][0], "@"));
+						$this->ldap_data['name']		= $ret[0]['givenname'][0];
+						$this->ldap_data['surname']		= $ret[0]['sn'][0];
+
                         return self::LOGIN_OK;
+					}
                     else
                         return self::LOGIN_PASSWORD_ERR;
                 }
@@ -79,5 +88,10 @@ class ldap_login
             return self::LOGIN_GEN_ERR;
         }
     }
+
+	public function get_data()
+	{
+		return $this->ldap_data;
+	}
 }
 ?>

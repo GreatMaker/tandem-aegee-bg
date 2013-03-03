@@ -13,7 +13,7 @@ body {
 }
 
 /** element defaults **/
-table {
+/*table {
 	width: 100%;
 	text-align: left;
 }
@@ -29,7 +29,7 @@ th {
 
 td {
 	border-bottom: 1px solid #ccc;
-}
+}*/
 
 code, blockquote {
 	display: block;
@@ -56,7 +56,7 @@ blockquote p {
 
 p {
 	line-height: 1.9em;
-	margin-bottom: 20px;
+	margin-bottom: 14px;
 	font-size: 12px;
 }
 
@@ -95,7 +95,7 @@ fieldset p label {
 }
 
 form input, form select, form textarea {
-	padding: 5px;
+	padding: 3px;
 	color: #333333;
 	border: 1px solid #ddd;
 	border-right:1px solid #ccc;
@@ -257,7 +257,7 @@ li ol, li ul {
 
 #content {
 	float: left;
-	width: 635px; /* 615 */
+	width: 625px; /* 615 */
 	margin: 0;
 	padding: 10px;
 	background-color: #fff;
@@ -267,7 +267,7 @@ li ol, li ul {
 }
 
 .sidebar {
-	width: 300px; /* 280 */
+	width: 310px; /* 280 */
 	padding: 0;
 	float: right;
 }
