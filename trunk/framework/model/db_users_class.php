@@ -97,6 +97,29 @@ class users_table
         }
 	}
 
+	public function user_auth($username, $password)
+	{
+		try
+        {
+			$query = "SELECT * FROM users WHERE username = ? AND password = md5(?) LIMIT 1";
+
+			$res = $this->dbConnection->prepare($query);
+
+			$res->bindParam(1, $username);
+			$res->bindParam(2, $password);
+			$res->execute();
+
+			if ($res->fetchColumn() > 0)
+				return true;
+
+			return false;
+		}
+		catch (PDOException $e)
+        {
+            $this->dbConnection->SetError(_("Errore informazioni utente"));
+        }
+	}
+
 	public function user_get_data($username)
 	{
 		try
