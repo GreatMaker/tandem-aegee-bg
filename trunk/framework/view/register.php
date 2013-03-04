@@ -80,9 +80,9 @@ $registration->add($send);
 // push validator js class
 $page->AddJS("jquery.form.js");
 $page->AddJS("jquery.notify.js");
-$page->AddJS("jquery-ui-1.8.21.custom.min.js");
+$page->AddJS("jquery-ui-1.10.1.custom.min.js");
 
-$page->AddCSS("ui-lightness/jquery-ui-1.8.21.custom.css");
+$page->AddCSS("ui-lightness/jquery-ui-1.10.1.custom.css");
 
 // add validator
 $page->AddJQuery("$(\"#registration\").ajaxForm({dataType:'json', success: processReply});$(\"#birthdate\").datepicker({yearRange: \"-50:+0\", changeMonth: true, changeYear: true});"); 

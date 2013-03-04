@@ -5,7 +5,7 @@
     <title><%TITLE></title>
     <link rel="stylesheet" href="include/css/style.css" type="text/css" />
 	<%CSS>
-	<script src="include/js/jquery-1.7.2.min.js" type="text/javascript"></script>
+	<script src="include/js/jquery-1.9.1.min.js" type="text/javascript"></script>
 	<%JS>
 	<%HEAD>
 	<script>
