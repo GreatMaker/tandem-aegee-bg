@@ -52,7 +52,7 @@ class login_box_class extends box_class
 		// password field
 		$password = new form_field("password", _("Password:"));
 		$password->set_type(form_field::FIELD_PASSWORD);
-		
+
 		// send button
 		$send = new form_field("send", "", false);
 		$send->set_type(form_field::FIELD_BUTTON);
@@ -82,22 +82,42 @@ class userdetails_box_class extends box_class
 		// create box
 		parent::__construct("");
 
+		$data = "";
+
 		// get user data
 		$user_data = $page->get_user_data();
 
-		// user table
-		$tbl = new HTML_Table(null, '', 0, 0, 0);
-		$tbl->addRow();
+		// user image
+		if (isset($user_data['facebook']) && $user_data['facebook'] != "")
+			$img_link = "<img src='http://graph.facebook.com/".$user_data['facebook']."/picture' />";
+		else
+		{
+			if ($user_data['gender'] == "M")
+				$img_link = "<img src='img/user_def_male.png' />";
+			else
+				$img_link = "<img src='img/user_def_female.png' />";
+		}
 
-		// user image cell
-        $tbl->addCell("img");
+        $data .= "<div class='user_image'>".$img_link."</div>\n";
 
 		// user name cell
-        $tbl->addCell("name");
+		$data .= "<div class='user_name'><span class='user_name'>".$user_data['name']." ".$user_data['surname']."</span></div>\n";
 
-		parent::add_content($tbl->display());
+		// tandem
+		$data .= "<div class='buttons_box'>\n";
+		$data .= "<img class='user_button' src='img/icons/tandem.png' alt=\"Tandem\" title=\"Tandem\" />\n";
 
-		// http://graph.facebook.com/sarfraz.anees/picture
+		// settings
+		$data .= "<img class='user_button' src='img/icons/settings.png' alt=\"Settings\" title=\"Settings\" />\n";
+
+		// logout
+		$data .= "<a style=\"cursor:pointer\" onclick=\"$().tandem_logout();\"><img class='user_button' src='img/icons/logout.png' alt=\"Logout\" title=\"Logout\" /></a>\n";
+		$data .= "</div>\n";
+
+		// insert JS
+		$page->AddJS("jquery.tandem.js");
+
+		parent::add_content($data);
 	}
 }
 
@@ -115,7 +135,7 @@ class facebook_box_class extends box_class
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>");
 
-		parent::add_content("<div class=\"fb-like-box\" data-href=\"http://www.facebook.com/TandemLanguageBergamo\" data-width=\"292\" data-show-faces=\"true\" data-stream=\"true\" data-header=\"false\"></div>");
+		parent::add_content("<div class=\"fb-like-box\" data-href=\"http://www.facebook.com/TandemLanguageBergamo\" data-width=\"292\" data-show-faces=\"true\" data-stream=\"true\" data-header=\"false\" data-border-color=\"#FFFFFF\"></div>");
 		/*
 		
 		 <div id="fb-root"></div>
