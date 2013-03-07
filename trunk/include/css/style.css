@@ -12,6 +12,45 @@ body {
 	padding:0;
 }
 
+/** User Details Table */
+table.user_details {
+	
+}
+table.user_details span{
+	font-size: 15px;
+	font-weight: bold;
+}
+table.user_details th, table.user_details td {
+	padding: 5px 5px 5px 5px;
+}
+
+div.user_name {
+border: 1px solid;
+  float: left;
+  height: 55px;
+}
+div.user_image {
+   border: 1px solid;
+	float: left;
+   padding-bottom: 5px;
+   padding-right: 5px;
+   overflow: hidden;
+   height: 55px;
+}
+div.buttons_box {
+	border: 1px solid;
+	height: 20px;
+	overflow: hidden;
+  clear: both;
+}
+img.user_button {
+	padding-right: 5px;
+}
+
+span.user_name{
+	font-size: 15px;
+	font-weight: bold;
+}
 /** element defaults **/
 /*table {
 	width: 100%;

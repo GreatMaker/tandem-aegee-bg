@@ -120,11 +120,14 @@ class users_table
         }
 	}
 
-	public function user_get_data($username)
+	public function user_get_data($username, $is_md5 = false)
 	{
 		try
         {
-			$query = "SELECT * FROM users WHERE username = ? LIMIT 1";
+			if ($is_md5 == false)
+				$query = "SELECT * FROM users WHERE username = ? LIMIT 1";
+			else
+				$query = "SELECT * FROM users WHERE md5(username) = ? LIMIT 1";
 
 			$res = $this->dbConnection->prepare($query);
 
@@ -133,7 +136,7 @@ class users_table
 
 			$data = $res->fetchAll(PDO::FETCH_ASSOC);
 
-            return $data[0];
+			return $data[0];
 		}
 		catch (PDOException $e)
         {

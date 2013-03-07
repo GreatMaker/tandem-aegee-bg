@@ -165,7 +165,12 @@ class page_class
 		// username
 		$username = $this->pCookie->GetUsername();
 
-		return $this->pConn->user_get_data($username);
+		return $this->pConn->user_get_data($username, true);
+	}
+
+	public function logout()
+	{
+		$this->pCookie->Logout();
 	}
 
     // display page
