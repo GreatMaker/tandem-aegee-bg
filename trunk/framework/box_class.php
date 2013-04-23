@@ -56,7 +56,7 @@ class login_box_class extends box_class
 		// send button
 		$send = new form_field("send", "", false);
 		$send->set_type(form_field::FIELD_BUTTON);
-		$send->set_value(_("Invia"));
+		$send->set_value(_("Send"));
 
 		//add fields
 		$form->add($username);

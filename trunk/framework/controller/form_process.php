@@ -20,7 +20,7 @@ $class_name = $form_list[$form_name]['class'];
 // check class existance
 if (!class_exists($class_name))
 {
-	$ret['error'] = _("Errore allocazione controller");
+	$ret['error'] = _("Error allocating controller");
 
 	// send reply
 	die(json_encode($ret));

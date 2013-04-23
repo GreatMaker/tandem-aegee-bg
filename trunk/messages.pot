@@ -1,0 +1,128 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: AEGEE-Bergamo Tandem Project\n"
+"POT-Creation-Date: 2013-04-23 11:43+0100\n"
+"PO-Revision-Date: 2013-04-23 11:43+0100\n"
+"Last-Translator: \n"
+"Language-Team: AEGEE-Bergamo <tandem@aegeebergamo.eu>\n"
+"Language: English\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.5\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: framework/box_class.php:49
+msgid "Username:"
+msgstr ""
+
+#: framework/box_class.php:53
+msgid "Password:"
+msgstr ""
+
+#: framework/box_class.php:59 framework/view/register.php:56
+msgid "Send"
+msgstr ""
+
+#: framework/page_class.php:139
+msgid "Login"
+msgstr ""
+
+#: framework/page_class.php:148 framework/view/register.php:45
+msgid "Facebook"
+msgstr ""
+
+#: framework/page_class.php:157
+msgid "User"
+msgstr ""
+
+#: framework/controller/form_process.php:23
+msgid "Error allocating controller"
+msgstr ""
+
+#: framework/controller/login_ctrl.php:46
+#: framework/controller/login_ctrl.php:51
+msgid "Authentication error, user not found"
+msgstr ""
+
+#: framework/controller/login_ctrl.php:82
+#: framework/controller/login_ctrl.php:114
+msgid "Authentication error, wrong password"
+msgstr ""
+
+#: framework/controller/login_ctrl.php:87
+msgid "Authentication error, unknown error"
+msgstr ""
+
+#: framework/controller/login_ctrl.php:93
+msgid "Authentication error, please try again later"
+msgstr ""
+
+#: framework/controller/login_ctrl.php:146
+msgid "Authentication error"
+msgstr ""
+
+#: framework/controller/register_ctrl.php:30
+msgid "Name error"
+msgstr ""
+
+#: framework/controller/register_ctrl.php:37
+msgid "Surname error"
+msgstr ""
+
+#: framework/controller/register_ctrl.php:44
+msgid "E-Mail error"
+msgstr ""
+
+#: framework/model/db_users_class.php:35
+msgid "Error inserting new user"
+msgstr ""
+
+#: framework/model/db_users_class.php:57
+msgid "Error modify user"
+msgstr ""
+
+#: framework/model/db_users_class.php:75
+msgid "Error delete user"
+msgstr ""
+
+#: framework/model/db_users_class.php:96
+#: framework/model/db_users_class.php:119
+#: framework/model/db_users_class.php:143
+msgid "Error user information"
+msgstr ""
+
+#: framework/scripts/tandem.php:22
+msgid "Function not defined"
+msgstr ""
+
+#: framework/view/register.php:14
+msgid "Finish registration"
+msgstr ""
+
+#: framework/view/register.php:19
+msgid "Name"
+msgstr ""
+
+#: framework/view/register.php:25
+msgid "Surname"
+msgstr ""
+
+#: framework/view/register.php:31
+msgid "Sex"
+msgstr ""
+
+#: framework/view/register.php:35
+msgid "Birthdate"
+msgstr ""
+
+#: framework/view/register.php:40
+msgid "E-Mail"
+msgstr ""
+
+#: framework/view/register.php:50
+msgid "About you"
+msgstr ""

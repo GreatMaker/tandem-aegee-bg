@@ -19,7 +19,7 @@ $ret = array('reload' => 'false');
 
 // Controllo parametro funzione
 if (!isset($_POST['func']))
-    $ret['error'] = _("Funzione non definita");
+    $ret['error'] = _("Function not defined");
 
 // Commutazione attivazione utente
 if ($_POST['func'] == "tandem_logout")
