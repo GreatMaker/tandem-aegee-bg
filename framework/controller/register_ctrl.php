@@ -27,21 +27,21 @@ class register_ctrl implements ctrl_interface
 			// check name
 			if (!isset($this->post_data['name']) || $this->post_data['name'] == "")
 			{
-				$this->ret['error'] = _("Errore inserimento nome");
+				$this->ret['error'] = _("Name error");
 				return;
 			}
 
 			// check surname
 			if (!isset($this->post_data['surname']) || $this->post_data['surname'] == "")
 			{
-				$this->ret['error'] = _("Errore inserimento cognome");
+				$this->ret['error'] = _("Surname error");
 				return;
 			}
 
 			// check mail
 			if (checkEmail($this->post_data['email']) == FALSE)
 			{
-				$this->ret['error'] = _("Errore inserimento mail");
+				$this->ret['error'] = _("E-Mail error");
 				return;
 			}
 		}

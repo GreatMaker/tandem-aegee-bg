@@ -58,27 +58,33 @@ class language_class
 {
     private $curr_lang;
 
-    private $available_langs = array("it_IT" => "it", "en_GB" => "en");
+    private $available_langs = array("it_IT" => "it_IT", "en_US" => "en_US");
     private $lang_names      = array("it" => "Italiano", "en" => "English");
 
     public function __construct($force_lang = false)
     {
-        bindtextdomain('messages', './locale');
-        textdomain('messages');
-
         if (isset($force_lang) && $force_lang != false)
             $this->curr_lang = $force_lang;
         else
-            $this->curr_lang = "it_IT"; //(http_negotiate_language($this->available_langs, $res); TODO
+            $this->curr_lang = http_negotiate_language($this->available_langs, $res); //TODO
 
-        // Impostazione lang da dati browser
-        setlocale(LC_ALL, array_search($this->curr_lang, $this->available_langs));
+		// Impostazione lang da dati browser
+		putenv("LC_ALL=".array_search($this->curr_lang, $this->available_langs));
+        setlocale(LC_ALL, array_search($this->curr_lang, $this->available_langs).".UTF-8");
+
+		bindtextdomain('messages', '/home/utente/tandem_new/locale');
+        textdomain('messages');        
     }
 
     public function GetActiveLanguage()
     {
         return $this->curr_lang;
     }
+
+	public function GetAvailableLanguages()
+	{
+		return $this->available_langs;
+	}
 
     /*public function GetLanguageBar()
     {

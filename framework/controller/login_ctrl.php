@@ -43,12 +43,12 @@ class login_ctrl implements ctrl_interface
 		}
 		catch (PDOException $e)
         {
-			$this->ret['error'] = _("Errore di autenticazione, utente non trovato");
+			$this->ret['error'] = _("Authentication error, user not found");
             throw new Exception($e);
         }
         catch (Exception $e)
         {
-			$this->ret['error'] = _("Errore di autenticazione, utente non trovato");
+			$this->ret['error'] = _("Authentication error, user not found");
             throw $e;
         }
 	}
@@ -79,18 +79,18 @@ class login_ctrl implements ctrl_interface
 					}
 					else if ($ret == ldap_login::LOGIN_PASSWORD_ERR)
 					{
-						$this->ret['error'] = _("Errore di autenticazione, password errata");
+						$this->ret['error'] = _("Authentication error, wrong password");
 						return;
 					}
 					else if ($ret == ldap_login::LOGIN_GEN_ERR)
 					{
-						$this->ret['error'] = _("Errore di autenticazione, errore sconosciuto");
+						$this->ret['error'] = _("Authentication error, unknown error");
 						return;
 					}
 				}
 				else
 				{
-					$this->ret['error'] = _("Errore di autenticazione, ti preghiamo di riprovare più tardi");
+					$this->ret['error'] = _("Authentication error, please try again later");
 					return;
 				}
 			}
@@ -111,7 +111,7 @@ class login_ctrl implements ctrl_interface
 				{
 					if (!$this->db->user_auth($this->post_data['username'], $this->post_data['password']))
 					{
-						$this->ret['error'] = _("Errore di autenticazione, password errata");
+						$this->ret['error'] = _("Authentication error, wrong password");
 						return;
 					}	
 				}
@@ -143,7 +143,7 @@ class login_ctrl implements ctrl_interface
 				}
 				else
 				{
-					$this->ret['error'] = _("Errore di autenticazione");
+					$this->ret['error'] = _("Authentication error");
 					return;
 				}
 			}

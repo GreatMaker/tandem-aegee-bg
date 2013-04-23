@@ -32,7 +32,7 @@ class users_table
 		}
 		catch (PDOException $e)
         {
-            $this->dbConnection->SetError(_("Errore inserimento nuovo utente"));
+            $this->dbConnection->SetError(_("Error inserting new user"));
         }
 	}
 
@@ -54,7 +54,7 @@ class users_table
 		}
 		catch (PDOException $e)
         {
-            $this->dbConnection->SetError(_("Errore modifica utente"));
+            $this->dbConnection->SetError(_("Error modify user"));
         }
 	}
 
@@ -72,7 +72,7 @@ class users_table
 		}
 		catch (PDOException $e)
         {
-            $this->dbConnection->SetError(_("Errore cancellazione utente"));
+            $this->dbConnection->SetError(_("Error delete user"));
         }
 	}
 
@@ -93,7 +93,7 @@ class users_table
 		}
 		catch (PDOException $e)
         {
-            $this->dbConnection->SetError(_("Errore informazioni utente"));
+            $this->dbConnection->SetError(_("Error user information"));
         }
 	}
 
@@ -116,7 +116,7 @@ class users_table
 		}
 		catch (PDOException $e)
         {
-            $this->dbConnection->SetError(_("Errore informazioni utente"));
+            $this->dbConnection->SetError(_("Error user information"));
         }
 	}
 
@@ -140,7 +140,7 @@ class users_table
 		}
 		catch (PDOException $e)
         {
-            $this->dbConnection->SetError(_("Errore informazioni utente"));
+            $this->dbConnection->SetError(_("Error user information"));
         }
 	}
 }

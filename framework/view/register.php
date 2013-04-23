@@ -11,18 +11,18 @@ $page->set_template('framework/templates/main.tpl');
 // set page title
 $page->set_title('Register');
 
-$page->AddToBody("<h2>"._("Completa la registrazione")."</h2>");
+$page->AddToBody("<h2>"._("Finish registration")."</h2>");
 
 $registration = new form_class("registration", "framework/controller/form_process.php", form_class::METHOD_POST, form_class::TYPE_FIELDSET);
 
 // name field
-$name = new form_field("name", _("Nome"), true);
+$name = new form_field("name", _("Name"), true);
 $name->set_type(form_field::FIELD_TEXT);
 $name->set_value($_SESSION['name']);
 $name->set_style("width: 250px;");
 
 // surname field
-$surname = new form_field("surname", _("Cognome"), true);
+$surname = new form_field("surname", _("Surname"), true);
 $surname->set_type(form_field::FIELD_TEXT);
 $surname->set_value($_SESSION['surname']);
 $surname->set_style("width: 250px;");
