@@ -185,7 +185,7 @@ class page_class
 		// Insert login sidebar box if needed
 		if ($this->bLoginNeeded == true && $this->page_req != REGISTER)
 			$this->add_sidebar_login_box();
-		else
+		else if ($this->page_req != REGISTER)
 			$this->add_sidebar_userdetails();
 
 		// Insert facebook sidebar box
