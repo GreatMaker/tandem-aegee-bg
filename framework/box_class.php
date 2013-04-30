@@ -98,6 +98,8 @@ class userdetails_box_class extends box_class
 				$img_link = "<img src='img/user_def_female.png' />";
 		}
 
+		$data .= "<div class='user_data'>";
+		
         $data .= "<div class='user_image'>".$img_link."</div>\n";
 
 		// user name cell
@@ -112,7 +114,7 @@ class userdetails_box_class extends box_class
 
 		// logout
 		$data .= "<a style=\"cursor:pointer\" onclick=\"$().tandem_logout();\"><img class='user_button' src='img/icons/logout.png' alt=\"Logout\" title=\"Logout\" /></a>\n";
-		$data .= "</div>\n";
+		$data .= "</div></div>\n";
 
 		// insert JS
 		$page->AddJS("jquery.tandem.js");

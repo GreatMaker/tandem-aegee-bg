@@ -25,26 +25,26 @@ table.user_details th, table.user_details td {
 }
 
 div.user_name {
-border: 1px solid;
-  float: left;
-  height: 55px;
+  display: block;
+  height: 25px;
 }
 div.user_image {
-   border: 1px solid;
-	float: left;
-   padding-bottom: 5px;
-   padding-right: 5px;
-   overflow: hidden;
-   height: 55px;
+   float: left;
+   margin-right: 8px;
+   height: 50px;
+}
+div.user_data {
+  clear: both;
+  display: block;
+  height: 50px;
 }
 div.buttons_box {
-	border: 1px solid;
-	height: 20px;
-	overflow: hidden;
-  clear: both;
+	height: 25px;
+	display: block;
 }
 img.user_button {
 	padding-right: 5px;
+	padding-top: 3px;
 }
 
 span.user_name{
