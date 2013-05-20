@@ -11,6 +11,10 @@ $page->set_template('framework/templates/main.tpl');
 // set page title
 $page->set_title('Register');
 
+// get db connection
+$db_conn = null;
+$page->get_db($db_conn);
+
 $page->AddToBody("<h2>"._("Finish registration")."</h2>");
 
 $registration = new form_class("registration", "framework/controller/form_process.php", form_class::METHOD_POST, form_class::TYPE_FIELDSET);
@@ -50,6 +54,35 @@ $fb->set_style("width: 350px;");
 $about = new form_field("about", _("About you"));
 $about->set_type(form_field::FIELD_TEXTAREA);
 
+// Languages you speak fields
+$lang_speak = new form_field("lang_speak", _("Language"));
+$lang_speak->set_type(form_field::FIELD_OPTION);
+$lang_speak->set_data($db_conn->languages_get_data());
+$lang_speak->set_style("width:180px;");
+$lang_speak->set_extra("<span class=\"inline\" style=\"vertical-align: middle;\"> <a id=\"minus_speak\" style=\"vertical-align: middle;\"><img src=\"img/icons/minus.png\" height=\"20\" width=\"20\"></a> <a id=\"plus_speak\" style=\"vertical-align: middle;\"><img src=\"img/icons/plus.png\"  height=\"20\" width=\"20\"></a></span>");
+
+// Languages you speak note
+$lang_speak_note = new form_field("lang_speak_note");
+$lang_speak_note->set_type(form_field::FIELD_NOTE);
+$lang_speak_note->set_value(_("These are the languages you fluently speak, and which you want to tutor."));
+
+// Language you want to learn
+$lang_learn = new form_field("lang_learn", _("Language"));
+$lang_learn->set_type(form_field::FIELD_OPTION);
+$lang_learn->set_data($db_conn->languages_get_data());
+$lang_learn->set_style("width:180px;");
+$lang_learn->set_extra("&nbsp;");
+
+$lang_learn_level = new form_field("lang_learn_level", "");
+$lang_learn_level->set_type(form_field::FIELD_OPTION);
+$lang_learn_level->set_data($db_conn->languages_get_levels());
+$lang_learn_level->set_extra("<span class=\"inline\" style=\"vertical-align: middle;\"> <a id=\"minus_learn\" style=\"vertical-align: middle;\"><img src=\"img/icons/minus.png\" height=\"20\" width=\"20\"></a> <a id=\"plus_learn\" style=\"vertical-align: middle;\"><img src=\"img/icons/plus.png\"  height=\"20\" width=\"20\"></a></span>");
+
+// Languages you want to learn note
+$lang_learn_note = new form_field("lang_learn_note");
+$lang_learn_note->set_type(form_field::FIELD_NOTE);
+$lang_learn_note->set_value(_("These are the languages you want to learn, set your skills level as well."));
+
 // send button
 $send = new form_field("send", "");
 $send->set_type(form_field::FIELD_BUTTON);
@@ -73,6 +106,20 @@ $registration->add($bdate);
 $registration->add($email);
 $registration->add($fb);
 $registration->add($about);
+
+$registration->fieldset_open(_("Languages you speak"), "lang_speak");
+$registration->add($lang_speak, true, true);
+$registration->add($lang_speak_note);
+$registration->fieldset_close();
+
+$registration->fieldset_open(_("Languages you want to learn"), "lang_learn");
+$registration->paragraph_open("p_lang_learn");
+$registration->add($lang_learn, false);
+$registration->add($lang_learn_level, false);
+$registration->paragraph_close();
+$registration->add($lang_learn_note);
+$registration->fieldset_close();
+
 $registration->add($id);
 $registration->add($username);
 $registration->add($send);
@@ -81,11 +128,15 @@ $registration->add($send);
 $page->AddJS("jquery.form.js");
 $page->AddJS("jquery.notify.js");
 $page->AddJS("jquery-ui-1.10.1.custom.min.js");
+$page->AddJS("jquery-dynamic-form.js");
 
 $page->AddCSS("ui-lightness/jquery-ui-1.10.1.custom.css");
 
 // add validator
-$page->AddJQuery("$(\"#registration\").ajaxForm({dataType:'json', success: processReply});$(\"#birthdate\").datepicker({yearRange: \"-50:+0\", changeMonth: true, changeYear: true});"); 
+$page->AddJQuery("$(\"#registration\").ajaxForm({dataType:'json', success: processReply});
+				  $(\"#birthdate\").datepicker({yearRange: \"-50:+0\", changeMonth: true, changeYear: true});
+				  var l_s = $(\"#p_lang_speak\").dynamicForm({plusSelector: \"#plus_speak\", minusSelector: \"#minus_speak\", limit: 5});
+				  var l_l = $(\"#p_lang_learn\").dynamicForm({plusSelector: \"#plus_learn\", minusSelector: \"#minus_learn\", limit: 5});"); 
 
 // add form
 $page->AddToBody($registration->get_form());

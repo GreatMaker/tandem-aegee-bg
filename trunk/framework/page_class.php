@@ -52,7 +52,7 @@ class page_class
 		try
 		{
 			// Connessione a DB
-			$this->pConn = new db_base(DB_USERNAME, DB_PASSWORD, DB_HOSTNAME, DB_NAME, DB_VER);
+			$this->pConnection = new db_base(DB_USERNAME, DB_PASSWORD, DB_HOSTNAME, DB_NAME, DB_VER);
 		}
 		catch (PDOException $e)
         {
@@ -158,6 +158,11 @@ class page_class
 
 		// append data
 		self::add_sidebar_box($box->get_box_data());
+	}
+
+	public function get_db(&$db_conn)
+	{
+		$db_conn = $this->pConnection;
 	}
 
 	public function get_user_data()

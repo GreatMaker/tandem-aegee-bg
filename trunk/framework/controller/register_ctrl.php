@@ -27,23 +27,42 @@ class register_ctrl implements ctrl_interface
 			// check name
 			if (!isset($this->post_data['name']) || $this->post_data['name'] == "")
 			{
-				$this->ret['error'] = _("Name error");
+				$this->ret['error'] = _("Name field error");
 				return;
 			}
 
 			// check surname
 			if (!isset($this->post_data['surname']) || $this->post_data['surname'] == "")
 			{
-				$this->ret['error'] = _("Surname error");
+				$this->ret['error'] = _("Surname field error");
+				return;
+			}
+
+			// check sex
+			if (!isset($this->post_data['sex']) || $this->post_data['sex'] == "")
+			{
+				$this->ret['error'] = _("Sex field error");
+				return;
+			}
+			
+			// check birthdate
+			if (!isset($this->post_data['birthdate']) || $this->post_data['birthdate'] == "")
+			{
+				$this->ret['error'] = _("Birthdate field error");
 				return;
 			}
 
 			// check mail
 			if (checkEmail($this->post_data['email']) == FALSE)
 			{
-				$this->ret['error'] = _("E-Mail error");
+				$this->ret['error'] = _("E-Mail field error");
 				return;
 			}
+
+
+				$this->ret['error'] = print_r($_POST, true);
+				return;
+
 		}
 		catch (Exception $e)
 		{
