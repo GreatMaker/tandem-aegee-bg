@@ -16,6 +16,7 @@ class form_field
 	const FIELD_TEXTAREA	= "textarea";
 	const FIELD_BUTTON		= "button";
 	const FIELD_LEGEND		= "legend";
+	const FIELD_NOTE		= "note";
 	const FIELD_HIDDEN		= "hidden";
 
 	private $field_name;
@@ -25,6 +26,7 @@ class form_field
 	private $field_value;
 	private $field_data;
 	private $field_style;
+	private $field_extra;
 
 	public function __construct($name, $label, $readonly = false)
 	{
@@ -65,6 +67,11 @@ class form_field
 		$this->field_style = $style;
 	}
 
+	public function set_extra($extra)
+	{
+		$this->field_extra = $extra;
+	}
+
 	public function get_type()
 	{
 		return $this->field_type;
@@ -99,6 +106,11 @@ class form_field
 	{
 		return $this->field_style;
 	}
+
+	public function get_extra()
+	{
+		return $this->field_extra;
+	}
 }
 
 class form_class
@@ -132,7 +144,7 @@ class form_class
 		$this->form_name = $name;
 	}
 
-	public function add($field)
+	public function add($field, $paragraph = true, $paragraph_name = false)
 	{
 		$type =		$field->get_type();
 		$name =		$field->get_name();
@@ -141,10 +153,18 @@ class form_class
 		$data =		$field->get_data();
 		$readonly =	$field->get_readonly();
 		$style =	$field->get_style();
+		$extra =	$field->get_extra();
 
-		if ($type != form_field::FIELD_BUTTON)
-			$this->form_data .= "<p>";
-			 
+		if ($type != form_field::FIELD_BUTTON && $paragraph == true)
+		{
+			$this->form_data .= "<p id=\"p_".$name."\"";
+			
+			if ($paragraph_name == true)
+				$this->form_data .= " name=\"p_".$name."\"";
+				
+			$this->form_data .= ">";
+		}
+
 		if (isset($label) && ($label != ""))
 		   $this->form_data .= "<label for=\"".$name."\">".$label."</label>\n";
 
@@ -168,7 +188,8 @@ class form_class
 				$this->form_data .= "<span style=\"padding: 0 10px\">&nbsp;</span>";
 			}
 
-			$this->form_data .= "</p>\n";
+			if ($paragraph == true)
+				$this->form_data .= "</p>\n";
 		}
 		else if ($type == form_field::FIELD_TEXTAREA)
 		{
@@ -186,6 +207,60 @@ class form_class
 		{
 			$this->form_data .= "<input type=\"hidden\" name=\"".$name."\" value=\"".$value."\">\n";
 		}
+		else if ($type == form_field::FIELD_OPTION)
+		{
+			$this->form_data .= "<select name=\"".$name."\" id=\"".$name."\" style=\"".$style."\">\n";
+
+			foreach ($data as $r_value => $r_text)
+			{
+				$this->form_data .= "<option value=\"".$r_value."\">".$r_text."</option>\n";
+			}
+
+			$this->form_data .= "</select>";
+
+			if (isset($extra) && $extra != "")
+				$this->form_data .= $extra;
+
+			if ($paragraph == true)
+				$this->form_data .= "</p>";
+		}
+		else if ($type == form_field::FIELD_NOTE)
+		{
+			$this->form_data .= $value;
+		}
+	}
+
+	public function fieldset_open($title, $id)
+	{
+		$this->form_data .= "<fieldset id=\"".$id."\">";
+
+		if (isset($title) && $title != "")
+			$this->form_data .= "<legend>".$title."</legend><br/>\n";
+	}
+
+	public function fieldset_close()
+	{
+		$this->form_data .= "</fieldset>\n";
+	}
+
+	public function div_open($id)
+	{
+		$this->form_data .= "<div id=\"".$id."\">";
+	}
+	
+	public function div_close()
+	{
+		$this->form_data .= "</div>\n";
+	}
+	
+	public function paragraph_open($id)
+	{
+		$this->form_data .= "<p id=\"".$id."\" name=\"".$id."\" class=\"".$id."\">";
+	}
+	
+	public function paragraph_close()
+	{
+		$this->form_data .= "</p>\n";
 	}
 
 	public function get_form()

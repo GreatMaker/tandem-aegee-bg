@@ -7,6 +7,7 @@
 
 require_once 'db_base_class.php';
 require_once 'db_users_class.php';
+require_once 'db_languages_class.php';
 
 Abstract class ExtensionBridge
 {
@@ -52,6 +53,7 @@ class database_tables extends ExtensionBridge
 
         // add table users
         parent::addExt(new users_table($this->base), "users_table");
+		parent::addExt(new languages_table($this->base), "languages_table");
     }
 }
 
