@@ -28,7 +28,7 @@ class form_field
 	private $field_style;
 	private $field_extra;
 
-	public function __construct($name, $label, $readonly = false)
+	public function __construct($name, $label = "", $readonly = false)
 	{
 		$this->field_name		= $name;
 		$this->field_label		= $label;

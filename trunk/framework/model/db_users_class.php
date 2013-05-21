@@ -18,21 +18,24 @@ class users_table
 	{
 		try
         {
-			$query = "INSERT INTO users (username, email, born_date, gender, facebook) VALUES (?, ?, ?, ?, ?)";
+			$query = "INSERT INTO users (name, surname, username, email, birthdate, gender, facebook, about) VALUES (?, ?, ?, ?, STR_TO_DATE(?, '%d/%m/%Y'), ?, ?, ?)";
 
 			$res = $this->dbConnection->prepare($query);
 
-			$res->bindParam(1, $data['username']);
-			$res->bindParam(2, $data['email']);
-			$res->bindParam(3, $data['born_date']);
-			$res->bindParam(4, $data['gender']);
-			$res->bindParam(5, $data['facebook']);
+			$res->bindParam(1, $data['name']);
+			$res->bindParam(2, $data['surname']);
+			$res->bindParam(3, $data['username']);
+			$res->bindParam(4, $data['email']);
+			$res->bindParam(5, $data['birthdate']);
+			$res->bindParam(6, $data['sex']);
+			$res->bindParam(7, $data['fb']);
+			$res->bindParam(8, $data['about']);
 
 			$res->execute();
 		}
 		catch (PDOException $e)
         {
-            $this->dbConnection->SetError(_("Error inserting new user"));
+            $this->dbConnection->SetError(_("Error inserting new user")." - ".$e->getMessage());
         }
 	}
 
@@ -54,7 +57,7 @@ class users_table
 		}
 		catch (PDOException $e)
         {
-            $this->dbConnection->SetError(_("Error modify user"));
+            $this->dbConnection->SetError(_("Error modifying user"));
         }
 	}
 
@@ -72,7 +75,7 @@ class users_table
 		}
 		catch (PDOException $e)
         {
-            $this->dbConnection->SetError(_("Error delete user"));
+            $this->dbConnection->SetError(_("Error deleting user"));
         }
 	}
 
