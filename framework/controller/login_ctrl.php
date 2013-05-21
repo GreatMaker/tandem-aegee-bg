@@ -9,7 +9,7 @@ require_once '../model/db_base_class.php';
 require_once '../model/db_config.php';
 require_once 'controller_interface.php';
 
-class login_ctrl implements ctrl_interface
+class login_ctrl extends ctrl_abstract
 {
 	private $ret;
 	private $ldap;

@@ -170,7 +170,7 @@ class page_class
 		// username
 		$username = $this->pCookie->GetUsername();
 
-		return $this->pConn->user_get_data($username, true);
+		return $this->pConnection->user_get_data($username, true);
 	}
 
 	public function logout()

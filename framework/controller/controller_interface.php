@@ -1,19 +1,42 @@
 <?php
 /*
- * Interface for Controller classes
+ * Abstract class for Controller classes
  *
  * @author Andrea Visinoni <andrea.visinoni@aegeebergamo.eu>
  */
 
-interface ctrl_interface
+require_once '../model/db_base_class.php';
+require_once '../model/db_config.php';
+
+abstract class ctrl_abstract
 {
 	// constructor
-    public function		__construct($data);
+    abstract public function		__construct($data);
 
 	// process data
-    public function		process();
+    abstract public function		process();
 
 	// reply to user
-	public function		get_reply();
+	abstract public function		get_reply();
+
+	// connection function
+	public function					getDBConnection(&$pConnection)
+	{
+		try
+		{
+			// Connessione a DB
+			$pConnection = new db_base(DB_USERNAME, DB_PASSWORD, DB_HOSTNAME, DB_NAME, DB_VER);
+		}
+		catch (PDOException $e)
+        {
+            return FALSE;
+        }
+        catch (Exception $e)
+        {
+            return FALSE;
+        }
+
+		return TRUE;
+	}
 }
 ?>
