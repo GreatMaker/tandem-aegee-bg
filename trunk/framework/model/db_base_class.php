@@ -8,6 +8,7 @@
 require_once 'db_base_class.php';
 require_once 'db_users_class.php';
 require_once 'db_languages_class.php';
+require_once 'db_user_languages_class.php';
 
 Abstract class ExtensionBridge
 {
@@ -54,6 +55,7 @@ class database_tables extends ExtensionBridge
         // add table users
         parent::addExt(new users_table($this->base), "users_table");
 		parent::addExt(new languages_table($this->base), "languages_table");
+		parent::addExt(new user_languages_table($this->base), "user_languages_table");
     }
 }
 
@@ -76,6 +78,9 @@ class db_base extends PDO
 
             // Error handling
             $this->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+			// Disable auto commit
+			$this->setAttribute(PDO::ATTR_AUTOCOMMIT, FALSE);
 
             // Allocation of tables classes through the extension bridge
             $this->db_tables  = new database_tables($this);

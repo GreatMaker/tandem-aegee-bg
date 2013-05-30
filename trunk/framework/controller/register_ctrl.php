@@ -69,39 +69,73 @@ class register_ctrl extends ctrl_abstract
 			throw new Exception("E-Mail field error");
 
 		// check spoken langs
+		$values = array();
+
 		foreach ($this->post_data['p_lang_speak'] as $id => $data)
 		{
 			if ($data['lang_speak'] == "-1")
 				throw new Exception("Select a valid language you speak");
+
+			// check unique
+			if (in_array($data['lang_speak'], $values))
+				throw new Exception("Duplicate entry for spoken languages");
+
+			$values[] = $data['lang_speak'];
 		}
 		
 		// check spoken langs
+		$values = array();
+
 		foreach ($this->post_data['p_lang_learn'] as $id => $data)
 		{
 			if ($data['lang_learn'] == "-1")
 				throw new Exception("Select a valid language you want to learn");
+
+			// check unique
+			if (in_array($data['lang_learn'], $values))
+				throw new Exception("Duplicate entry for learning languages");
+
+			$values[] = $data['lang_learn'];
 		}
 
-		throw new Exception(print_r($this->post_data, true));
+		return;
 	}
 	
 	private function apply()
 	{
 		if ($this->getDBConnection($this->dbConnection) == TRUE)
 		{
-			// add new user
-			$this->dbConnection->user_add($this->post_data);
+			try
+			{
+				// start transaction
+				$this->dbConnection->beginTransaction();
 
-			$err_str = "";
+				// add new user
+				$this->dbConnection->user_add($this->post_data);
 
-			if ($this->dbConnection->GetError($err_str))
-				throw new Exception($err_str);
-			
-			// get username data
-			$userdata = $this->dbConnection->user_get_data($this->post_data['username']);
+				// add languages
+				$this->dbConnection->user_languages_add($this->post_data, $this->dbConnection->lastInsertId());
 
-			// setcookie
-			$this->cookie->SetData($userdata);
+				// commit data
+				$this->dbConnection->commit();
+
+				// Login
+				// get username data
+				$userdata = $this->dbConnection->user_get_data($this->post_data['username']);
+
+				// setcookie
+				$this->cookie->SetData($userdata);
+			}
+			catch (PDOException $e)
+			{
+				// roll back data
+				$this->dbConnection->rollBack();
+
+				$err_str = "";
+
+				if ($this->dbConnection->GetError($err_str))
+					throw new Exception($err_str);
+			}
 		}
 		else
 			throw new Exception(_("Database connection error"));
