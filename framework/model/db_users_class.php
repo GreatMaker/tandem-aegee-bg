@@ -36,6 +36,7 @@ class users_table
 		catch (PDOException $e)
         {
             $this->dbConnection->SetError(_("Error inserting new user")." - ".$e->getMessage());
+			throw $e;
         }
 	}
 
