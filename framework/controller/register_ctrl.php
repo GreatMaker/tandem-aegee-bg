@@ -69,6 +69,20 @@ class register_ctrl extends ctrl_abstract
 			throw new Exception("E-Mail field error");
 
 		// check spoken langs
+		foreach ($this->post_data['p_lang_speak'] as $id => $data)
+		{
+			if ($data['lang_speak'] == "-1")
+				throw new Exception("Select a valid language you speak");
+		}
+		
+		// check spoken langs
+		foreach ($this->post_data['p_lang_learn'] as $id => $data)
+		{
+			if ($data['lang_learn'] == "-1")
+				throw new Exception("Select a valid language you want to learn");
+		}
+
+		throw new Exception(print_r($this->post_data, true));
 	}
 	
 	private function apply()

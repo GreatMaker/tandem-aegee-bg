@@ -135,8 +135,8 @@ $page->AddCSS("ui-lightness/jquery-ui-1.10.1.custom.css");
 // add validator
 $page->AddJQuery("$(\"#registration\").ajaxForm({dataType:'json', success: processReply});
 				  $(\"#birthdate\").datepicker({yearRange: \"-50:+0\", changeMonth: true, changeYear: true, dateFormat: \"dd/mm/yy\"});
-				  var l_s = $(\"#p_lang_speak\").dynamicForm({plusSelector: \"#plus_speak\", minusSelector: \"#minus_speak\", limit: 5});
-				  var l_l = $(\"#p_lang_learn\").dynamicForm({plusSelector: \"#plus_learn\", minusSelector: \"#minus_learn\", limit: 5});"); 
+				  $(\"#p_lang_speak\").dynamicForm({plusSelector: \"#plus_speak\", minusSelector: \"#minus_speak\", limit: 5});
+				  $(\"#p_lang_learn\").dynamicForm({plusSelector: \"#plus_learn\", minusSelector: \"#minus_learn\", limit: 5});"); 
 
 // add form
 $page->AddToBody($registration->get_form());
