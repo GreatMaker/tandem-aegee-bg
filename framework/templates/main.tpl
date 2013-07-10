@@ -18,18 +18,15 @@
 <body>
 <div id="container">
 	<div id="header">
-		<h1><a href="/">inception</a></h1>
-		<h2>your website slogan here</h2>
-		<div class="clear"></div>
+		<a href="index.php?page=home" title="Tandem Bergamo"><img src="img/logo_tandem.png" alt="Tandem Bergamo" /></a>
+		<div id="header-social">
+			<%SOCIAL>
+		</div>
 	</div> <!-- header -->
 
 	<div id="nav">
 		<ul>
-        	<li><a href="index.html">Home</a></li>
-            <li><a href="examples.html">Examples</a></li>
-            <li><a href="#">Products</a></li>
-            <li><a href="#">Solutions</a></li>
-            <li><a href="#">Contact</a></li>
+        	<%MENU>
 		</ul>
 	</div> <!-- navigation -->
 
@@ -51,16 +48,8 @@
 <div id="footer">
 	<div class="footer-content">
 		<div class="footer-width">
-
-            <span class="sitename">sitename</span>
-                <p class="footer-links">
-                <a href="index.html">Home</a> |
-                <a href="examples.html">Examples</a> |
-                <a href="#">Products</a> |
-                <a href="#">Solutions</a> |
-                <a href="#">Contact</a>
-
-            </p>
+			<a href="http://www.aegeebergamo.eu" title="AEGEE-Bergamo"><img src="img/logo_aegee-bergamo_mini.png" alt="AEGEE-Bergamo" /></a>&nbsp;
+			<a href="http://www.unibg.it" title="UniBG"><img src="img/logo_UNIbg_mini.png" alt="UniBG" /></a>
 		</div>
 	</div> <!-- footer-content -->
 

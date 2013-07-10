@@ -9,6 +9,8 @@ require_once 'form_class.php';
 require_once 'page_class.php';
 require_once 'table_class.php';
 
+define("FB_SOCIAL",		"http://www.facebook.com/TandemLanguageBergamo");
+
 class box_class
 {
     private $box_data;
@@ -137,18 +139,7 @@ class facebook_box_class extends box_class
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>");
 
-		parent::add_content("<div class=\"fb-like-box\" data-href=\"http://www.facebook.com/TandemLanguageBergamo\" data-width=\"292\" data-show-faces=\"true\" data-stream=\"true\" data-header=\"false\" data-border-color=\"#FFFFFF\"></div>");
-		/*
-		
-		 <div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/it_IT/all.js#xfbml=1";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-		 */
+		parent::add_content("<div class=\"fb-like-box\" data-href=\"".FB_SOCIAL."\" data-width=\"292\" data-show-faces=\"false\" data-stream=\"true\" data-header=\"false\" data-show-border=\"false\"></div>");
 	}
 }
 ?>

@@ -8,10 +8,13 @@
 require('config.php');
 require('cookie_class.php');
 require('language_class.php');
-require('page_list.php');
 require('model/db_base_class.php');
 
 require('box_class.php');
+
+// pages
+define("HOME",      "home");
+define("REGISTER",	"register");
 
 class page_class
 {
@@ -36,6 +39,7 @@ class page_class
     private     $page_req;
     private     $page_sidebar;
 	private		$page_jquery;
+	private		$page_social;
 
     public function __construct()
     {
@@ -160,6 +164,50 @@ class page_class
 		self::add_sidebar_box($box->get_box_data());
 	}
 
+	private function add_social_toolbar()
+	{
+		$str_err = "";
+
+		// get toolbar
+		$data = $this->pConnection->get_social_toolbar();
+		
+		if ($this->pConnection->GetError($str_err) == false)
+		{
+			$social_content = "";
+
+			foreach ($data as $id => $social_data)
+			{
+				$link = $social_data['link_1'].$social_data['link_2'];
+
+				$social_content .= "<a href=\"".$link."\" title=\"".$social_data['name_ext']."\"><img src=\"img/icons/social/".$social_data['icon']."\" /></a>&nbsp;";
+			}
+
+			$this->page_social = $social_content;
+		}
+	}
+
+	private function add_top_menu()
+	{
+		$str_err = "";
+
+		// get toolbar
+		$data = $this->pConnection->get_top_menu();
+
+		if ($this->pConnection->GetError($str_err) == false)
+		{
+			$menu_content = "";
+
+			foreach ($data as $id => $menu_data)
+			{
+				$link = "index.php?page=".$menu_data['page'];
+
+				$menu_content .= "<li><a href=\"".$link."\" title=\"".$menu_data['name']."\">".$menu_data['name']."</a></li>\n";
+			}
+
+			$this->page_menu = $menu_content;
+		}
+	}
+
 	public function get_db(&$db_conn)
 	{
 		$db_conn = $this->pConnection;
@@ -193,6 +241,12 @@ class page_class
 		else if ($this->page_req != REGISTER)
 			$this->add_sidebar_userdetails();
 
+		// Insert social toolbar in header
+		$this->add_social_toolbar();
+		
+		// Insert top menu
+		$this->add_top_menu();
+
 		// Insert facebook sidebar box
 		$this->add_sidebar_facebook();
 
@@ -222,6 +276,9 @@ class page_class
         $this->page_html = str_replace("<%SIDEBAR>", $this->page_sidebar, $this->page_html);
 		// jQuery on load
 		$this->page_html = str_replace("<%JQUERY>", $this->page_jquery, $this->page_html);
+		// Social toolbar
+		$this->page_html = str_replace("<%SOCIAL>", $this->page_social, $this->page_html);
+		
 
         // Output pagina
         echo $this->page_html;
