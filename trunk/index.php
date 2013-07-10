@@ -1,6 +1,5 @@
 <?php
     require_once 'framework/page_class.php';
-    require_once 'framework/page_list.php';
 
     // Page generator class
     $page = new page_class();
@@ -12,15 +11,11 @@
     $page->set_required_page($page_req);
 
     // Get page path
-    $path_base = './framework/view/'; 
-    $path      = $path_base;
-
-    // folder
-    if (isset($pages_list[$page_req]['folder']) && ($pages_list[$page_req]['folder'] != ""))
-        $path .= $pages_list[$page_req]['folder'].'/';
+    $path_base = './framework/view/';
+	$path = $path_base;
 
     // file
-    $path .= $pages_list[$page_req]['page'];
+    $path .= $page_req.".php";
 
     // check file existance
     if (file_exists($path))

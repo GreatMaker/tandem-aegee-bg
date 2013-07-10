@@ -9,6 +9,8 @@ require_once 'db_base_class.php';
 require_once 'db_users_class.php';
 require_once 'db_languages_class.php';
 require_once 'db_user_languages_class.php';
+require_once 'db_social_toolbar_class.php';
+require_once 'db_top_menu_class.php';
 
 Abstract class ExtensionBridge
 {
@@ -56,6 +58,8 @@ class database_tables extends ExtensionBridge
         parent::addExt(new users_table($this->base), "users_table");
 		parent::addExt(new languages_table($this->base), "languages_table");
 		parent::addExt(new user_languages_table($this->base), "user_languages_table");
+		parent::addExt(new social_toolbar_table($this->base), "social_toolbar_table");
+		parent::addExt(new top_menu_table($this->base), "top_menu_table");
     }
 }
 

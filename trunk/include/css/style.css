@@ -224,12 +224,17 @@ li ol, li ul {
 }
 
 #header {
-	padding: 30px 15px;
-	background-color: #FF7918;
+	background-color: #E6E6E6;
 	margin: 0 auto;
-	border-bottom: 10px solid #E66000;
+	position: relative;
+	/* border-bottom: 10px solid #E66000; */
 }
-
+#header-social {
+	float: right;
+	position: absolute;
+	bottom: 5px;
+	right: 5px;
+}
 #header h1 a {
 	color: #fff;
 	font-size: 50px;
@@ -401,7 +406,7 @@ li ol, li ul {
 }
 
 .footer-content {
-	padding: 30px 5px 60px;
+	padding: 25px;
 	background: #444;
 	border-top: 10px solid #262626;
 }
@@ -431,7 +436,7 @@ li ol, li ul {
 }
 
 .footer-width {
-	width: 940px;
+	width: 1000px;
 	margin: 0 auto;
 }
 
