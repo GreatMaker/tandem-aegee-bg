@@ -116,6 +116,9 @@ class register_ctrl extends ctrl_abstract
 				// add languages
 				$this->dbConnection->user_languages_add($this->post_data, $this->dbConnection->lastInsertId());
 
+				// add interests
+				$this->dbConnection->user_interests_add($this->post_data, $this->dbConnection->lastInsertId());
+
 				// commit data
 				$this->dbConnection->commit();
 

@@ -54,6 +54,11 @@ $fb->set_style("width: 350px;");
 $about = new form_field("about", _("About you"));
 $about->set_type(form_field::FIELD_TEXTAREA);
 
+// About you field
+$interests = new form_field("interests", _("Interests"));
+$interests->set_type(form_field::FIELD_CHECKGRID);
+$interests->set_data($db_conn->get_interests());
+
 // Languages you speak fields
 $lang_speak = new form_field("lang_speak", _("Language"));
 $lang_speak->set_type(form_field::FIELD_OPTION);
@@ -106,6 +111,7 @@ $registration->add($bdate);
 $registration->add($email);
 $registration->add($fb);
 $registration->add($about);
+$registration->add($interests);
 
 $registration->fieldset_open(_("Languages you speak"), "lang_speak");
 $registration->add($lang_speak, true, true);

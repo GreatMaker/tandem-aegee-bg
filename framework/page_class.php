@@ -179,7 +179,7 @@ class page_class
 			{
 				$link = $social_data['link_1'].$social_data['link_2'];
 
-				$social_content .= "<a href=\"".$link."\" title=\"".$social_data['name_ext']."\"><img src=\"img/icons/social/".$social_data['icon']."\" /></a>&nbsp;";
+				$social_content .= "<a href=\"".$link."\" title=\"".$social_data['name_ext']."\"><img src=\"img/icons/social/".$social_data['icon']."\" border=\"0\" /></a>&nbsp;";
 			}
 
 			$this->page_social = $social_content;

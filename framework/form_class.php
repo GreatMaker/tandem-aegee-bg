@@ -10,6 +10,7 @@ class form_field
 	// fields
 	const FIELD_TEXT		= "text";
 	const FIELD_CHECKBOX	= "checkbox";
+	const FIELD_CHECKGRID	= "checkgrid";
 	const FIELD_RADIO		= "radio";
 	const FIELD_OPTION		= "option";
 	const FIELD_PASSWORD	= "password";
@@ -179,6 +180,21 @@ class form_class
 		else if ($type == form_field::FIELD_CHECKBOX)
 		{
 			$this->form_data .= "<input name=\"".$name."\" id=\"".$name."\" value=\"".$value."\" type=\"checkbox\" style=\"".$style."\" /></p>\n";
+		}
+		else if ($type == form_field::FIELD_CHECKGRID)
+		{
+			$this->form_data .= "<div style=\"float: right; width: 500px;\"><ul class=\"checkbox-grid\">\n";
+			// <li><input type=\"checkbox\" name=\"text1\" value=\"value1\" /><label for=\"text1\">Text 1</label></li>\n
+
+			foreach ($data as $id => $int_data)
+			{
+				$this->form_data .= "<li><input name=\"".$name."[]\" value=\"".$int_data['id']."\" type=\"checkbox\" style=\"".$style."\" />&nbsp;".$int_data['interest']."</li>\n";
+			}
+
+			$this->form_data .= "</ul></div><br />";
+			
+			if ($paragraph == true)
+				$this->form_data .= "</p>\n";
 		}
 		else if ($type == form_field::FIELD_RADIO)
 		{
