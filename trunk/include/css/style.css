@@ -385,6 +385,12 @@ li ol, li ul {
 	clear: both;
 }
 
+.checkbox-grid li {
+    display: block;
+    float: left;
+    width: 25%;
+}
+
 #footer {
 	margin:0 auto 60px;
 	border-top: 10px solid #1A1A1A;

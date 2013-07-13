@@ -18,7 +18,7 @@
 <body>
 <div id="container">
 	<div id="header">
-		<a href="index.php?page=home" title="Tandem Bergamo"><img src="img/logo_tandem.png" alt="Tandem Bergamo" /></a>
+		<a href="index.php?page=home" title="Tandem Bergamo"><img src="img/logo_tandem.png" alt="Tandem Bergamo" border="0" /></a>
 		<div id="header-social">
 			<%SOCIAL>
 		</div>
@@ -48,8 +48,8 @@
 <div id="footer">
 	<div class="footer-content">
 		<div class="footer-width">
-			<a href="http://www.aegeebergamo.eu" title="AEGEE-Bergamo"><img src="img/logo_aegee-bergamo_mini.png" alt="AEGEE-Bergamo" /></a>&nbsp;
-			<a href="http://www.unibg.it" title="UniBG"><img src="img/logo_UNIbg_mini.png" alt="UniBG" /></a>
+			<a href="http://www.aegeebergamo.eu" title="AEGEE-Bergamo"><img src="img/logo_aegee-bergamo_mini.png" alt="AEGEE-Bergamo" border="0" /></a>&nbsp;
+			<a href="http://www.unibg.it" title="UniBG"><img src="img/logo_UNIbg_mini.png" alt="UniBG" border="0" /></a>
 		</div>
 	</div> <!-- footer-content -->
 
