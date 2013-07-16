@@ -113,11 +113,14 @@ class register_ctrl extends ctrl_abstract
 				// add new user
 				$this->dbConnection->user_add($this->post_data);
 
+				// new user ID
+				$user_new_id = $this->dbConnection->lastInsertId();
+
 				// add languages
-				$this->dbConnection->user_languages_add($this->post_data, $this->dbConnection->lastInsertId());
+				$this->dbConnection->user_languages_add($this->post_data, $user_new_id);
 
 				// add interests
-				$this->dbConnection->user_interests_add($this->post_data, $this->dbConnection->lastInsertId());
+				$this->dbConnection->user_interests_add($this->post_data, $user_new_id);
 
 				// commit data
 				$this->dbConnection->commit();
