@@ -5,7 +5,7 @@
     <title><%TITLE></title>
     <link rel="stylesheet" href="include/css/style.css" type="text/css" />
 	<%CSS>
-	<script src="include/js/jquery-1.9.1.min.js" type="text/javascript"></script>
+	<script src="include/js/jquery-1.10.2.min.js" type="text/javascript"></script>
 	<%JS>
 	<%HEAD>
 	<script>
@@ -37,7 +37,7 @@
 
 		<div class="sidebar">
 			<ul>
-<%SIDEBAR>
+				<%SIDEBAR>
 			</ul>
 		</div> <!-- sidebar -->
 
@@ -54,7 +54,7 @@
 	</div> <!-- footer-content -->
 
 	<div class="footer-width footer-bottom">
-		<p>&copy;2012 Tandem Project Bergamo by <a href="http://www.aegeebergamo.eu">AEGEE-Bergamo</a></p>
+		<p>&copy;2013 Tandem Project Bergamo by <a href="http://www.aegeebergamo.eu">AEGEE-Bergamo</a></p>
 	</div> <!-- footer-bottom -->
 </div> <!-- footer -->
 </body>

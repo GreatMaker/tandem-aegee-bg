@@ -15,7 +15,7 @@ class user_interests_table
     }
 
 	public function user_interests_add($data, $user_id)
-	{		
+	{
 		try
 		{
 			foreach ($data['interests'] as $id => $int_id)
@@ -33,7 +33,7 @@ class user_interests_table
 		catch (PDOException $e)
         {
 			// set error
-            $this->dbConnection->SetError(_("Error inserting user interests"));
+            $this->dbConnection->SetError(_("Error inserting user interests")." - ".$e->getMessage());
 			throw $e;
         }
 	}
