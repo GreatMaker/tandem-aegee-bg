@@ -20,6 +20,33 @@ class languages_table
 		return $this->lang_levels;
 	}
 
+	public function languages_get_level($level)
+	{
+		return $this->lang_levels[$level];
+	}
+
+	public function languages_get_lang_name($lang_code)
+	{
+		try
+        {
+			$query = "SELECT lang_name FROM languages WHERE lang_code = ? LIMIT 1";
+
+			$res = $this->dbConnection->prepare($query);
+
+			$res->bindParam(1, $lang_code);
+
+			$res->execute();
+
+			$row = $res->fetch(PDO::FETCH_ASSOC, PDO::FETCH_ORI_NEXT);
+
+			return $row['lang_name'];
+		}
+		catch (PDOException $e)
+        {
+            $this->dbConnection->SetError(_("Error language code"));
+        }
+	}
+
 	public function languages_get_data()
 	{
 		try

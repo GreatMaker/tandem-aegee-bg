@@ -12,18 +12,7 @@ body {
 	padding:0;
 }
 
-/** User Details Table */
-table.user_details {
-	
-}
-table.user_details span{
-	font-size: 15px;
-	font-weight: bold;
-}
-table.user_details th, table.user_details td {
-	padding: 5px 5px 5px 5px;
-}
-
+/** User Details divs */
 div.user_name {
   display: block;
   height: 25px;
