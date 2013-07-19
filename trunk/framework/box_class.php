@@ -7,7 +7,6 @@
 
 require_once 'form_class.php';
 require_once 'page_class.php';
-require_once 'table_class.php';
 
 define("FB_SOCIAL",		"http://www.facebook.com/TandemLanguageBergamo");
 
@@ -107,9 +106,9 @@ class userdetails_box_class extends box_class
 		// user name cell
 		$data .= "<div class='user_name'><span class='user_name'>".$user_data['name']." ".$user_data['surname']."</span></div>\n";
 
-		// tandem
+		// buddies
 		$data .= "<div class='buttons_box'>\n";
-		$data .= "<img class='user_button' src='img/icons/tandem.png' alt=\"Tandem\" title=\"Tandem\" />\n";
+		$data .= "<a href=\"index.php?page=buddies\"><img class='user_button' src='img/icons/tandem.png' alt=\"Tandem\" title=\"Tandem\" /></a>\n";
 
 		// settings
 		$data .= "<img class='user_button' src='img/icons/settings.png' alt=\"Settings\" title=\"Settings\" />\n";

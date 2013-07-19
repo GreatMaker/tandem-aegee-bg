@@ -147,5 +147,26 @@ class users_table
             $this->dbConnection->SetError(_("Error user information"));
         }
 	}
+
+	public function user_get_data_by_id($user_id)
+	{
+		try
+        {
+			$query = "SELECT *, DATE_FORMAT(FROM_DAYS(TO_DAYS(NOW())-TO_DAYS(birthdate)), '%Y')+0 AS age FROM users WHERE id = ? LIMIT 1";
+
+			$res = $this->dbConnection->prepare($query);
+
+			$res->bindParam(1, $user_id);
+			$res->execute();
+
+			$data = $res->fetchAll(PDO::FETCH_ASSOC);
+
+			return $data[0];
+		}
+		catch (PDOException $e)
+        {
+            $this->dbConnection->SetError(_("Error user information"));
+        }
+	}
 }
 ?>

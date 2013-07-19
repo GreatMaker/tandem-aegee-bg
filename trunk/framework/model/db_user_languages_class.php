@@ -50,6 +50,27 @@ class user_languages_table
 			throw $e;
         }
 	}
+	
+	public function user_languages_get_by_id($user_id)
+	{
+		try
+        {
+			$query = "SELECT user_languages.mother_tongue, user_languages.level, languages.lang_name FROM user_languages JOIN languages ON user_languages.lang_code = languages.lang_code WHERE user_languages.user_id = ? ORDER BY user_languages.mother_tongue DESC, user_languages.level";
+
+			$res = $this->dbConnection->prepare($query);
+
+			$res->bindParam(1, $user_id);
+			$res->execute();
+
+			$data = $res->fetchAll(PDO::FETCH_ASSOC);
+
+			return $data;
+		}
+		catch (PDOException $e)
+        {
+            $this->dbConnection->SetError(_("Error user languages information"));
+        }
+	}
 }
 ?>
 

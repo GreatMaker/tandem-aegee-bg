@@ -13,6 +13,7 @@ require_once 'db_social_toolbar_class.php';
 require_once 'db_top_menu_class.php';
 require_once 'db_interests_class.php';
 require_once 'db_user_interests_class.php';
+require_once 'db_matching_engine_class.php';
 
 Abstract class ExtensionBridge
 {
@@ -64,6 +65,8 @@ class database_tables extends ExtensionBridge
 		parent::addExt(new top_menu_table($this->base), "top_menu_table");
 		parent::addExt(new interests_table($this->base), "interests_table");
 		parent::addExt(new user_interests_table($this->base), "user_interests_table");
+		
+		parent::addExt(new matching_engine($this->base), "matching_engine");
     }
 }
 

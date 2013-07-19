@@ -68,6 +68,11 @@ class page_class
         }
     }
 
+	public function is_user_logged()
+	{
+		return ($this->bLoginNeeded) ? false : true;
+	}
+
     public function set_template($tpl_name)
     {
         // Reading template file
