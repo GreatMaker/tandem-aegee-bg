@@ -3,6 +3,10 @@
  * Database Base Model Class
  * 
  * @author Andrea Visinoni <andrea.visinoni@aegeebergamo.eu>
+ * 
+ * @license This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License. 
+ * To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/3.0/ 
+ * or send a letter to Creative Commons, 444 Castro Street, Suite 900, Mountain View, California, 94041, USA.
  */
 
 require_once 'db_base_class.php';
@@ -14,6 +18,7 @@ require_once 'db_top_menu_class.php';
 require_once 'db_interests_class.php';
 require_once 'db_user_interests_class.php';
 require_once 'db_matching_engine_class.php';
+require_once 'db_messages_class.php';
 
 Abstract class ExtensionBridge
 {
@@ -65,6 +70,7 @@ class database_tables extends ExtensionBridge
 		parent::addExt(new top_menu_table($this->base), "top_menu_table");
 		parent::addExt(new interests_table($this->base), "interests_table");
 		parent::addExt(new user_interests_table($this->base), "user_interests_table");
+		parent::addExt(new messages_table($this->base), "messages_table");
 		
 		parent::addExt(new matching_engine($this->base), "matching_engine");
     }
@@ -91,7 +97,7 @@ class db_base extends PDO
             $this->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 			// Disable auto commit
-			$this->setAttribute(PDO::ATTR_AUTOCOMMIT, FALSE);
+			$this->setAttribute(PDO::ATTR_AUTOCOMMIT, TRUE);
 
             // Allocation of tables classes through the extension bridge
             $this->db_tables  = new database_tables($this);

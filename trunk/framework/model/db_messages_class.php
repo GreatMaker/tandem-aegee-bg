@@ -1,6 +1,6 @@
 <?php
 /*
- * Top Menu table class
+ * Messages table class
  * 
  * @author Andrea Visinoni <andrea.visinoni@aegeebergamo.eu>
  * 
@@ -9,7 +9,7 @@
  * or send a letter to Creative Commons, 444 Castro Street, Suite 900, Mountain View, California, 94041, USA.
  */
 
-class top_menu_table
+class messages_table
 {
     private $dbConnection;
 
@@ -18,22 +18,23 @@ class top_menu_table
         $this->dbConnection = $dbconn;
     }
 
-	public function get_top_menu()
+	public function message_add($from_id, $to_id, $message)
 	{
 		try
         {
-			$query = "SELECT name, page FROM top_menu ORDER BY top_menu.order";
+			$query = "INSERT INTO messages (from_user_id, to_user_id, message) VALUES (?, ?, ?)";
 
-			if ($res = $this->dbConnection->query($query))
-			{
-				$data = $res->fetchAll(PDO::FETCH_ASSOC);
-				
-				return $data;
-			}
+			$res = $this->dbConnection->prepare($query);
+
+			$res->bindParam(1, $from_id);
+			$res->bindParam(2, $to_id);
+			$res->bindParam(3, $message);
+
+			$res->execute();
 		}
 		catch (PDOException $e)
         {
-            $this->dbConnection->SetError(_("Error retreiving top menu"));
+            $this->dbConnection->SetError(_("Error sending message")." - ".$e->getMessage());
         }
 	}
 }

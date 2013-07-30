@@ -13,6 +13,7 @@
 		{
 			<%JQUERY>
 		});
+		<%PLAINJS>
 	</script>
 </head>
 <body>
@@ -54,7 +55,8 @@
 	</div> <!-- footer-content -->
 
 	<div class="footer-width footer-bottom">
-		<p>&copy;2013 Tandem Project Bergamo by <a href="http://www.aegeebergamo.eu">AEGEE-Bergamo</a></p>
+		<p>&copy;2013 Tandem Project Bergamo by <a href="http://www.aegeebergamo.eu">AEGEE-Bergamo</a>
+		<a href="http://creativecommons.org/licenses/by-nc-sa/3.0/" title="CC License" rel="license"><img alt="Creative Commons License" style="border-width:0; float: right;" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a></p>
 	</div> <!-- footer-bottom -->
 </div> <!-- footer -->
 </body>
