@@ -3,6 +3,10 @@
  * Page generation class
  *
  * @author Andrea Visinoni <andrea.visinoni@aegeebergamo.eu>
+ * 
+ * @license This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License. 
+ * To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/3.0/ 
+ * or send a letter to Creative Commons, 444 Castro Street, Suite 900, Mountain View, California, 94041, USA.
  */
 
 require('config.php');
@@ -40,6 +44,7 @@ class page_class
     private     $page_sidebar;
 	private		$page_jquery;
 	private		$page_social;
+	private		$page_plainjs;
 
     public function __construct()
     {
@@ -118,6 +123,14 @@ class page_class
             $this->page_jquery .= "\n";
 
         $this->page_jquery .= "\t".$data;
+    }
+	
+	public function AddJSPlain($data)
+    {
+        if (isset($this->page_plainjs))
+            $this->page_plainjs .= "\n";
+
+        $this->page_plainjs .= "\t".$data;
     }
 
 	public function AddHead($data)
@@ -281,6 +294,8 @@ class page_class
         $this->page_html = str_replace("<%SIDEBAR>", $this->page_sidebar, $this->page_html);
 		// jQuery on load
 		$this->page_html = str_replace("<%JQUERY>", $this->page_jquery, $this->page_html);
+		// JS Plain
+		$this->page_html = str_replace("<%PLAINJS>", $this->page_plainjs, $this->page_html);
 		// Social toolbar
 		$this->page_html = str_replace("<%SOCIAL>", $this->page_social, $this->page_html);
 		

@@ -3,6 +3,10 @@
  * Buddies List View File
  *
  * @author Andrea Visinoni <andrea.visinoni@aegeebergamo.eu>
+ * 
+ * @license This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License. 
+ * To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/3.0/ 
+ * or send a letter to Creative Commons, 444 Castro Street, Suite 900, Mountain View, California, 94041, USA.
  */
 
 if ($page->is_user_logged() == false)
@@ -16,19 +20,24 @@ else
 
 	// set page title
 	$page->set_title('Buddies');
-	
+
 	// Add jquery UI
 	$page->AddJS("jquery-ui-1.10.1.custom.min.js");
+	$page->AddJS("jquery.tandem.js");
 	$page->AddCSS("ui-lightness/jquery-ui-1.10.1.custom.css");
-	
+
 	// get db connection
 	$db_conn = null;
 	$page->get_db($db_conn);
-	
+
 	// Page title
 	$page->AddToBody("<h2>"._("Buddies List")."</h2>");
 
-	$data = $db_conn->matching_find_buddies(14); // TODO real id
+	// current user data
+	$current_user_data = $page->get_user_data();
+
+	// get buddies data
+	$data = $db_conn->matching_find_buddies($current_user_data['id']);
 
 	foreach ($data as $lang => $buddies)
 	{
@@ -114,7 +123,7 @@ else
 			$bd_data .= "<div style=\"float: left; margin-left: 5px; margin-bottom: 5px;\">".$langs_str_s."<br />".$langs_str_l."</div>";
 
 			// Buddy common interests
-			$user_c_interests = $db_conn->matching_get_common_interests(14, $buddy_id);
+			$user_c_interests = $db_conn->matching_get_common_interests($current_user_data['id'], $buddy_id);
 
 			if (count($user_c_interests) > 0)
 			{
@@ -139,7 +148,7 @@ else
 
 			// Buttons
 			$bd_data .= "<div style=\"clear: both; margin-right: 10px; overflow:auto;\">";
-			$bd_data .= "<a href=\"#\" class=\"open_message\"><div style=\"float: right; border: 1px solid black; padding: 5px;\">"._("Send message")."</div></a>";
+			$bd_data .= "<a href=\"#\" onClick=\"open_message(14, 15); return false;\"><div style=\"float: right; border: 1px solid black; padding: 5px;\">"._("Send message")."</div></a>";
 			$bd_data .= "</div>";
 
 			// Separator
@@ -148,16 +157,23 @@ else
 	}
 
 	// send message dialog
-	$page->AddJQuery("$(\"#dialog-message\").dialog({resizable: false, width: 500, height: 280, modal: true, autoOpen: false, close: function() {}});
-					 $('.open_message').click(function() {\$(\"#dialog-message\").dialog('open'); return false;});");
+	$page->AddJSPlain("function open_message(from, to) {
+        $(\"#dialog-message\").data(\"msg_data\", {msg_from: from, msg_to: to}).dialog({
+            autoOpen: true,
+			resizable: false, width: 520, height: 320,
+            modal: true,
+            buttons: {\""._("Send")."\": function () { $().tandem_message($(this).data('msg_data').msg_from, $(this).data('msg_data').msg_to, $('#message_field').val()); $(this).dialog(\"close\");} },
+			close: function() {\$(this).find('form')[0].reset();}
+        });
+    }");
 
 	// set page
 	$page->AddToBody($bd_data);
 
 	// Message div
-	$div_send_message = "<div id=\"dialog-message\" title=\"Send Message\">
+	$div_send_message = "<div id=\"dialog-message\" title=\""._("Send Message")."\" style=\"display: none;\">
 						<p><form>
-							<textarea name=\"message\" id=\"message\" rows=\"8\" cols=\"62\" class=\"ui-widget-content ui-corner-all\ style=\"resize: none;\"></textarea>
+							<textarea name=\"message_field\" id=\"message_field\" rows=\"8\" cols=\"62\" class=\"ui-widget-content ui-corner-all\" style=\"resize: none;\"></textarea>
 						</form></p>
 						</div>";
 
