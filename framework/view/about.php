@@ -16,5 +16,8 @@ $page->set_template('framework/templates/main.tpl');
 $page->set_title('About');
 
 // Page title
-$page->AddToBody("<h2>"._("About the Tandem Project")."</h2>");
+//$page->AddToBody("<h2>"._("About the Tandem Project")."</h2>");
+
+// Add contents from database
+$page->add_db_contents($page_req);
 ?>

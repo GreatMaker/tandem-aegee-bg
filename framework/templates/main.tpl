@@ -32,15 +32,13 @@
 	</div> <!-- navigation -->
 
 	<div id="body">
-		<div id="content">
-			<%MAIN>
-		</div> <!-- content -->
-
 		<div class="sidebar">
 			<ul>
 				<%SIDEBAR>
 			</ul>
 		</div> <!-- sidebar -->
+
+		<%MAIN> <!-- content -->
 
     	<div class="clear"></div>
 	</div> <!-- body -->

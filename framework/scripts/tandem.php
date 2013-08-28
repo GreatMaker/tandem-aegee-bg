@@ -10,6 +10,7 @@
  */
 
 require_once '../page_class.php';
+require_once '../mail_class.php';
 
 header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
 header('Cache-Control: no-store, no-cache, must-revalidate');
@@ -40,13 +41,30 @@ else if ($_POST['func'] == "tandem_message")
 	// get connection to DB
 	 $page->get_db($db_conn);
 
+	 $user_from_data = $db_conn->user_get_data_by_id($_POST['from']);
+	 $user_to_data = $db_conn->user_get_data_by_id($_POST['to']);
+
 	 // send message
+	 $mail = new mailman_class();
+
+	 $mail->set_sender($user_from_data['name']);
+	 $mail->set_receiver($user_to_data['name']);
+	 $mail->set_receiver_mail($user_to_data['email']);
+	 $mail->set_object(_("New message from the Tandem Project Bergamo!"));
+	 $mail->set_user_message($_POST['message']);
+
+	 // send message
+	 $mail->send_message();
+	 
+	 // add do DB
 	 $db_conn->message_add($_POST['from'], $_POST['to'], $_POST['message']);
 
 	 $str_err = "";
 
 	 if ($db_conn->GetError($str_err))
 		 $ret['error'] = $str_err;
+
+	 $ret['success'] = _("Message sent correctly");
 }
 else
 	$ret['error'] = _("Function not found");

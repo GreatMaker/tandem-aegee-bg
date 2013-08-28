@@ -188,11 +188,15 @@ class form_class
 		else if ($type == form_field::FIELD_CHECKGRID)
 		{
 			$this->form_data .= "<div style=\"float: right; width: 500px;\"><ul class=\"checkbox-grid\">\n";
-			// <li><input type=\"checkbox\" name=\"text1\" value=\"value1\" /><label for=\"text1\">Text 1</label></li>\n
 
 			foreach ($data as $id => $int_data)
-			{
-				$this->form_data .= "<li><input name=\"".$name."[]\" value=\"".$int_data['id']."\" type=\"checkbox\" style=\"".$style."\" />&nbsp;".$int_data['interest']."</li>\n";
+			{						
+				$this->form_data .= "<li><input name=\"".$name."[]\" value=\"".$int_data['id']."\" type=\"checkbox\" style=\"".$style."\" ";
+
+				if (in_array($int_data['id'], $value))
+					$this->form_data .= " checked=\"checked\"";
+		
+				$this->form_data .= "/>&nbsp;".$int_data['interest']."</li>\n";
 			}
 
 			$this->form_data .= "</ul></div><br />";
@@ -204,7 +208,12 @@ class form_class
 		{
 			foreach ($data as $r_value => $r_text)
 			{
-				$this->form_data .= "<input name=\"".$name."\" id=\"".$name."\" value=\"".$r_value."\" type=\"radio\" style=\"".$style."\" /> ".$r_text;
+				$this->form_data .= "<input name=\"".$name."\" id=\"".$name."\" value=\"".$r_value."\" type=\"radio\" style=\"".$style."\"";
+
+				if ($value == $r_value)
+					$this->form_data .= " checked=\"checked\"";
+
+				$this->form_data .= "/> ".$r_text;
 				$this->form_data .= "<span style=\"padding: 0 10px\">&nbsp;</span>";
 			}
 
