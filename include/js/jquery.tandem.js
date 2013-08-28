@@ -32,14 +32,13 @@
 	{
 		if (data.error)
 		{
-			//alert(data.error);
-			$('#dialog-message').html(data.success);
-			//$('#dialog-message').dialog();
+			$('#btn_send').hide();
+			$('#dialog-message').html(data.error);
 		}
         else
 		{
-			$('#dialog-message').html(data.error);
-			//$('#dialog-message').dialog();
+			$('#btn_send').hide();
+			$('#dialog-message').html(data.success);
 		}
 	}
 })(jQuery);

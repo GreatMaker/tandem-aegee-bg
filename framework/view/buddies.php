@@ -162,7 +162,7 @@ else
             autoOpen: true,
 			resizable: false, width: 520, height: 320,
             modal: true,
-            buttons: {\""._("Send")."\": function () { $().tandem_message($(this).data('msg_data').msg_from, $(this).data('msg_data').msg_to, $('#message_field').val()); $(this).dialog(\"close\");} },
+            buttons: {\"Send\": { text: \""._("Send")."\", id: \"btn_send\", click: function () { $().tandem_message($(this).data('msg_data').msg_from, $(this).data('msg_data').msg_to, $('#message_field').val());} }},
 			close: function() {\$(this).find('form')[0].reset();}
         });
     }");

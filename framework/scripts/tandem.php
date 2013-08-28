@@ -52,9 +52,6 @@ else if ($_POST['func'] == "tandem_message")
 	 $mail->set_receiver_mail($user_to_data['email']);
 	 $mail->set_object(_("New message from the Tandem Project Bergamo!"));
 	 $mail->set_user_message($_POST['message']);
-
-	 // send message
-	 $mail->send_message();
 	 
 	 // add do DB
 	 $db_conn->message_add($_POST['from'], $_POST['to'], $_POST['message']);
@@ -63,6 +60,11 @@ else if ($_POST['func'] == "tandem_message")
 
 	 if ($db_conn->GetError($str_err))
 		 $ret['error'] = $str_err;
+	 else
+	 {
+		// send message
+		$mail->send_message();
+	 }
 
 	 $ret['success'] = _("Message sent correctly");
 }
