@@ -22,6 +22,22 @@ class messages_table
 	{
 		try
         {
+			// check message limit (5 per day)
+			$query = "SELECT COUNT(*) FROM messages WHERE from_user_id = ?";
+
+			$res = $this->dbConnection->prepare($query);
+
+			$res->bindParam(1, $from_id);
+			$res->execute();
+
+			$cnt = $res->fetchColumn();
+
+			if ($cnt >= 5)
+			{
+				$this->dbConnection->SetError(_("Maximum number of messages sent for today!"));
+				return;
+			}
+
 			$query = "INSERT INTO messages (from_user_id, to_user_id, message) VALUES (?, ?, ?)";
 
 			$res = $this->dbConnection->prepare($query);

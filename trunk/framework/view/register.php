@@ -58,7 +58,7 @@ $fb->set_style("width: 350px;");
 $about = new form_field("about", _("About you"));
 $about->set_type(form_field::FIELD_TEXTAREA);
 
-// About you field
+// Interests field
 $interests = new form_field("interests", _("Interests"));
 $interests->set_type(form_field::FIELD_CHECKGRID);
 $interests->set_data($db_conn->get_interests());

@@ -1,6 +1,6 @@
 <?php
 /*
- * Top Menu table class
+ * Contents table class
  * 
  * @author Andrea Visinoni <andrea.visinoni@aegeebergamo.eu>
  * 
@@ -9,7 +9,7 @@
  * or send a letter to Creative Commons, 444 Castro Street, Suite 900, Mountain View, California, 94041, USA.
  */
 
-class top_menu_table
+class contents_table
 {
     private $dbConnection;
 
@@ -18,22 +18,25 @@ class top_menu_table
         $this->dbConnection = $dbconn;
     }
 
-	public function get_top_menu()
+	public function get_contents_page($page_name)
 	{
 		try
         {
-			$query = "SELECT name, page FROM top_menu ORDER BY top_menu.order";
+			$query = "SELECT html FROM contents WHERE page_id = ? ORDER BY contents.pinned DESC, contents.order";
 
-			if ($res = $this->dbConnection->query($query))
-			{
-				$data = $res->fetchAll(PDO::FETCH_ASSOC);
-				
-				return $data;
-			}
+			$res = $this->dbConnection->prepare($query);
+
+			$res->bindParam(1, $page_name);
+
+			$res->execute();
+
+			$data = $res->fetchAll(PDO::FETCH_ASSOC);
+
+			return $data;
 		}
 		catch (PDOException $e)
         {
-            $this->dbConnection->SetError(_("Error retreiving top menu"));
+            $this->dbConnection->SetError(_("Error retreiving page contents"));
         }
 	}
 }

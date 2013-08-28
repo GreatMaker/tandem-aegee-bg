@@ -31,6 +31,15 @@
 	function reply_message(data)
 	{
 		if (data.error)
-            alert(data.error);
+		{
+			//alert(data.error);
+			$('#dialog-message').html(data.success);
+			//$('#dialog-message').dialog();
+		}
+        else
+		{
+			$('#dialog-message').html(data.error);
+			//$('#dialog-message').dialog();
+		}
 	}
 })(jQuery);

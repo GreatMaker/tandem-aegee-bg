@@ -93,7 +93,9 @@ class users_table
 			if ($res = $this->dbConnection->query($query))
 			{
 				/* Check the number of rows that match the SELECT statement */
-				if ($res->fetchColumn() > 0)
+				$cnt = $res->fetchColumn();
+
+				if ($cnt > 0)
 					return true;
 			}
 
@@ -145,6 +147,30 @@ class users_table
 			$data = $res->fetchAll(PDO::FETCH_ASSOC);
 
 			return $data[0];
+		}
+		catch (PDOException $e)
+        {
+            $this->dbConnection->SetError(_("Error user information"));
+        }
+	}
+
+	public function user_get_id_by_username($username, $is_md5 = false)
+	{
+		try
+        {
+			if ($is_md5 == false)
+				$query = "SELECT id FROM users WHERE username = ? LIMIT 1";
+			else
+				$query = "SELECT id FROM users WHERE md5(username) = ? LIMIT 1";
+
+			$res = $this->dbConnection->prepare($query);
+
+			$res->bindParam(1, $username);
+			$res->execute();
+
+			$data = $res->fetchAll(PDO::FETCH_ASSOC);
+
+			return $data[0]['id'];
 		}
 		catch (PDOException $e)
         {

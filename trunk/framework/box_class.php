@@ -115,7 +115,7 @@ class userdetails_box_class extends box_class
 		$data .= "<a href=\"index.php?page=buddies\"><img class='user_button' src='img/icons/tandem.png' alt=\"Tandem\" title=\"Tandem\" /></a>\n";
 
 		// settings
-		$data .= "<img class='user_button' src='img/icons/settings.png' alt=\"Settings\" title=\"Settings\" />\n";
+		$data .= "<a href=\"index.php?page=settings\"><img class='user_button' src='img/icons/settings.png' alt=\"Settings\" title=\"Settings\" /></a>\n";
 
 		// logout
 		$data .= "<a style=\"cursor:pointer\" onclick=\"$().tandem_logout();\"><img class='user_button' src='img/icons/logout.png' alt=\"Logout\" title=\"Logout\" /></a>\n";

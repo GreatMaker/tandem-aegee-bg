@@ -27,8 +27,9 @@ class page_class
 	protected	$pConnection;
 
 	private		$bLoginNeeded = false;
+	private		$bContentsDB = false;
 
-    private     $page_html;
+	private     $page_html;
     private     $page_title;
     private     $page_css;
     private     $page_js;
@@ -144,6 +145,9 @@ class page_class
 	public function AddToBody($str)
     {
         $this->page_body .= $str;
+
+		// force flag
+		$this->bContentsDB = false;
     }
 
     // populate sidebar
@@ -209,7 +213,7 @@ class page_class
 		$str_err = "";
 
 		// get toolbar
-		$data = $this->pConnection->get_top_menu();
+		$data = $this->pConnection->get_pages_top_menu();
 
 		if ($this->pConnection->GetError($str_err) == false)
 		{
@@ -226,6 +230,27 @@ class page_class
 		}
 	}
 
+	public function add_db_contents($page)
+	{
+		$str_err = "";
+
+		// force flag
+		$this->bContentsDB = true;
+
+		// get contents for the selected page
+		$data = $this->pConnection->get_contents_page($page);
+
+		if ($this->pConnection->GetError($str_err) == false)
+		{
+			foreach ($data as $id => $content_data)
+			{
+				$this->page_body .= "<div id=\"content\">\n";
+				$this->page_body .= "\t".$content_data['html']."\n";
+				$this->page_body .= "</div>\n";
+			}
+		}
+	}
+
 	public function get_db(&$db_conn)
 	{
 		$db_conn = $this->pConnection;
@@ -239,6 +264,14 @@ class page_class
 		return $this->pConnection->user_get_data($username, true);
 	}
 
+	public function get_user_id()
+	{
+		// username
+		$username = $this->pCookie->GetUsername();
+
+		return $this->pConnection->user_get_id_by_username($username, true);
+	}
+
 	public function logout()
 	{
 		$this->pCookie->Logout();
@@ -246,13 +279,7 @@ class page_class
 
     // display page
     public function display()
-    {
-        // Caricamento JS menu (sono da caricare dopo per evitare conflitti con altri plugin jquery nella pagina)
-        /*$this->AddJS('jquery.autron.js');
-        $this->AddJS('hoverIntent.js');
-	$this->AddJS('superfish.js');
-        $this->AddJS('supersubs.js');*/
-		
+    {		
 		// Insert login sidebar box if needed
 		if ($this->bLoginNeeded == true && $this->page_req != REGISTER)
 			$this->add_sidebar_login_box();
@@ -284,8 +311,6 @@ class page_class
         $this->page_html = str_replace("<%BODY>", $this->page_body_extra, $this->page_html);
         // Impostazione Menu
         $this->page_html = str_replace("<%MENU>", $this->page_menu, $this->page_html);
-        // Impostazione Body
-        $this->page_html = str_replace("<%MAIN>", $this->page_body, $this->page_html);
         // Impostazione Footer
         $this->page_html = str_replace("<%FOOTER>", $this->page_footer, $this->page_html);
         // Impostazione Nome societÃ 
@@ -298,7 +323,20 @@ class page_class
 		$this->page_html = str_replace("<%PLAINJS>", $this->page_plainjs, $this->page_html);
 		// Social toolbar
 		$this->page_html = str_replace("<%SOCIAL>", $this->page_social, $this->page_html);
+
+		// page content (db or not db...)
+		if ($this->bContentsDB == true)
+		{
+			
+		}
+		else
+		{
+			// fix div
+			$this->page_body = "<div id=\"content\">".$this->page_body."</div>";
+		}
 		
+		// set page content
+		$this->page_html = str_replace("<%MAIN>", $this->page_body, $this->page_html);
 
         // Output pagina
         echo $this->page_html;

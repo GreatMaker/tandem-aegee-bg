@@ -18,6 +18,27 @@ class user_interests_table
         $this->dbConnection = $dbconn;
     }
 
+	public function user_interests_get($user_id)
+	{
+		try
+        {
+			$query = "SELECT interest_id FROM user_interests WHERE user_id = ?";
+
+			$res = $this->dbConnection->prepare($query);
+
+			$res->bindParam(1, $user_id);
+			$res->execute();
+
+			$data = $res->fetchAll(PDO::FETCH_COLUMN);
+
+			return $data;
+		}
+		catch (PDOException $e)
+        {
+            $this->dbConnection->SetError(_("Error user interests"));
+        }
+	}
+
 	public function user_interests_add($data, $user_id)
 	{
 		try
