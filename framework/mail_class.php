@@ -16,6 +16,7 @@ class mailman_class
 	private $receiver;
 	private $receiver_mail;
 	private $sender;
+	private $sender_id;
 	private $user_message;
 	private $user_image;
 
@@ -37,6 +38,11 @@ class mailman_class
 	public function set_sender($sender)
 	{
 		$this->sender = $sender;
+	}
+
+	public function set_sender_id($id)
+	{
+		$this->sender_id = $id;
 	}
 
 	public function set_receiver_mail($recv_mail)
@@ -73,7 +79,7 @@ class mailman_class
 				</div>
 			</div>
 			<div style=\"clear: both; margin-right: 10px; overflow:auto;\">
-			<a href=\"#\">
+			<a href=\"index.php?page=home&option=message&to=".$this->sender_id."\">
 			<div style=\"float: right; border: 1px solid black; padding: 5px;\">Reply</div>
 			</a>
 			</div>
