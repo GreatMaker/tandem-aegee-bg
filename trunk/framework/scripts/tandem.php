@@ -48,12 +48,13 @@ else if ($_POST['func'] == "tandem_message")
 	 $mail = new mailman_class();
 
 	 $mail->set_sender($user_from_data['name']);
+	 $mail->set_sender_id($user_from_data['id']);
 	 $mail->set_receiver($user_to_data['name']);
 	 $mail->set_receiver_mail($user_to_data['email']);
 	 $mail->set_object(_("New message from the Tandem Project Bergamo!"));
 	 $mail->set_user_message($_POST['message']);
 	 $mail->set_user_image($user_from_data['facebook']);
-	 
+
 	 // add do DB
 	 $db_conn->message_add($_POST['from'], $_POST['to'], $_POST['message']);
 
