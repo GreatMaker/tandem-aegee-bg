@@ -23,7 +23,7 @@ class messages_table
 		try
         {
 			// check message limit (5 per day)
-			$query = "SELECT COUNT(*) FROM messages WHERE from_user_id = ?";
+			$query = "SELECT COUNT(*) FROM messages WHERE from_user_id = ? AND DATE(timestamp) = CURDATE()";
 
 			$res = $this->dbConnection->prepare($query);
 
