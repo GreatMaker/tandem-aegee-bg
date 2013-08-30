@@ -148,7 +148,7 @@ else
 
 			// Buttons
 			$bd_data .= "<div style=\"clear: both; margin-right: 10px; overflow:auto;\">";
-			$bd_data .= "<a href=\"#\" onClick=\"open_message(14, 15); return false;\"><div style=\"float: right; border: 1px solid black; padding: 5px;\">"._("Send message")."</div></a>";
+			$bd_data .= "<a class=\"dialog_link\" from=\"".$current_user_data['id']."\" to=\"".$buddy_id."\" style=\"cursor: pointer;\"><div style=\"float: right; border: 1px solid black; padding: 5px;\">"._("Send message")."</div></a>";
 			$bd_data .= "</div>";
 
 			// Separator
@@ -157,22 +157,30 @@ else
 	}
 
 	// send message dialog
-	$page->AddJSPlain("function open_message(from, to) {
-        $(\"#dialog-message\").data(\"msg_data\", {msg_from: from, msg_to: to}).dialog({
-            autoOpen: true,
+	$page->AddJQuery("
+		message_field_html = $('#dialog-message').html();
+        $(\"#dialog-message\").dialog({
+            autoOpen: false,
 			resizable: false, width: 520, height: 320,
             modal: true,
             buttons: {\"Send\": { text: \""._("Send")."\", id: \"btn_send\", click: function () { $().tandem_message($(this).data('msg_data').msg_from, $(this).data('msg_data').msg_to, $('#message_field').val());} }},
-			close: function() {\$(this).find('form')[0].reset();}
+			close: function() {if($('#form_message').length) {\$(this).find('form')[0].reset();} $('#btn_send').show();}
         });
-    }");
+		$('.dialog_link').click(function(event){
+			event.preventDefault();
+			\$(\"#dialog-message\").html(message_field_html);
+			var from =$(this).attr(\"from\");
+			var to =$(this).attr(\"to\");
+			\$(\"#dialog-message\").data(\"msg_data\", {msg_from: from, msg_to: to}).dialog(\"open\");
+			return false; });
+    ");
 
 	// set page
 	$page->AddToBody($bd_data);
 
 	// Message div
 	$div_send_message = "<div id=\"dialog-message\" title=\""._("Send Message")."\" style=\"display: none;\">
-						<p><form>
+						<p><form id =\"form_message\">
 							<textarea name=\"message_field\" id=\"message_field\" rows=\"8\" cols=\"62\" class=\"ui-widget-content ui-corner-all\" style=\"resize: none;\"></textarea>
 						</form></p>
 						</div>";

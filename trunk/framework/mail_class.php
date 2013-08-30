@@ -17,6 +17,7 @@ class mailman_class
 	private $receiver_mail;
 	private $sender;
 	private $user_message;
+	private $user_image;
 
 	public function __construct()
     {
@@ -48,13 +49,13 @@ class mailman_class
 		$this->user_message = $msg;
 	}
 
+	public function set_user_image($img)
+	{
+		$this->user_image = $img;
+	}
+
 	public function send_message()
 	{
-		$this->message  = "Hi ".$this->receiver.",\n";
-		$this->message .= $this->sender." just sent you a message, here it is:\n\n";
-		$this->message .= $this->user_message;
-		$this->message .= "\n\nPlease do not reply to this mail ";
-		
 		$this->message  = "<html><body style=\"background-color: #E6E6E6; color: #666666; font-family: Verdana,Geneva,sans-serif; font-size: 13px;\">
 		<img src=\"http://tandem.unibg.it/new/img/logo_tandem.png\" />
 		<div style=\"width: 600px; padding: 10px; background-color: #FFFFFF; border-color: #CCCCCC #C0C0C0 #C0C0C0 #CCCCCC; border-image: none; border-style: solid; border-width: 1px;\">
@@ -62,10 +63,10 @@ class mailman_class
 				<div style=\"clear: both; font-size: 15px; margin-left: 10px;\">
 					Hi ".$this->receiver.",<br/>
 					".$this->sender." just sent you a message, here it is:<br/><br/>
-					<strong>Jill Timmreck</strong>
+					<strong>".$this->sender."</strong>
 				</div>
 				<div style=\"border: 1px solid black; float: left; width: 50px; height: 50px; margin: 10px;\">
-					<img src=\"http://graph.facebook.com/jill.timmreck/picture\">
+					<img src=\"http://graph.facebook.com/".$this->user_image."/picture\">
 				</div>
 				<div style=\"overflow:auto; margin-top: 10px;\">
 				".$this->user_message."

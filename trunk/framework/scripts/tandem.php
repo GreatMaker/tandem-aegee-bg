@@ -52,6 +52,7 @@ else if ($_POST['func'] == "tandem_message")
 	 $mail->set_receiver_mail($user_to_data['email']);
 	 $mail->set_object(_("New message from the Tandem Project Bergamo!"));
 	 $mail->set_user_message($_POST['message']);
+	 $mail->set_user_image($user_from_data['facebook']);
 	 
 	 // add do DB
 	 $db_conn->message_add($_POST['from'], $_POST['to'], $_POST['message']);
