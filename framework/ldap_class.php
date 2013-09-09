@@ -97,5 +97,10 @@ class ldap_login
 	{
 		return $this->ldap_data;
 	}
+
+	public function is_username_login_type()
+	{
+		return ($this->login_type == self::LOGIN_USERNAME) ? true : false;
+	}
 }
 ?>

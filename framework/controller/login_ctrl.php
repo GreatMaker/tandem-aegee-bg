@@ -77,6 +77,15 @@ class login_ctrl extends ctrl_abstract
 					if ($ret == ldap_login::LOGIN_OK)
 					{
 						$b_ldap_ok = true;
+
+						// user logged in with id, make it work
+						if ($this->ldap->is_username_login_type() == false)
+						{
+							// get ldap data
+							$ldap_data = $this->ldap->get_data();
+					
+							$this->post_data['username'] = $ldap_data['username'];
+						}
 					}
 					else if (($ret == ldap_login::LOGIN_SEARCH_ERR) || ($ret == ldap_login::LOGIN_RETRIVE_ERR))
 					{

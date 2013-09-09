@@ -198,5 +198,23 @@ class users_table
             $this->dbConnection->SetError(_("Error user information"));
         }
 	}
+	
+	public function user_toggle_invisible($user_id)
+	{
+		try
+        {
+			$query = "UPDATE users SET invisible = !invisible WHERE id = ?";
+
+			$res = $this->dbConnection->prepare($query);
+
+			$res->bindParam(1, $user_id);
+
+			$res->execute();
+		}
+		catch (PDOException $e)
+        {
+            $this->dbConnection->SetError(_("Error user set invisible"));
+        }	
+	}
 }
 ?>

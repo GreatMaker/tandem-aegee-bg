@@ -94,25 +94,41 @@ class userdetails_box_class extends box_class
 
 		// user image
 		if (isset($user_data['facebook']) && $user_data['facebook'] != "")
-			$img_link = "<img src='http://graph.facebook.com/".$user_data['facebook']."/picture' />";
+			$img_user = "<img src='http://graph.facebook.com/".$user_data['facebook']."/picture' />";
 		else
 		{
 			if ($user_data['gender'] == "M")
-				$img_link = "<img src='img/user_def_male.png' />";
+				$img_user = "<img src='img/user_def_male.png' />";
 			else
-				$img_link = "<img src='img/user_def_female.png' />";
+				$img_user = "<img src='img/user_def_female.png' />";
+		}
+
+		// user visible
+		if ($user_data['invisible'] == 0)
+		{
+			$img_invisible = "<img class='user_button' src='img/icons/visible.png' alt='Set Invisible' title='Set Invisible' />";
+		}
+		else
+		{
+			$img_invisible = "<img class='user_button' src='img/icons/invisible.png' alt='Set Visible' title='Set Visible' />";
 		}
 
 		$data .= "<div class='user_data'>";
 		
-        $data .= "<div class='user_image'>".$img_link."</div>\n";
+        $data .= "<div class='user_image' style='border: 1px solid black;'>".$img_user."</div>\n";
 
 		// user name cell
 		$data .= "<div class='user_name'><span class='user_name'>".$user_data['name']." ".$user_data['surname']."</span></div>\n";
 
 		// buddies
 		$data .= "<div class='buttons_box'>\n";
-		$data .= "<a href=\"index.php?page=buddies\"><img class='user_button' src='img/icons/tandem.png' alt=\"Tandem\" title=\"Tandem\" /></a>\n";
+
+		if ($user_data['admin'] == 0)
+			$data .= "<a href=\"index.php?page=buddies\"><img class='user_button' src='img/icons/tandem.png' alt=\"Tandem\" title=\"Tandem\" /></a>\n";
+
+		// visible
+		if ($user_data['admin'] == 0)
+			$data .= "<a style=\"cursor:pointer\" onclick=\"$().tandem_toggle_visible();\">".$img_invisible."</a>\n";
 
 		// settings
 		$data .= "<a href=\"index.php?page=settings\"><img class='user_button' src='img/icons/settings.png' alt=\"Settings\" title=\"Settings\" /></a>\n";

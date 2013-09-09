@@ -10,6 +10,11 @@
         $.post("framework/scripts/tandem.php", { func: "tandem_logout"}, reply, "json");
     };
 
+	$.fn.tandem_toggle_visible = function()
+    {
+        $.post("framework/scripts/tandem.php", { func: "tandem_invisible"}, reply, "json");
+    };
+
 	$.fn.tandem_message = function(msg_from, msg_to, message_str)
     {
         $.post("framework/scripts/tandem.php", { func: "tandem_message", from: msg_from, to: msg_to, message: message_str}, reply_message, "json");
