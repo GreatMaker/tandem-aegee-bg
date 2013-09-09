@@ -36,10 +36,24 @@ if ($_POST['func'] == "tandem_logout")
 	// force reload
 	$ret['reload'] = 'true';
 }
+else if ($_POST['func'] == "tandem_invisible")
+{
+	// get connection to DB
+	$page->get_db($db_conn);
+
+	// get user data
+	$user_data = $page->get_user_data();
+
+	// set invisible flag
+	$db_conn->user_toggle_invisible($user_data['id']);
+
+	// force reload
+	$ret['reload'] = 'true';
+}
 else if ($_POST['func'] == "tandem_message")
 {
 	// get connection to DB
-	 $page->get_db($db_conn);
+	$page->get_db($db_conn);
 
 	 $user_from_data = $db_conn->user_get_data_by_id($_POST['from']);
 	 $user_to_data = $db_conn->user_get_data_by_id($_POST['to']);

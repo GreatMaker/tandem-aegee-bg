@@ -9,6 +9,8 @@
  * or send a letter to Creative Commons, 444 Castro Street, Suite 900, Mountain View, California, 94041, USA.
  */
 
+define(MSG_PER_DAY, 5);
+
 class messages_table
 {
     private $dbConnection;
@@ -32,7 +34,7 @@ class messages_table
 
 			$cnt = $res->fetchColumn();
 
-			if ($cnt >= 5)
+			if ($cnt >= MSG_PER_DAY)
 			{
 				$this->dbConnection->SetError(_("Maximum number of messages sent for today!"));
 				return;
