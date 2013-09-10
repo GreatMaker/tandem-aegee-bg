@@ -80,7 +80,28 @@ class user_languages_table
 	{
 		try
         {
-			$query = "SELECT lang_code FROM user_languages WHERE user_languages.user_id = ?";
+			$query = "SELECT lang_code FROM user_languages WHERE user_languages.mother_tongue = 1 AND user_languages.user_id = ?";
+
+			$res = $this->dbConnection->prepare($query);
+
+			$res->bindParam(1, $user_id);
+			$res->execute();
+
+			$data = $res->fetchAll(PDO::FETCH_ASSOC);
+
+			return $data;
+		}
+		catch (PDOException $e)
+        {
+            $this->dbConnection->SetError(_("Error user languages information"));
+        }
+	}
+
+	public function user_learn_languages_get_by_id($user_id)
+	{
+		try
+        {
+			$query = "SELECT lang_code, level FROM user_languages WHERE user_languages.mother_tongue = 0 AND user_languages.user_id = ?";
 
 			$res = $this->dbConnection->prepare($query);
 

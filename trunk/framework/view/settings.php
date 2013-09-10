@@ -101,6 +101,23 @@ else
 	$lang_speak_note->set_type(form_field::FIELD_NOTE);
 	$lang_speak_note->set_value(_("These are the languages you fluently speak, and which you want to tutor."));
 
+	// Language you want to learn
+	$lang_learn = new form_field("lang_learn", _("Language"));
+	$lang_learn->set_type(form_field::FIELD_OPTION);
+	$lang_learn->set_data($db_conn->languages_get_data());
+	$lang_learn->set_style("width:180px;");
+	$lang_learn->set_extra("&nbsp;");
+
+	$lang_learn_level = new form_field("lang_learn_level", "");
+	$lang_learn_level->set_type(form_field::FIELD_OPTION);
+	$lang_learn_level->set_data($db_conn->languages_get_levels());
+	$lang_learn_level->set_extra("<span class=\"inline\" style=\"vertical-align: middle;\"> <a id=\"minus_learn\" style=\"vertical-align: middle;\"><img src=\"img/icons/minus.png\" height=\"20\" width=\"20\"></a> <a id=\"plus_learn\" style=\"vertical-align: middle;\"><img src=\"img/icons/plus.png\"  height=\"20\" width=\"20\"></a></span>");
+
+	// Languages you want to learn note
+	$lang_learn_note = new form_field("lang_learn_note");
+	$lang_learn_note->set_type(form_field::FIELD_NOTE);
+	$lang_learn_note->set_value(_("These are the languages you want to learn, set your skills level as well."));
+
 	// send button
 	$send = new form_field("send", "");
 	$send->set_type(form_field::FIELD_BUTTON);
@@ -130,6 +147,14 @@ else
 	$settings->add($lang_speak_note);
 	$settings->fieldset_close();
 
+	$settings->fieldset_open(_("Languages you want to learn"), "f_lang_learn");
+	$settings->paragraph_open("p_lang_learn");
+	$settings->add($lang_learn, false);
+	$settings->add($lang_learn_level, false);
+	$settings->paragraph_close();
+	$settings->add($lang_learn_note);
+	$settings->fieldset_close();
+
 	$settings->add($id);
 	$settings->add($username);
 	$settings->add($send);
@@ -151,14 +176,26 @@ else
 		$def_speak .= "{\"lang_speak\":\"".$lang_code['lang_code']."\"},";
 	}
 	$def_speak .= "]}]}";
+	
+	// default learn languages
+	$user_learn_data = $db_conn->user_learn_languages_get_by_id($page->get_user_id());
+
+	$def_learn = "{\"f_lang_learn\": [{ \"p_lang_learn\" :[";
+	foreach($user_learn_data as $id => $lang_code)
+	{
+		$def_learn .= "{\"lang_learn\":\"".$lang_code['lang_code']."\", \"lang_learn_level\":\"".$lang_code['level']."\"},";
+	}
+	$def_learn .= "]}]}";
 
 	// add validator
 	$page->AddJQuery("$(\"#registration\").ajaxForm({dataType:'json', success: processReply});
 					  $(\"#birthdate\").datepicker({yearRange: \"-50:+0\", changeMonth: true, changeYear: true, dateFormat: \"dd/mm/yy\"});
-					  var mainDynamicForm = $(\"#f_lang_speak\").dynamicForm({formPrefix:\"mainForm\"});
+					  var speakForm = $(\"#f_lang_speak\").dynamicForm({formPrefix:\"mainForm\"});
+					  var learnForm = $(\"#f_lang_learn\").dynamicForm({formPrefix:\"mainForm\"});
 					  $(\"#p_lang_speak\").dynamicForm({plusSelector: \"#plus_speak\", minusSelector: \"#minus_speak\", limit: 5});
 					  $(\"#p_lang_learn\").dynamicForm({plusSelector: \"#plus_learn\", minusSelector: \"#minus_learn\", limit: 5});
-					  mainDynamicForm.dynamicForm('inject', ".$def_speak.");
+					  speakForm.dynamicForm('inject', ".$def_speak.");
+					  learnForm.dynamicForm('inject', ".$def_learn.");
 	"); 
 
 	// add form

@@ -39,6 +39,8 @@ else
 	// get buddies data
 	$data = $db_conn->matching_find_buddies($current_user_data['id']);
 
+	$bd_data = "";
+
 	foreach ($data as $lang => $buddies)
 	{
 		$bd_data = "<div style=\"border-bottom: 1px solid black; margin-bottom: 10px; \">".$db_conn->languages_get_lang_name($lang)."</div>";
