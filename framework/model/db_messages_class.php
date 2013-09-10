@@ -9,7 +9,7 @@
  * or send a letter to Creative Commons, 444 Castro Street, Suite 900, Mountain View, California, 94041, USA.
  */
 
-define(MSG_PER_DAY, 5);
+define("MSG_PER_DAY", 5);
 
 class messages_table
 {
