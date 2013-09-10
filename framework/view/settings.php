@@ -88,6 +88,18 @@ else
 	$interests->set_type(form_field::FIELD_CHECKGRID);
 	$interests->set_value($user_interests_data);
 	$interests->set_data($db_conn->get_interests());
+	
+	// Languages you speak fields
+	$lang_speak = new form_field("lang_speak", _("Language"));
+	$lang_speak->set_type(form_field::FIELD_OPTION);
+	$lang_speak->set_data($db_conn->languages_get_data());
+	$lang_speak->set_style("width:180px;");
+	$lang_speak->set_extra("<span class=\"inline\" style=\"vertical-align: middle;\"> <a id=\"minus_speak\" style=\"vertical-align: middle;\"><img src=\"img/icons/minus.png\" height=\"20\" width=\"20\"></a> <a id=\"plus_speak\" style=\"vertical-align: middle;\"><img src=\"img/icons/plus.png\"  height=\"20\" width=\"20\"></a></span>");
+
+	// Languages you speak note
+	$lang_speak_note = new form_field("lang_speak_note");
+	$lang_speak_note->set_type(form_field::FIELD_NOTE);
+	$lang_speak_note->set_value(_("These are the languages you fluently speak, and which you want to tutor."));
 
 	// send button
 	$send = new form_field("send", "");
@@ -112,6 +124,11 @@ else
 	$settings->add($fb);
 	$settings->add($about);
 	$settings->add($interests);
+	
+	$settings->fieldset_open(_("Languages you speak"), "f_lang_speak");
+	$settings->add($lang_speak, true, true);
+	$settings->add($lang_speak_note);
+	$settings->fieldset_close();
 
 	$settings->add($id);
 	$settings->add($username);
@@ -125,11 +142,24 @@ else
 
 	$page->AddCSS("ui-lightness/jquery-ui-1.10.1.custom.css");
 
+	// default spoken languages
+	$user_speak_data = $db_conn->user_spoken_languages_get_by_id($page->get_user_id());
+
+	$def_speak = "{\"f_lang_speak\": [{ \"p_lang_speak\" :[";
+	foreach($user_speak_data as $id => $lang_code)
+	{
+		$def_speak .= "{\"lang_speak\":\"".$lang_code['lang_code']."\"},";
+	}
+	$def_speak .= "]}]}";
+
 	// add validator
 	$page->AddJQuery("$(\"#registration\").ajaxForm({dataType:'json', success: processReply});
 					  $(\"#birthdate\").datepicker({yearRange: \"-50:+0\", changeMonth: true, changeYear: true, dateFormat: \"dd/mm/yy\"});
+					  var mainDynamicForm = $(\"#f_lang_speak\").dynamicForm({formPrefix:\"mainForm\"});
 					  $(\"#p_lang_speak\").dynamicForm({plusSelector: \"#plus_speak\", minusSelector: \"#minus_speak\", limit: 5});
-					  $(\"#p_lang_learn\").dynamicForm({plusSelector: \"#plus_learn\", minusSelector: \"#minus_learn\", limit: 5});"); 
+					  $(\"#p_lang_learn\").dynamicForm({plusSelector: \"#plus_learn\", minusSelector: \"#minus_learn\", limit: 5});
+					  mainDynamicForm.dynamicForm('inject', ".$def_speak.");
+	"); 
 
 	// add form
 	$page->AddToBody($settings->get_form());
