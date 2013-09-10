@@ -10,6 +10,7 @@
  */
 
 require_once 'controller_interface.php';
+require_once '../cookie_class.php';
 require_once '../utils.php';
 
 class settings_ctrl extends ctrl_abstract
@@ -46,6 +47,11 @@ class settings_ctrl extends ctrl_abstract
 			$this->ret['error'] = $e->getMessage();
 			return;
 		}
+		catch (PDOException $e)
+		{
+			$this->ret['error'] = $e->getMessage();
+			return;
+		}
 
 		// redirect to home
 		$this->ret['redirect'] = "index.php?page=home";
@@ -60,7 +66,7 @@ class settings_ctrl extends ctrl_abstract
 
 		// check surname
 		if (!isset($this->post_data['surname']) || $this->post_data['surname'] == "")
-			throw new Exception("Surname field error");
+			throw new Exception("Surname field error");*/
 
 		// check sex
 		if (!isset($this->post_data['sex']) || $this->post_data['sex'] == "")
@@ -102,7 +108,7 @@ class settings_ctrl extends ctrl_abstract
 				throw new Exception("Duplicate entry for learning languages");
 
 			$values[] = $data['lang_learn'];
-		}*/
+		}
 
 		return;
 	}
@@ -113,23 +119,37 @@ class settings_ctrl extends ctrl_abstract
 		{
 			try
 			{
-				// add new user
+				// start transaction
+				//$this->dbConnection->beginTransaction();
+
+				// modify user user
 				$this->dbConnection->user_modify($this->post_data);
 
 				// add languages
-				$this->dbConnection->user_languages_modify($this->post_data);
+				//$this->dbConnection->user_languages_modify($this->post_data);
 
 				// add interests
-				$this->dbConnection->user_interests_modify($this->post_data);
+				//$this->dbConnection->user_interests_modify($this->post_data);
+
+				// commit data
+				//$this->dbConnection->commit();
+			}
+			catch (Exception $e)
+			{
+				// roll back data
+				//$this->dbConnection->rollBack();
+
+				// throw exception
+				throw new Exception(_("Error modifying user").$e->getMessage());
 			}
 			catch (PDOException $e)
 			{
 				// roll back data
-				$this->dbConnection->rollBack();
+				//$this->dbConnection->rollBack();
 
 				$err_str = "";
 
-				if ($this->dbConnection->GetError($err_str))
+				if ($this->dbConnection->GetError($err_str) == true)
 					throw new Exception($err_str);
 			}
 		}

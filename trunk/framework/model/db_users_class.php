@@ -44,19 +44,20 @@ class users_table
         }
 	}
 
-	public function user_update($data)
+	public function user_modify($data)
 	{
 		try
         {
-			$query = "UPDATE users SET email = ?, born_date = ?, gender = ?, facebook = ? WHERE id = ?";
+			$query = "UPDATE users SET email = ?, born_date = ?, gender = ?, facebook = ?, about = ? WHERE id = ?";
 
 			$res = $this->dbConnection->prepare($query);
 
 			$res->bindParam(1, $data['email']);
-			$res->bindParam(2, $data['born_date']);
-			$res->bindParam(3, $data['gender']);
-			$res->bindParam(4, $data['facebook']);
-			$res->bindParam(5, $data['hidden_user_id']);
+			$res->bindParam(2, $data['birthdate']);
+			$res->bindParam(3, $data['sex']);
+			$res->bindParam(4, $data['fb']);
+			$res->bindParam(5, $data['about']);
+			$res->bindParam(6, $data['id']);
 
 			$res->execute();
 		}

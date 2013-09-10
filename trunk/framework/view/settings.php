@@ -188,7 +188,7 @@ else
 	$def_learn .= "]}]}";
 
 	// add validator
-	$page->AddJQuery("$(\"#registration\").ajaxForm({dataType:'json', success: processReply});
+	$page->AddJQuery("$(\"#settings\").ajaxForm({dataType:'json', success: processReply});
 					  $(\"#birthdate\").datepicker({yearRange: \"-50:+0\", changeMonth: true, changeYear: true, dateFormat: \"dd/mm/yy\"});
 					  var speakForm = $(\"#f_lang_speak\").dynamicForm({formPrefix:\"mainForm\"});
 					  var learnForm = $(\"#f_lang_learn\").dynamicForm({formPrefix:\"mainForm\"});

@@ -123,7 +123,7 @@ class db_base extends PDO
         }
         catch (Exception $e)
         {
-            throw new PDOException($e);
+            throw new PDOException($e->getMessage());
         }
     }
 
