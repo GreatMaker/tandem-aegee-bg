@@ -261,7 +261,7 @@ class form_class
 
 	public function fieldset_open($title, $id)
 	{
-		$this->form_data .= "<fieldset id=\"".$id."\">";
+		$this->form_data .= "<fieldset id=\"".$id."\" name=\"".$id."\">";
 
 		if (isset($title) && $title != "")
 			$this->form_data .= "<legend>".$title."</legend><br/>\n";
