@@ -21,7 +21,7 @@ $page->AddJS("jquery.tandem.js");
 $page->AddCSS("ui-lightness/jquery-ui-1.10.1.custom.css");
 
 // Force message dialog
-if (($_GET["option"] == "message") && ($_GET["to"] != ""))
+if ((isset($_GET["option"]) && $_GET["option"] == "message") && ($_GET["to"] != ""))
 {
 	// current user data
 	$current_user_data = $page->get_user_data();
