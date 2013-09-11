@@ -54,7 +54,31 @@ class user_languages_table
 			throw $e;
         }
 	}
-	
+
+	public function user_languages_modify($data, $user_id)
+	{
+		try
+		{
+			// delete interests
+			$query = "DELETE FROM user_languages WHERE user_id = ?";
+
+			$res = $this->dbConnection->prepare($query);
+
+			$res->bindParam(1, $data['id']);
+
+			$res->execute();
+
+			// readd interests
+			$this->user_languages_add($data, $data['id']);
+		}
+		catch (PDOException $e)
+        {
+			// set error
+            $this->dbConnection->SetError(_("Error modifying user languages"));
+			throw $e;
+        }
+	}
+
 	public function user_languages_get_by_id($user_id)
 	{
 		try

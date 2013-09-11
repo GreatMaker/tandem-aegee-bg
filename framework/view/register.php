@@ -117,12 +117,12 @@ $registration->add($fb);
 $registration->add($about);
 $registration->add($interests);
 
-$registration->fieldset_open(_("Languages you speak"), "lang_speak");
+$registration->fieldset_open(_("Languages you speak"), "f_lang_speak");
 $registration->add($lang_speak, true, true);
 $registration->add($lang_speak_note);
 $registration->fieldset_close();
 
-$registration->fieldset_open(_("Languages you want to learn"), "lang_learn");
+$registration->fieldset_open(_("Languages you want to learn"), "f_lang_learn");
 $registration->paragraph_open("p_lang_learn");
 $registration->add($lang_learn, false);
 $registration->add($lang_learn_level, false);
