@@ -77,6 +77,7 @@ else
 
 	// About you field
 	$about = new form_field("about", _("About you"));
+	$user_data['about'] = str_replace("<br />","\r", $user_data['about']);
 	$about->set_value($user_data['about']);
 	$about->set_type(form_field::FIELD_TEXTAREA);
 

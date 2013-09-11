@@ -217,8 +217,9 @@
 
                     // If this has a dynamicFormName, let's use it to set name
                     if($elem.attr('dynamicFormName')) {
+						
                         var dynamicFormCloneIndex = $elem.attr('dynamicFormCloneIndex')
-                        var index = ']'
+                        var index = ']';
                         var _prefix = prefix + '[';
                         if(prefix == undefined || prefix == '') {
                             _prefix = '';
@@ -229,6 +230,7 @@
                             index = '[' + dynamicFormCloneIndex + ']';
                         }
                         $elem.attr('name', _prefix + $elem.attr('dynamicFormName') + index);
+							
 
                     // If there's no dynamicFormName and the tagName is in the listed tags, let's give this element a name.
                     // In order for this to not get out of control, we also need to set ignoreDynamicFormName on the element.
@@ -241,7 +243,10 @@
 
                     var _prefix = prefix;
                     if($elem.attr('name') != null) {
+						if ($elem.get(0).tagName != 'FIELDSET')
+							{
                         _prefix = $elem.attr('name');
+							}
                     }
 
                     recurseSettingNames($elem, _prefix);

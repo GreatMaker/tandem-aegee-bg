@@ -48,7 +48,7 @@ class users_table
 	{
 		try
         {
-			$query = "UPDATE users SET email = ?, born_date = ?, gender = ?, facebook = ?, about = ? WHERE id = ?";
+			$query = "UPDATE users SET email = ?, birthdate = STR_TO_DATE(?, '%d/%m/%Y'), gender = ?, facebook = ?, about = ? WHERE id = ?";
 
 			$res = $this->dbConnection->prepare($query);
 
@@ -136,9 +136,9 @@ class users_table
 		try
         {
 			if ($is_md5 == false)
-				$query = "SELECT * FROM users WHERE username = ? LIMIT 1";
+				$query = "SELECT id, username, password, name, surname, email, DATE_FORMAT(birthdate, '%d/%m/%Y') as birthdate, gender, facebook, about FROM users WHERE username = ? LIMIT 1"; // TODO: la data la prende sbagliata
 			else
-				$query = "SELECT * FROM users WHERE md5(username) = ? LIMIT 1";
+				$query = "SELECT id, username, password, name, surname, email, DATE_FORMAT(birthdate, '%d/%m/%Y') as birthdate, gender, facebook, about FROM users WHERE md5(username) = ? LIMIT 1";
 
 			$res = $this->dbConnection->prepare($query);
 

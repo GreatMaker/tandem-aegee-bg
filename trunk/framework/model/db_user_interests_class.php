@@ -62,5 +62,29 @@ class user_interests_table
 			throw $e;
         }
 	}
+
+	public function user_interests_modify($data)
+	{
+		try
+		{
+			// delete interests
+			$query = "DELETE FROM user_interests WHERE user_id = ?";
+
+			$res = $this->dbConnection->prepare($query);
+
+			$res->bindParam(1, $data['id']);
+
+			$res->execute();
+
+			// readd interests
+			$this->user_interests_add($data, $data['id']);
+		}
+		catch (PDOException $e)
+        {
+			// set error
+            $this->dbConnection->SetError(_("Error modifying user interests")." - ".$e->getMessage());
+			throw $e;
+        }
+	}
 }
 ?>

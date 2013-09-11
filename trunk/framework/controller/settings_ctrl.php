@@ -126,10 +126,10 @@ class settings_ctrl extends ctrl_abstract
 				$this->dbConnection->user_modify($this->post_data);
 
 				// add languages
-				//$this->dbConnection->user_languages_modify($this->post_data);
+				$this->dbConnection->user_languages_modify($this->post_data);
 
 				// add interests
-				//$this->dbConnection->user_interests_modify($this->post_data);
+				$this->dbConnection->user_interests_modify($this->post_data);
 
 				// commit data
 				//$this->dbConnection->commit();
