@@ -150,7 +150,8 @@ else
 
 			// Buttons
 			$bd_data .= "<div style=\"clear: both; margin-right: 10px; overflow:auto;\">";
-			$bd_data .= "<a class=\"dialog_link\" from=\"".$current_user_data['id']."\" to=\"".$buddy_id."\" style=\"cursor: pointer;\"><div style=\"float: right; border: 1px solid black; padding: 5px;\">"._("Send message")."</div></a>";
+			$bd_data .= "<a href=\"index.php?page=profile&id=".$buddy_id."\"><div style=\"float: right; border: 1px solid black; padding: 5px; margin-left: 10px;\"><img style=\"vertical-align: middle;\" src=\"img/icons/message.png\" /><span style=\"display:inline-block; vertical-align:middle; line-height:30px; \">&nbsp;"._("View profile")."</span></div></a>";
+			$bd_data .= "<a class=\"dialog_link\" from=\"".$current_user_data['id']."\" to=\"".$buddy_id."\" style=\"cursor: pointer;\"><div style=\"float: right; border: 1px solid black; padding: 5px; margin-left: 10px;\"><img style=\"vertical-align: middle;\" src=\"img/icons/message.png\" /><span style=\"display:inline-block; vertical-align:middle; line-height:30px; \">&nbsp;"._("Send message")."</span></div></a>";
 			$bd_data .= "</div>";
 
 			// Separator
@@ -179,6 +180,11 @@ else
 
 	// set page
 	$page->AddToBody($bd_data);
+
+	if (!$data)
+	{
+		$page->AddToBody("<br /><span>"._("We can't find a buddy for you at the moment, but keep on take a look at the buddies page, more and more users are joining right now!")."</span>");
+	}
 
 	// Message div
 	$div_send_message = "<div id=\"dialog-message\" title=\""._("Send Message")."\" style=\"display: none;\">
