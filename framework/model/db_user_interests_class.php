@@ -39,6 +39,27 @@ class user_interests_table
         }
 	}
 
+	public function user_interests_get_data($user_id)
+	{
+		try
+        {
+			$query = "SELECT interests.interest FROM user_interests JOIN interests ON user_interests.interest_id = interests.id WHERE user_interests.user_id = ?";
+
+			$res = $this->dbConnection->prepare($query);
+
+			$res->bindParam(1, $user_id);
+			$res->execute();
+
+			$data = $res->fetchAll(PDO::FETCH_COLUMN);
+
+			return $data;
+		}
+		catch (PDOException $e)
+        {
+            $this->dbConnection->SetError(_("Error user interests"));
+        }
+	}
+
 	public function user_interests_add($data, $user_id)
 	{
 		try

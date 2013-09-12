@@ -54,7 +54,7 @@ class matching_engine
         {
 			foreach ($buddy_data as $id => $b_data)
 			{
-				$query = "SELECT COUNT(*) as nr_interests FROM user_interests WHERE user_id = 14 UNION ALL SELECT COUNT(*) as nr_interests FROM user_interests a JOIN user_interests b ON a.interest_id = b.interest_id WHERE b.user_id = ".$b_data['id']." AND a.user_id = ".$user_id;
+				$query = "SELECT COUNT(*) as nr_interests FROM user_interests WHERE user_id = ".$user_id." UNION ALL SELECT COUNT(*) as nr_interests FROM user_interests a JOIN user_interests b ON a.interest_id = b.interest_id WHERE b.user_id = ".$b_data['id']." AND a.user_id = ".$user_id;
 
 				if ($res = $this->dbConnection->query($query))
 				{
@@ -94,7 +94,52 @@ class matching_engine
             $this->dbConnection->SetError(_("Error retreiving interests"));
         }
 	}
-	
+
+	// TODO: implement single user get affinity details
+	function matching_get_single_score($user_id, $buddy_id)
+	{
+		try
+		{
+			$query = "SELECT COUNT(*) as nr_interests FROM user_interests WHERE user_id = ".$user_id." UNION ALL SELECT COUNT(*) as nr_interests FROM user_interests a JOIN user_interests b ON a.interest_id = b.interest_id WHERE b.user_id = ".$buddy_id." AND a.user_id = ".$user_id;
+
+			if ($res = $this->dbConnection->query($query))
+			{
+				$data = $res->fetchAll(PDO::FETCH_ASSOC);
+
+				if (array_key_exists($b_data['lang_code'], $score_data))
+				{
+					// buddy id
+					$score_data[$b_data['lang_code']][$b_data['id']] = array();
+				}
+				else
+				{
+					$score_data[$b_data['lang_code']] = array();
+
+					// buddy id
+					$score_data[$b_data['lang_code']][$b_data['id']] = array();
+				}
+
+				// lang score
+				if ($b_data['mother_tongue'] == 1)
+					$score_data[$b_data['lang_code']][$b_data['id']]['score'] = SCORE_TUTOR;
+				else
+					$score_data[$b_data['lang_code']][$b_data['id']]['score'] = SCORE_NOT_TUTOR * $b_data['level'];
+
+				// affinity score
+				$score_data[$b_data['lang_code']][$b_data['id']]['score'] += $data[1]['nr_interests'] * SCORE_INTEREST;
+
+				// max score
+				$score_data[$b_data['lang_code']][$b_data['id']]['max_score'] = SCORE_TUTOR + ($data[0]['nr_interests'] * SCORE_INTEREST);
+			}
+			
+			return $score_data;
+		}
+		catch (PDOException $e)
+        {
+            $this->dbConnection->SetError(_("Error retreiving matching data"));
+        }
+	}
+
 	public function matching_get_common_interests($user_id, $buddy_id)
 	{
 		try

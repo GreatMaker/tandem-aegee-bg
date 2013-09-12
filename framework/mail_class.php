@@ -79,8 +79,11 @@ class mailman_class
 				</div>
 			</div>
 			<div style=\"clear: both; margin-right: 10px; overflow:auto;\">
-			<a href=\"index.php?page=home&option=message&to=".$this->sender_id."\">
-			<div style=\"float: right; border: 1px solid black; padding: 5px;\">Reply</div>
+			<a href=\"http://tandem.unibg.it/new/index.php?page=profile&id=".$this->sender_id."\">
+			<div style=\"float: right; border: 1px solid black; padding: 5px; margin: 5px;\">Profile</div>
+			</a>
+			<a href=\"http://tandem.unibg.it/new/index.php?page=home&option=message&to=".$this->sender_id."\">
+			<div style=\"float: right; border: 1px solid black; padding: 5px;  margin: 5px;\">Reply</div>
 			</a>
 			</div>
 		</div>
