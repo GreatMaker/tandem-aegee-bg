@@ -84,6 +84,37 @@ else if ($_POST['func'] == "tandem_message")
 
 	 $ret['success'] = _("Message sent correctly");
 }
+else if ($_POST['func'] == "tandem_add_friend")
+{
+	// get connection to DB
+	$page->get_db($db_conn);
+
+	// add friend
+	$db_conn->user_friends_add($page->get_user_id(), $_POST['friend']);
+	
+	$str_err = "";
+
+	if ($db_conn->GetError($str_err))
+		$ret['error'] = $str_err;
+	else
+		$ret['redirect'] = 'index.php?page=friends';
+}
+else if ($_POST['func'] == "tandem_remove_friend")
+{
+	// get connection to DB
+	$page->get_db($db_conn);
+
+	// add friend
+	$db_conn->user_friends_remove($page->get_user_id(), $_POST['friend']);
+	
+	$str_err = "";
+
+	if ($db_conn->GetError($str_err))
+		$ret['error'] = $str_err;
+	else
+		// force reload
+		$ret['reload'] = 'true';
+}
 else
 	$ret['error'] = _("Function not found");
 

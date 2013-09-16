@@ -136,7 +136,7 @@ class users_table
 		try
         {
 			if ($is_md5 == false)
-				$query = "SELECT id, username, password, name, surname, email, DATE_FORMAT(birthdate, '%d/%m/%Y') as birthdate, gender, facebook, about, active, invisible, admin, note FROM users WHERE username = ? LIMIT 1"; // TODO: la data la prende sbagliata
+				$query = "SELECT id, username, password, name, surname, email, DATE_FORMAT(birthdate, '%d/%m/%Y') as birthdate, gender, facebook, about, active, invisible, admin, note FROM users WHERE username = ? LIMIT 1";
 			else
 				$query = "SELECT id, username, password, name, surname, email, DATE_FORMAT(birthdate, '%d/%m/%Y') as birthdate, gender, facebook, about, active, invisible, admin, note FROM users WHERE md5(username) = ? LIMIT 1";
 

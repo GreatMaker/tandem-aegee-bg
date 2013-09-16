@@ -89,11 +89,12 @@ p {
 }
 
 a {
-	color: #D1700E;
+	/*color: #D1700E;*/
+	color: #666;
 }
 
 a:hover {
-	color: #1F4F82;
+	/*color: #1F4F82;*/
 }
 
 a:focus {
