@@ -90,7 +90,7 @@ else
 			if (isset($user_data['about']) && $user_data['about'] != "")
 			{
 				$bd_data .= "<div style=\"float: left; text-align: right; width: 20%; clear: left;\"><strong>About me:</strong></div>";
-				$bd_data .= "<div style=\"float: left; margin-left: 5px; margin-bottom: 5px;\">".$user_data['about']."</div>";
+				$bd_data .= "<div style=\"float: left; margin-left: 5px; margin-bottom: 5px;\">".nl2br($user_data['about'])."</div>";
 			}
 
 			// Buddy languages
@@ -150,7 +150,7 @@ else
 
 			// Buttons
 			$bd_data .= "<div style=\"clear: both; margin-right: 10px; overflow:auto;\">";
-			$bd_data .= "<a href=\"index.php?page=profile&id=".$buddy_id."\"><div style=\"float: right; border: 1px solid black; padding: 5px; margin-left: 10px;\"><img style=\"vertical-align: middle;\" src=\"img/icons/message.png\" /><span style=\"display:inline-block; vertical-align:middle; line-height:30px; \">&nbsp;"._("View profile")."</span></div></a>";
+			$bd_data .= "<a href=\"index.php?page=profile&id=".$buddy_id."\"><div style=\"float: right; border: 1px solid black; padding: 5px; margin-left: 10px;\"><img style=\"vertical-align: middle;\" src=\"img/icons/profile.png\" /><span style=\"display:inline-block; vertical-align:middle; line-height:30px; \">&nbsp;"._("View profile")."</span></div></a>";
 			$bd_data .= "<a class=\"dialog_link\" from=\"".$current_user_data['id']."\" to=\"".$buddy_id."\" style=\"cursor: pointer;\"><div style=\"float: right; border: 1px solid black; padding: 5px; margin-left: 10px;\"><img style=\"vertical-align: middle;\" src=\"img/icons/message.png\" /><span style=\"display:inline-block; vertical-align:middle; line-height:30px; \">&nbsp;"._("Send message")."</span></div></a>";
 			$bd_data .= "</div>";
 

@@ -94,13 +94,13 @@ class userdetails_box_class extends box_class
 
 		// user image
 		if (isset($user_data['facebook']) && $user_data['facebook'] != "")
-			$img_user = "<img src='http://graph.facebook.com/".$user_data['facebook']."/picture' />";
+			$img_user = "<img src='http://graph.facebook.com/".$user_data['facebook']."/picture' style='border: 1px solid;' />";
 		else
 		{
 			if ($user_data['gender'] == "M")
-				$img_user = "<img src='img/user_def_male.png' />";
+				$img_user = "<img src='img/user_def_male.png' style='border: 1px solid;' />";
 			else
-				$img_user = "<img src='img/user_def_female.png' />";
+				$img_user = "<img src='img/user_def_female.png' style='border: 1px solid;' />";
 		}
 
 		// user visible
@@ -115,7 +115,7 @@ class userdetails_box_class extends box_class
 
 		$data .= "<div class='user_data'>";
 		
-        $data .= "<div class='user_image' style='border: 1px solid black;'>".$img_user."</div>\n";
+        $data .= "<div class='user_image'>".$img_user."</div>\n";
 
 		// user name cell
 		$data .= "<div class='user_name'><span class='user_name'>".$user_data['name']." ".$user_data['surname']."</span></div>\n";
@@ -125,6 +125,10 @@ class userdetails_box_class extends box_class
 
 		if ($user_data['admin'] == 0)
 			$data .= "<a href=\"index.php?page=buddies\"><img class='user_button' src='img/icons/tandem.png' alt=\"Tandem\" title=\"Tandem\" /></a>\n";
+
+		// Friends
+		if ($user_data['admin'] == 0)
+			$data .= "<a href=\"index.php?page=friends\"><img class='user_button' src='img/icons/friends.png' alt=\"Friends\" title=\"Friends\" /></a>\n";
 
 		// visible
 		if ($user_data['admin'] == 0)

@@ -20,6 +20,16 @@
         $.post("framework/scripts/tandem.php", { func: "tandem_message", from: msg_from, to: msg_to, message: message_str}, reply_message, "json");
     };
 
+	$.fn.tandem_add_friend = function(friend_id)
+    {
+        $.post("framework/scripts/tandem.php", { func: "tandem_add_friend", friend: friend_id}, reply, "json");
+    };
+
+	$.fn.tandem_remove_friend = function(friend_id)
+    {
+        $.post("framework/scripts/tandem.php", { func: "tandem_remove_friend", friend: friend_id}, reply, "json");
+    };
+
 	function getURLParameter(name) {return decodeURI((RegExp(name + '=' + '(.+?)(&|$)').exec(location.search)||[,null])[1]);}
 
 	// Reply function
