@@ -120,19 +120,24 @@ class userdetails_box_class extends box_class
 		// user name cell
 		$data .= "<div class='user_name'><span class='user_name'>".$user_data['name']." ".$user_data['surname']."</span></div>\n";
 
-		// buddies
+		// Button box
 		$data .= "<div class='buttons_box'>\n";
 
 		if ($user_data['admin'] == 0)
+		{
+			// Buddies
 			$data .= "<a href=\"index.php?page=buddies\"><img class='user_button' src='img/icons/tandem.png' alt=\"Tandem\" title=\"Tandem\" /></a>\n";
 
-		// Friends
-		if ($user_data['admin'] == 0)
+			// Friends
 			$data .= "<a href=\"index.php?page=friends\"><img class='user_button' src='img/icons/friends.png' alt=\"Friends\" title=\"Friends\" /></a>\n";
 
-		// visible
-		if ($user_data['admin'] == 0)
-			$data .= "<a style=\"cursor:pointer\" onclick=\"$().tandem_toggle_visible();\">".$img_invisible."</a>\n";
+			// Visible/Invisible
+			//$data .= "<a style=\"cursor:pointer\" onclick=\"$().tandem_toggle_visible();\">".$img_invisible."</a>\n";
+			if ($user_data['invisible'] == 0)
+				$data .= "<a style=\"cursor:pointer\" visible=\"1\" class=\"invisible_link\">".$img_invisible."</a>\n";
+			else
+				$data .= "<a style=\"cursor:pointer\" visible=\"0\" class=\"invisible_link\">".$img_invisible."</a>\n";
+		}
 
 		// settings
 		$data .= "<a href=\"index.php?page=settings\"><img class='user_button' src='img/icons/settings.png' alt=\"Settings\" title=\"Settings\" /></a>\n";
@@ -144,6 +149,29 @@ class userdetails_box_class extends box_class
 		// insert JS
 		$page->AddJS("jquery.tandem.js");
 
+		// insert jquery
+		$page->AddJQuery("
+		$(\"#invisible-message\").dialog({
+		autoOpen: false,
+		resizable: false, height: 190, width: 400,
+		modal: true,
+		buttons: {\"Invisible\": { text: \""._("Toggle")."\", id: \"btn_invisible\", click: function () { $().tandem_toggle_visible();} }}
+		});
+		$('.invisible_link').click(function(event){
+		event.preventDefault();
+		var a =$(this).attr(\"visible\");
+		if (a == 0)
+			\$(\"#visible_text\").html(\""._("You are setting yourself to be visible again!<br />Doing so users can find you in the buddies list.")."\");
+		else
+			\$(\"#visible_text\").html(\""._("You are setting yourself to be invisible!<br />Doing so noone can find you in the buddies list.")."\");
+		\$(\"#invisible-message\").dialog(\"open\");
+		return false; });
+		");
+
+		$data .= "<div id=\"invisible-message\" title=\""._("Toggle visibility")."\" style=\"display: none;\">
+					<p><span class=\"ui-icon ui-icon-alert\" style=\"float: left; margin: 0 7px 20px 0;\"></span><div id=\"visible_text\"></div></p>
+					</div>";
+
 		parent::add_content($data);
 	}
 }
@@ -152,7 +180,7 @@ class facebook_box_class extends box_class
 {
 	public function __construct($title, &$page)
 	{
-		parent::__construct($title);
+		parent::__construct("");
 
 		$page->AddHead("<script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];

@@ -30,6 +30,16 @@
         $.post("framework/scripts/tandem.php", { func: "tandem_remove_friend", friend: friend_id}, reply, "json");
     };
 
+	$.fn.tandem_block_user = function(block_id)
+	{
+		$.post("framework/scripts/tandem.php", { func: "tandem_block_user", block: block_id}, reply, "json");
+	};
+
+	$.fn.tandem_unblock_user = function(block_id)
+	{
+		$.post("framework/scripts/tandem.php", { func: "tandem_unblock_user", block: block_id}, reply, "json");
+	};
+
 	function getURLParameter(name) {return decodeURI((RegExp(name + '=' + '(.+?)(&|$)').exec(location.search)||[,null])[1]);}
 
 	// Reply function
