@@ -142,7 +142,7 @@ class login_ctrl extends ctrl_abstract
 			}
 			else
 			{
-				if (LDAP_ENABLE == true)
+				if (LDAP_ENABLE == true && $b_ldap_ok == true)
 				{
 					// get ldap data
 					$ldap_data = $this->ldap->get_data();

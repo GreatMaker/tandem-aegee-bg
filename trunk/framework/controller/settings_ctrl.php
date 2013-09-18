@@ -80,6 +80,12 @@ class settings_ctrl extends ctrl_abstract
 		if (checkEmail($this->post_data['email']) == FALSE)
 			throw new Exception("E-Mail field error");
 
+		// fix facebook
+		if (isset($this->post_data['fb']) && $this->post_data['fb'] != "")
+		{
+			fix_facebook_link($this->post_data['fb']);
+		}
+
 		// check spoken langs
 		$values = array();
 

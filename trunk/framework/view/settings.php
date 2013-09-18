@@ -36,6 +36,12 @@ else
 	// get db connection
 	$db_conn = null;
 	$page->get_db($db_conn);
+	
+	// invisible warning message
+	if ($user_data['invisible'] == 1)
+	{
+		$page->AddToBody("<span>"._("Warning! You are set to be invisible! If you wish to change that, use the button on the right.")."</span><br /><br />");
+	}
 
 	$settings = new form_class("settings", "framework/controller/form_process.php", form_class::METHOD_POST, form_class::TYPE_FIELDSET);
 

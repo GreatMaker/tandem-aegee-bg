@@ -18,6 +18,7 @@ require_once 'db_pages_class.php';
 require_once 'db_interests_class.php';
 require_once 'db_user_interests_class.php';
 require_once 'db_user_friends_class.php';
+require_once 'db_user_block_class.php';
 require_once 'db_matching_engine_class.php';
 require_once 'db_messages_class.php';
 require_once 'db_contents_class.php';
@@ -73,9 +74,10 @@ class database_tables extends ExtensionBridge
 		parent::addExt(new interests_table($this->base), "interests_table");
 		parent::addExt(new user_interests_table($this->base), "user_interests_table");
 		parent::addExt(new user_friends_table($this->base), "user_friends_table");
+		parent::addExt(new user_block_table($this->base), "user_block_table");
 		parent::addExt(new messages_table($this->base), "messages_table");
 		parent::addExt(new contents_table($this->base), "contents_table");
-		
+
 		parent::addExt(new matching_engine($this->base), "matching_engine");
     }
 }

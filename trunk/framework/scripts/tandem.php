@@ -33,8 +33,8 @@ if ($_POST['func'] == "tandem_logout")
 	// logout
 	$page->logout();
 
-	// force reload
-	$ret['reload'] = 'true';
+	// force redirect to homepage
+	$ret['redirect'] = 'index.php?page=home';
 }
 else if ($_POST['func'] == "tandem_invisible")
 {
@@ -58,31 +58,39 @@ else if ($_POST['func'] == "tandem_message")
 	 $user_from_data = $db_conn->user_get_data_by_id($_POST['from']);
 	 $user_to_data = $db_conn->user_get_data_by_id($_POST['to']);
 
-	 // send message
-	 $mail = new mailman_class();
-
-	 $mail->set_sender($user_from_data['name']);
-	 $mail->set_sender_id($user_from_data['id']);
-	 $mail->set_receiver($user_to_data['name']);
-	 $mail->set_receiver_mail($user_to_data['email']);
-	 $mail->set_object(_("New message from the Tandem Project Bergamo!"));
-	 $mail->set_user_message($_POST['message']);
-	 $mail->set_user_image($user_from_data['facebook']);
-
-	 // add do DB
-	 $db_conn->message_add($_POST['from'], $_POST['to'], $_POST['message']);
-
-	 $str_err = "";
-
-	 if ($db_conn->GetError($str_err))
-		 $ret['error'] = $str_err;
+	 // check user block
+	 if ($db_conn->user_block_is_blocked($_POST['to'], $_POST['from']) == true)
+	 {
+		 $ret['error'] = _("You can't message this user, you've been blocked!");
+	 }
 	 else
 	 {
 		// send message
-		$mail->send_message();
-	 }
+		$mail = new mailman_class();
 
-	 $ret['success'] = _("Message sent correctly");
+		$mail->set_sender($user_from_data['name']);
+		$mail->set_sender_id($user_from_data['id']);
+		$mail->set_receiver($user_to_data['name']);
+		$mail->set_receiver_mail($user_to_data['email']);
+		$mail->set_object(_("New message from the Tandem Project Bergamo!"));
+		$mail->set_user_message($_POST['message']);
+		$mail->set_user_image($user_from_data['facebook']);
+
+		// add do DB
+		$db_conn->message_add($_POST['from'], $_POST['to'], $_POST['message']);
+
+		$str_err = "";
+
+		if ($db_conn->GetError($str_err))
+			$ret['error'] = $str_err;
+		else
+		{
+		   // send message
+		   $mail->send_message();
+		}
+
+		$ret['success'] = _("Message sent correctly");
+	 }
 }
 else if ($_POST['func'] == "tandem_add_friend")
 {
@@ -106,6 +114,38 @@ else if ($_POST['func'] == "tandem_remove_friend")
 
 	// add friend
 	$db_conn->user_friends_remove($page->get_user_id(), $_POST['friend']);
+	
+	$str_err = "";
+
+	if ($db_conn->GetError($str_err))
+		$ret['error'] = $str_err;
+	else
+		// force reload
+		$ret['reload'] = 'true';
+}
+else if ($_POST['func'] == "tandem_block_user")
+{
+	// get connection to DB
+	$page->get_db($db_conn);
+
+	// add friend
+	$db_conn->user_block_add($page->get_user_id(), $_POST['block']);
+
+	$str_err = "";
+
+	if ($db_conn->GetError($str_err))
+		$ret['error'] = $str_err;
+	else
+		// force reload
+		$ret['reload'] = 'true';
+}
+else if ($_POST['func'] == "tandem_unblock_user")
+{
+	// get connection to DB
+	$page->get_db($db_conn);
+
+	// add friend
+	$db_conn->user_block_remove($page->get_user_id(), $_POST['block']);
 	
 	$str_err = "";
 
