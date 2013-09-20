@@ -55,5 +55,50 @@ class messages_table
             $this->dbConnection->SetError(_("Error sending message")." - ".$e->getMessage());
         }
 	}
+
+	public function message_get_buddies($user_id)
+	{
+		try
+        {
+			$query = "SELECT DISTINCT(users.id) FROM messages JOIN users ON messages.to_user_id = users.id WHERE messages.from_user_id = ?";
+
+			$res = $this->dbConnection->prepare($query);
+
+			$res->bindParam(1, $user_id);
+			$res->execute();
+
+			$data = $res->fetchAll(PDO::FETCH_COLUMN);
+
+			return $data;
+		}
+		catch (PDOException $e)
+        {
+            $this->dbConnection->SetError(_("Error user messages"));
+        }
+	}
+
+	public function message_get_thread($user_id, $friend_id)
+	{
+		try
+        {
+			$query = "SELECT users.id, users.name, users.surname, users.facebook, users.gender, messages.message,  DATE_FORMAT(messages.timestamp, '%d/%m/%Y %H:%i') as timestamp FROM messages JOIN users ON messages.from_user_id = users.id WHERE ((messages.from_user_id = ? AND messages.to_user_id = ?) OR (messages.from_user_id = ? AND messages.to_user_id = ?)) ORDER BY timestamp";
+
+			$res = $this->dbConnection->prepare($query);
+
+			$res->bindParam(1, $user_id);
+			$res->bindParam(2, $friend_id);
+			$res->bindParam(3, $friend_id);
+			$res->bindParam(4, $user_id);
+			$res->execute();
+
+			$data = $res->fetchAll(PDO::FETCH_ASSOC);
+
+			return $data;
+		}
+		catch (PDOException $e)
+        {
+            $this->dbConnection->SetError(_("Error user interests"));
+        }
+	}
 }
 ?>
