@@ -40,6 +40,11 @@
 		$.post("framework/scripts/tandem.php", { func: "tandem_unblock_user", block: block_id}, reply, "json");
 	};
 
+	$.fn.tandem_load_messages = function(user_id)
+	{
+		$.post("framework/scripts/tandem.php", { func: "tandem_load_messages", user_id: user_id}, reply_message_list, "json");
+	}
+
 	function getURLParameter(name) {return decodeURI((RegExp(name + '=' + '(.+?)(&|$)').exec(location.search)||[,null])[1]);}
 
 	// Reply function
@@ -65,5 +70,11 @@
 			$('#btn_send').hide();
 			$('#dialog-message').html(data.success);
 		}
+	}
+
+	function reply_message_list(data)
+	{
+		$('#message_list').html(data.list);
+		$('#message_list').scrollTop($('#message_list')[0].scrollHeight);
 	}
 })(jQuery);

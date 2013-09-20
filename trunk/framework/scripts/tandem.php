@@ -155,6 +155,47 @@ else if ($_POST['func'] == "tandem_unblock_user")
 		// force reload
 		$ret['reload'] = 'true';
 }
+else if ($_POST['func'] == "tandem_load_messages")
+{
+	// get connection to DB
+	$page->get_db($db_conn);
+
+	$msg_data = $db_conn->message_get_thread($page->get_user_id(), $_POST['user_id']);
+
+	foreach ($msg_data as $id => $m_data)
+	{
+		// user image
+		if (isset($m_data['facebook']) && $m_data['facebook'] != "")
+			$usr_img = "<img src='http://graph.facebook.com/".$m_data['facebook']."/picture?width=40&height=40' />";
+		else
+		{
+			if ($m_data['gender'] == "M")
+				$usr_img = "<img src='img/user_def_male.png' height=\"40\" width=\"40\" />";
+			else
+				$usr_img = "<img src='img/user_def_female.png' height=\"40\" width=\"40\" />";
+		}
+
+		// timestamp
+		$timestamp = "<span style=\"color: grey; font-size: 7pt;\">".$m_data['timestamp']."</span>";
+
+		if ($m_data['id'] == $page->get_user_id())
+		{
+			$ret['list'] .= "<div style=\"margin: 10px; min-height:60px; height:auto !important;height:60px; clear:right;\">
+			<div style=\"float: left;\">".$usr_img."</div>
+			<div style=\"display: block; margin-left: 48px;\"><strong>".$m_data['name']."&nbsp;".$m_data['surname']."</strong></div>
+			<div style=\"display: block; margin-left: 48px;\">".nl2br($m_data['message'])."<br />".$timestamp."</div>
+			</div>";
+		}
+		else
+		{
+			$ret['list'] .= "<div style=\"margin: 10px; min-height:60px; height:auto !important;height:60px; clear:right;\">
+			<div style=\"float: right; \">".$usr_img."</div>
+			<div style=\"display: block; margin-right: 48px; text-align: right;\"><strong>".$m_data['name']."&nbsp;".$m_data['surname']."</strong></div>
+			<div style=\"display: block; margin-right: 48px; text-align: right;\">".nl2br($m_data['message'])."<br />".$timestamp."</div>
+			</div>";
+		}
+	}
+}
 else
 	$ret['error'] = _("Function not found");
 

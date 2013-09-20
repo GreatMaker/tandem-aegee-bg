@@ -442,3 +442,8 @@ li ol, li ul {
 #footer .footer-bottom p, #footer .footer-bottom p a {
 	color: #888;
 }
+
+#usr_msg_list .ui-selecting { background: #FECA40; }
+#usr_msg_list .ui-selected { background: #F39814; color: white; }
+#usr_msg_list { list-style-type: none; margin: 0; padding: 0; width: 100%; }
+#usr_msg_list li { margin: 3px;  }
