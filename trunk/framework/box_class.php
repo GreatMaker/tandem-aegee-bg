@@ -94,23 +94,23 @@ class userdetails_box_class extends box_class
 
 		// user image
 		if (isset($user_data['facebook']) && $user_data['facebook'] != "")
-			$img_user = "<img src='http://graph.facebook.com/".$user_data['facebook']."/picture' style='border: 1px solid;' />";
+			$img_user = "<img src='http://graph.facebook.com/".$user_data['facebook']."/picture' style='border: 1px solid;' border=\"0\" />";
 		else
 		{
 			if ($user_data['gender'] == "M")
-				$img_user = "<img src='img/user_def_male.png' style='border: 1px solid;' />";
+				$img_user = "<img src='img/user_def_male.png' style='border: 1px solid;' border=\"0\" />";
 			else
-				$img_user = "<img src='img/user_def_female.png' style='border: 1px solid;' />";
+				$img_user = "<img src='img/user_def_female.png' style='border: 1px solid;' border=\"0\" />";
 		}
 
 		// user visible
 		if ($user_data['invisible'] == 0)
 		{
-			$img_invisible = "<img class='user_button' src='img/icons/visible.png' alt='Set Invisible' title='Set Invisible' />";
+			$img_invisible = "<img class='user_button' src='img/icons/visible.png' alt='Set Invisible' title='Set Invisible' border=\"0\" />";
 		}
 		else
 		{
-			$img_invisible = "<img class='user_button' src='img/icons/invisible.png' alt='Set Visible' title='Set Visible' />";
+			$img_invisible = "<img class='user_button' src='img/icons/invisible.png' alt='Set Visible' title='Set Visible' border=\"0\" />";
 		}
 
 		$data .= "<div class='user_data'>";
@@ -126,10 +126,10 @@ class userdetails_box_class extends box_class
 		if ($user_data['admin'] == 0)
 		{
 			// Buddies
-			$data .= "<a href=\"index.php?page=buddies\"><img class='user_button' src='img/icons/tandem.png' alt=\"Tandem\" title=\"Tandem\" /></a>\n";
+			$data .= "<a href=\"index.php?page=buddies\"><img class='user_button' src='img/icons/tandem.png' alt=\"Tandem\" title=\"Tandem\" border=\"0\" /></a>\n";
 
 			// Friends
-			$data .= "<a href=\"index.php?page=friends\"><img class='user_button' src='img/icons/friends.png' alt=\"Friends\" title=\"Friends\" /></a>\n";
+			$data .= "<a href=\"index.php?page=friends\"><img class='user_button' src='img/icons/friends.png' alt=\"Friends\" title=\"Friends\" border=\"0\" /></a>\n";
 
 			// Visible/Invisible
 			//$data .= "<a style=\"cursor:pointer\" onclick=\"$().tandem_toggle_visible();\">".$img_invisible."</a>\n";
@@ -140,10 +140,10 @@ class userdetails_box_class extends box_class
 		}
 
 		// settings
-		$data .= "<a href=\"index.php?page=settings\"><img class='user_button' src='img/icons/settings.png' alt=\"Settings\" title=\"Settings\" /></a>\n";
+		$data .= "<a href=\"index.php?page=settings\"><img class='user_button' src='img/icons/settings.png' alt=\"Settings\" title=\"Settings\" border=\"0\" /></a>\n";
 
 		// logout
-		$data .= "<a style=\"cursor:pointer\" onclick=\"$().tandem_logout();\"><img class='user_button' src='img/icons/logout.png' alt=\"Logout\" title=\"Logout\" /></a>\n";
+		$data .= "<a style=\"cursor:pointer\" onclick=\"$().tandem_logout();\"><img class='user_button' src='img/icons/logout.png' alt=\"Logout\" title=\"Logout\" border=\"0\" /></a>\n";
 		$data .= "</div></div>\n";
 
 		// insert JS

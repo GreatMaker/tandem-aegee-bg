@@ -183,7 +183,7 @@ class form_class
 		}
 		else if ($type == form_field::FIELD_CHECKBOX)
 		{
-			$this->form_data .= "<input name=\"".$name."\" id=\"".$name."\" value=\"".$value."\" type=\"checkbox\" style=\"".$style."\" /></p>\n";
+			$this->form_data .= "<input name=\"".$name."\" id=\"".$name."\" value=\"".$value."\" type=\"checkbox\" style=\"".$style."\" />".$data."</p>\n";
 		}
 		else if ($type == form_field::FIELD_CHECKGRID)
 		{

@@ -19,12 +19,27 @@ if ($user_data['admin'] == 1)
 {
 	// set page title
 	$page->set_title('Admin Settings');
+	
+	$page->AddCSS("grid.css");
 
 	$page->AddToBody("<h2>"._("Admin Settings")."</h2>");
 
 	// get db connection
 	$db_conn = null;
 	$page->get_db($db_conn);
+	
+	$bd_data = "<div class=\"grid grid-pad\">\n";
+	$bd_data .= "\t<a href=\"index.php?admin=1&page=settings_user_insert\"><div class=\"col-1-5\" style=\"text-align: center; border: 1px solid; margin: 5px; height: 50px;\">User insert</div></a>\n";
+	$bd_data .= "\t<a href=\"index.php?admin=1&page=settings_users\"><div class=\"col-1-5\" style=\"text-align: center; border: 1px solid; margin: 5px; height: 50px;\">Users</div></a>\n";
+	$bd_data .= "\t<a href=\"framework/view/admin/settings_user_insert.php\"><div class=\"col-1-5\" style=\"text-align: center; border: 1px solid; margin: 5px; height: 50px;\">Stats</div></a>\n";
+	$bd_data .= "\t<a href=\"framework/view/admin/settings_user_insert.php\"><div class=\"col-1-5\" style=\"text-align: center; border: 1px solid; margin: 5px; height: 50px;\">Pages</div></a>\n";
+	$bd_data .= "\t<a href=\"framework/view/admin/settings_user_insert.php\"><div class=\"col-1-5\" style=\"text-align: center; border: 1px solid; margin: 5px; height: 50px;\">Contents</div></a>\n";
+	$bd_data .= "\t<a href=\"framework/view/admin/settings_user_insert.php\"><div class=\"col-1-5\" style=\"text-align: center; border: 1px solid; margin: 5px; height: 50px;\">Social</div></a>\n";
+	$bd_data .= "\t<a href=\"framework/view/admin/settings_user_insert.php\"><div class=\"col-1-5\" style=\"text-align: center; border: 1px solid; margin: 5px; height: 50px;\">Configs</div></a>\n";
+	
+	$bd_data .= "</div>";
+	
+	$page->AddToBody($bd_data);
 }
 else
 {
