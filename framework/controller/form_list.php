@@ -11,7 +11,8 @@
 
 $form_list = array();
 
-$form_list["login"]			= array("controller" => "login_ctrl.php", "class" => "login_ctrl");
-$form_list["registration"]	= array("controller" => "register_ctrl.php", "class" => "register_ctrl");
-$form_list["settings"]		= array("controller" => "settings_ctrl.php", "class" => "settings_ctrl");
+$form_list["login"]					= array("controller" => "login_ctrl.php", "class" => "login_ctrl");
+$form_list["registration"]			= array("controller" => "register_ctrl.php", "class" => "register_ctrl");
+$form_list["manual_registration"]	= array("controller" => "manual_register_ctrl.php", "class" => "manual_register_ctrl");
+$form_list["settings"]				= array("controller" => "settings_ctrl.php", "class" => "settings_ctrl");
 ?>

@@ -21,6 +21,11 @@
 
     // Get page path
     $path_base = './framework/view/';
+
+	// admin redirect
+	if (isset($_GET['admin']))
+		$path_base .= "admin/";
+
 	$path = $path_base;
 
     // file

@@ -28,4 +28,21 @@ function fix_facebook_link(&$str)
 	// recursive fix
 	fix_facebook_link($str);
 }
+
+function requireToVar($file)
+{
+    ob_start();
+    require($file);
+    return ob_get_clean();
+}
+
+function generateRandomString($length = 10)
+{
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $randomString = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[rand(0, strlen($characters) - 1)];
+    }
+    return $randomString;
+}
 ?>

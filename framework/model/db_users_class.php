@@ -44,6 +44,37 @@ class users_table
         }
 	}
 
+	public function user_manual_add($data, $password)
+	{
+		try
+        {
+			$query = "INSERT INTO users (name, surname, username, password, email, birthdate, gender, note, admin, content_manager) VALUES (?, ?, ?, MD5(?), ?, STR_TO_DATE(?, '%d/%m/%Y'), ?, ?, ?, ?)";
+
+			$res = $this->dbConnection->prepare($query);
+
+			$data['admin']		= (!isset($data['admin'])) ? 0 : $data['admin'];
+			$data['content']	= (!isset($data['content'])) ? 0 : $data['content'];
+
+			$res->bindParam(1, $data['name']);
+			$res->bindParam(2, $data['surname']);
+			$res->bindParam(3, $data['username']);
+			$res->bindParam(4, $password);
+			$res->bindParam(5, $data['email']);
+			$res->bindParam(6, $data['birthdate']);
+			$res->bindParam(7, $data['sex']);
+			$res->bindParam(8, $data['note']);
+			$res->bindParam(9, $data['admin']);
+			$res->bindParam(10, $data['content']);
+
+			$res->execute();
+		}
+		catch (PDOException $e)
+        {
+            $this->dbConnection->SetError(_("Error inserting new user")." - ".$e->getMessage());
+			throw $e;
+        }
+	}
+
 	public function user_modify($data)
 	{
 		try
@@ -136,9 +167,9 @@ class users_table
 		try
         {
 			if ($is_md5 == false)
-				$query = "SELECT id, username, password, name, surname, email, DATE_FORMAT(birthdate, '%d/%m/%Y') as birthdate, gender, facebook, about, active, invisible, admin, note FROM users WHERE username = ? LIMIT 1";
+				$query = "SELECT id, username, password, name, surname, email, DATE_FORMAT(birthdate, '%d/%m/%Y') as birthdate, gender, facebook, about, active, invisible, admin, note, content_manager FROM users WHERE username = ? LIMIT 1";
 			else
-				$query = "SELECT id, username, password, name, surname, email, DATE_FORMAT(birthdate, '%d/%m/%Y') as birthdate, gender, facebook, about, active, invisible, admin, note FROM users WHERE md5(username) = ? LIMIT 1";
+				$query = "SELECT id, username, password, name, surname, email, DATE_FORMAT(birthdate, '%d/%m/%Y') as birthdate, gender, facebook, about, active, invisible, admin, note, content_manager FROM users WHERE md5(username) = ? LIMIT 1";
 
 			$res = $this->dbConnection->prepare($query);
 

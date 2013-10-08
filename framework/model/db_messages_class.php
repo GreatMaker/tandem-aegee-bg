@@ -81,7 +81,7 @@ class messages_table
 	{
 		try
         {
-			$query = "SELECT users.id, users.name, users.surname, users.facebook, users.gender, messages.message,  DATE_FORMAT(messages.timestamp, '%d/%m/%Y %H:%i') as timestamp FROM messages JOIN users ON messages.from_user_id = users.id WHERE ((messages.from_user_id = ? AND messages.to_user_id = ?) OR (messages.from_user_id = ? AND messages.to_user_id = ?)) ORDER BY timestamp";
+			$query = "SELECT users.id, users.name, users.surname, users.facebook, users.gender, messages.message,  DATE_FORMAT(messages.timestamp, '%d/%m/%Y %H:%i') as timestamp FROM messages JOIN users ON messages.from_user_id = users.id WHERE ((messages.from_user_id = ? AND messages.to_user_id = ?) OR (messages.from_user_id = ? AND messages.to_user_id = ?)) ORDER BY messages.timestamp";
 
 			$res = $this->dbConnection->prepare($query);
 

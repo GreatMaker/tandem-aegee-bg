@@ -1,6 +1,6 @@
 <?php
 /**
- * Profile View File
+ * Messages View File
  *
  * @author Andrea Visinoni <andrea.visinoni@aegeebergamo.eu>
  * 
@@ -59,8 +59,12 @@ $data .= "</ol></div>";
 // message view
 $data .= "<div id=\"message_list\" style=\"margin-bottom: 10px; margin-top: 10px; margin-left: 190px; margin-right: 10px; height:440px; witdh: 100%; border: 1px solid grey; overflow-y: auto;\">"._("Select a user to show the message thread!")."</div>";
 
+// reply div
+$data .= "<div id=\"message_reply\" style=\"margin-top: 10px; margin-left: 190px; margin-right: 10px;\"><input type=\"text\" id=\"reply_msg\" style=\"border:solid 1px #BFBDBD; width: 85%;\"/><input type=\"hidden\" id=\"dest_id\" />&nbsp;<input type=\"submit\" id=\"reply_send\" style=\" width: 10%;\" value=\""._("Send")."\"/></div>";
+
 $page->AddToBody($data);
 
 // add jquery
-$page->AddJQuery("$(\"#usr_msg_list\").bind(\"mousedown\", function (e) {e.metaKey = false;}).selectable({selected: function(event, ui){\$().tandem_load_messages(ui.selected.id);}});");
+$page->AddJQuery("$(\"#usr_msg_list\").bind(\"mousedown\", function (e) {e.metaKey = false;}).selectable({selected: function(event, ui){\$().tandem_load_messages(ui.selected.id);$(\"#dest_id\").val(ui.selected.id);}});
+	$('#reply_send').click(function(e) {e.preventDefault(); $().tandem_message_fast($('#dest_id').val(), $('#reply_msg').val()); $().tandem_load_messages($('#dest_id').val()); $('#reply_msg').val(\"\"); $('#dest_id').val(\"\"); });");
 ?>
