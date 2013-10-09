@@ -22,6 +22,7 @@ require_once 'db_user_block_class.php';
 require_once 'db_matching_engine_class.php';
 require_once 'db_messages_class.php';
 require_once 'db_contents_class.php';
+require_once 'db_stats_class.php';
 
 Abstract class ExtensionBridge
 {
@@ -77,6 +78,7 @@ class database_tables extends ExtensionBridge
 		parent::addExt(new user_block_table($this->base), "user_block_table");
 		parent::addExt(new messages_table($this->base), "messages_table");
 		parent::addExt(new contents_table($this->base), "contents_table");
+		parent::addExt(new stats_table($this->base), "stats_table");
 
 		parent::addExt(new matching_engine($this->base), "matching_engine");
     }
