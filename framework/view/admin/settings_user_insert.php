@@ -1,6 +1,6 @@
 <?php
 /**
- * Settings View File
+ * Settings user insert manual View File
  *
  * @author Andrea Visinoni <andrea.visinoni@aegeebergamo.eu>
  * 

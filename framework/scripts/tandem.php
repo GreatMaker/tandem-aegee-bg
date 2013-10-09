@@ -100,39 +100,46 @@ else if ($_POST['func'] == "tandem_message_fast")
 	$user_from_data = $db_conn->user_get_data_by_id($page->get_user_id());
 	$user_to_data = $db_conn->user_get_data_by_id($_POST['to']);
 
-	 // check user block
-	 if ($db_conn->user_block_is_blocked($_POST['to'], $page->get_user_id()) == true)
-	 {
-		 $ret['error'] = _("You can't message this user, you've been blocked!");
-	 }
-	 else
-	 {
-		// send message
-		$mail = new mailman_class();
-
-		$mail->set_sender($user_from_data['name']);
-		$mail->set_sender_id($user_from_data['id']);
-		$mail->set_receiver($user_to_data['name']);
-		$mail->set_receiver_mail($user_to_data['email']);
-		$mail->set_object(_("New message from the Tandem Project Bergamo!"));
-		$mail->set_user_message($_POST['message']);
-		$mail->set_user_image($user_from_data['facebook']);
-
-		// add do DB
-		$db_conn->message_add($page->get_user_id(), $_POST['to'], $_POST['message']);
-
-		$str_err = "";
-
-		if ($db_conn->GetError($str_err))
-			$ret['error'] = $str_err;
+	if (!isset($_POST['to']) || $_POST['to'] == "")
+	{
+		$ret['error'] = _("Please select a user first!");
+	}
+	else
+	{
+		// check user block
+		if ($db_conn->user_block_is_blocked($_POST['to'], $page->get_user_id()) == true)
+		{
+			$ret['error'] = _("You can't message this user, you've been blocked!");
+		}
 		else
 		{
 		   // send message
-		   $mail->send_message();
-		}
+		   $mail = new mailman_class();
 
-		$ret['success'] = _("Message sent correctly");
-	 }
+		   $mail->set_sender($user_from_data['name']);
+		   $mail->set_sender_id($user_from_data['id']);
+		   $mail->set_receiver($user_to_data['name']);
+		   $mail->set_receiver_mail($user_to_data['email']);
+		   $mail->set_object(_("New message from the Tandem Project Bergamo!"));
+		   $mail->set_user_message($_POST['message']);
+		   $mail->set_user_image($user_from_data['facebook']);
+
+		   // add do DB
+		   $db_conn->message_add($page->get_user_id(), $_POST['to'], $_POST['message']);
+
+		   $str_err = "";
+
+		   if ($db_conn->GetError($str_err))
+			   $ret['error'] = $str_err;
+		   else
+		   {
+			  // send message
+			  $mail->send_message();
+		   }
+
+		   $ret['success'] = _("Message sent correctly");
+		}
+	}
 }
 else if ($_POST['func'] == "tandem_add_friend")
 {

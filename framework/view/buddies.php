@@ -43,8 +43,10 @@ else
 
 	foreach ($data as $lang => $buddies)
 	{
-		$bd_data = "<div style=\"border-bottom: 1px solid black; margin-bottom: 10px; \">".$db_conn->languages_get_lang_name($lang)."</div>";
+		$bd_data .= "<div style=\"border-bottom: 1px solid black; margin-bottom: 10px; \">".$db_conn->languages_get_lang_name($lang)."</div>";
 		
+		$cnt_buddy = 0;
+
 		foreach ($buddies as $buddy_id => $buddy_data)
 		{
 			// get DB user data
@@ -155,7 +157,8 @@ else
 			$bd_data .= "</div>";
 
 			// Separator
-			$bd_data .= "<div style=\"line-height: .2em; background-color: #676767; height: 1px; margin: 10px;\"></div>";
+			if (++$cnt_buddy != count($buddies))
+				$bd_data .= "<div style=\"line-height: .2em; background-color: #676767; height: 1px; margin: 10px;\"></div>";
 		}
 	}
 
