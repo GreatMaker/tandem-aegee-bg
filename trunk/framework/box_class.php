@@ -58,12 +58,18 @@ class login_box_class extends box_class
 		$password = new form_field("password", _("Password:"));
 		$password->set_type(form_field::FIELD_PASSWORD);
 
+		// info field
+		$info = new form_field("info");
+		$info->set_type(form_field::FIELD_NOTE);
+		$info->set_value(_("<strong>Use your University credentials.</strong>"));
+
 		// send button
 		$send = new form_field("send", "", false);
 		$send->set_type(form_field::FIELD_BUTTON);
 		$send->set_value(_("Send"));
 
 		//add fields
+		$form->add($info);
 		$form->add($username);
 		$form->add($password);
 		$form->add($send);
@@ -71,6 +77,7 @@ class login_box_class extends box_class
 		// push validator js class
 		$page->AddJS("jquery.form.js");
 		$page->AddJS("jquery.notify.js");
+		$page->AddCSS("grid.css");
 
 		// add validator
 		$page->AddJQuery("$(\"#".$form_name."\").ajaxForm({dataType:'json', success: processReply});"); 
@@ -118,36 +125,40 @@ class userdetails_box_class extends box_class
         $data .= "<div class='user_image'>".$img_user."</div>\n";
 
 		// user name cell
-		$data .= "<div class='user_name'><span class='user_name'>".$user_data['name']." ".$user_data['surname']."</span></div>\n";
+		$data .= "<div class='user_name'><span class='user_name'>".$user_data['name']." ".$user_data['surname']."</span></div></div>\n";
 
 		// Button box
-		$data .= "<div class='buttons_box'>\n";
+		$data .= "<div class=\"grid grid-pad\">\n";
 
 		if ($user_data['admin'] == 0)
 		{
 			// Buddies
-			$data .= "<a href=\"index.php?page=buddies\"><img class='user_button' src='img/icons/tandem.png' alt=\"Tandem\" title=\"Tandem\" border=\"0\" /></a>\n";
+			$data .= "<div class=\"col-1-3\" style=\"text-align: center; height: 60px; padding: 5px;\"><a href=\"index.php?page=buddies\" style=\"text-decoration:none;\"><img class='user_button' src='img/icons/tandem.png' alt=\"Tandem\" title=\"Tandem\" border=\"0\" /><br />"._("Buddies")."</a></div>\n";
 
 			// Friends
-			$data .= "<a href=\"index.php?page=friends\"><img class='user_button' src='img/icons/friends.png' alt=\"Friends\" title=\"Friends\" border=\"0\" /></a>\n";
+			$data .= "<div class=\"col-1-3\" style=\"text-align: center; height: 60px; padding: 5px;\"><a href=\"index.php?page=friends\" style=\"text-decoration:none;\"><img class='user_button' src='img/icons/friends.png' alt=\"Favourites\" title=\"Favourites\" border=\"0\" /><br />"._("Favourites")."</a></div>\n";
+
+			// Messages
+			$data .= "<div class=\"col-1-3\" style=\"text-align: center; height: 60px; padding: 5px;\"><a href=\"index.php?page=messages\" style=\"text-decoration:none;\"><img class='user_button' src='img/icons/comments.png' alt=\"Messages\" title=\"Messages\" border=\"0\" /><br />"._("Messages")."</a></div>\n";
 
 			// Visible/Invisible
 			//$data .= "<a style=\"cursor:pointer\" onclick=\"$().tandem_toggle_visible();\">".$img_invisible."</a>\n";
 			if ($user_data['invisible'] == 0)
-				$data .= "<a style=\"cursor:pointer\" visible=\"1\" class=\"invisible_link\">".$img_invisible."</a>\n";
+				$data .= "<div class=\"col-1-3\" style=\"text-align: center; height: 60px; padding: 5px;\"><a style=\"cursor:pointer\" visible=\"1\" class=\"invisible_link\">".$img_invisible."<br />"._("Set invisible")."</a></div>\n";
 			else
-				$data .= "<a style=\"cursor:pointer\" visible=\"0\" class=\"invisible_link\">".$img_invisible."</a>\n";
+				$data .= "<div class=\"col-1-3\" style=\"text-align: center; height: 60px; padding: 5px;\"><a style=\"cursor:pointer\" visible=\"0\" class=\"invisible_link\">".$img_invisible."<br />"._("Set visible")."</a></div>\n";
 		}
 
 		// settings
-		$data .= "<a href=\"index.php?page=settings\"><img class='user_button' src='img/icons/settings.png' alt=\"Settings\" title=\"Settings\" border=\"0\" /></a>\n";
+		$data .= "<div class=\"col-1-3\" style=\"text-align: center; height: 60px; padding: 5px;\"><a href=\"index.php?page=settings\" style=\"text-decoration:none;\"><img class='user_button' src='img/icons/settings.png' alt=\"Settings\" title=\"Settings\" border=\"0\" /><br />"._("Settings")."</a></div>\n";
 
 		// logout
-		$data .= "<a style=\"cursor:pointer\" onclick=\"$().tandem_logout();\"><img class='user_button' src='img/icons/logout.png' alt=\"Logout\" title=\"Logout\" border=\"0\" /></a>\n";
-		$data .= "</div></div>\n";
+		$data .= "<div class=\"col-1-3\" style=\"text-align: center; height: 60px; padding: 5px;\"><a style=\"cursor:pointer\" onclick=\"$().tandem_logout();\"><img class='user_button' src='img/icons/logout.png' alt=\"Logout\" title=\"Logout\" border=\"0\" /><br />"._("Logout")."</a></div>\n";
+		$data .= "</div>\n";
 
 		// insert JS
 		$page->AddJS("jquery.tandem.js");
+		$page->AddCSS("grid.css");
 
 		// insert jquery
 		$page->AddJQuery("

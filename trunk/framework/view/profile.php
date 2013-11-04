@@ -67,11 +67,18 @@ if ($user_data['age'] != "" && $user_data['age'] != 0)
 	$bd_data .= "<div style=\"float: left; margin-left: 5px; margin-bottom: 5px;\">".$user_data['age']."</div>";
 }
 
+// Buddy sex
+if (isset($user_data['gender']) && $user_data['gender'] != "")
+{
+	$bd_data .= "<div style=\"float: left; text-align: right; width: 20%; clear: left;\"><strong>Sex:</strong></div>";
+	$bd_data .= "<div style=\"float: left; margin-left: 5px; margin-bottom: 5px;\">".$user_data['gender']."</div>";
+}
+
 // Buddy about..
 if (isset($user_data['about']) && $user_data['about'] != "")
 {
 	$bd_data .= "<div style=\"float: left; text-align: right; width: 20%; clear: left;\"><strong>About me:</strong></div>";
-	$bd_data .= "<div style=\"float: left; margin-left: 5px; margin-bottom: 5px;\">".nl2br($user_data['about'])."</div>";
+	$bd_data .= "<div style=\"float: left; margin-left: 5px; margin-bottom: 5px; width: 79%;\">".nl2br($user_data['about'])."</div>";
 }
 
 // Buddy languages
@@ -103,7 +110,7 @@ foreach ($user_langs as $l_id => $l_data)
 }
 
 $bd_data .= "<div style=\"float: left; text-align: right; width: 20%; clear: left;\"><strong>Languages:</strong></div>";
-$bd_data .= "<div style=\"float: left; margin-left: 5px; margin-bottom: 5px;\">".$langs_str_s."<br />".$langs_str_l."</div>";
+$bd_data .= "<div style=\"float: left; margin-left: 5px; margin-bottom: 5px; width: 79%;\">".$langs_str_s."<br />".$langs_str_l."</div>";
 
 // Buddy common interests
 $user_c_interests = $db_conn->user_interests_get_data($_GET['id']);
@@ -123,7 +130,7 @@ if (count($user_c_interests) > 0)
 	}
 
 	$bd_data .= "<div style=\"float: left; text-align: right; width: 20%; clear: left;\"><strong>"._("interests").":</strong></div>";
-	$bd_data .= "<div style=\"float: left; margin-left: 5px; margin-bottom: 5px;\">".$user_int_str."</div>";
+	$bd_data .= "<div style=\"float: left; margin-left: 5px; margin-bottom: 5px; width: 79%;\">".$user_int_str."</div>";
 }
 
 $bd_data .= "</div>";
@@ -133,7 +140,7 @@ $bd_data .= "</div><br />";
 $bd_data .= "<div style=\"clear: both; margin-right: 10px; overflow:auto;\">";
 
 if ($db_conn->user_friends_is_friend($page->get_user_id(), $_GET['id']) == false)
-	$bd_data .= "<a style=\"cursor: pointer;\" onclick=\"$().tandem_add_friend(".$_GET['id'].")\"><div style=\"float: right; border: 1px solid black; padding: 5px; margin-left: 10px;\"><img style=\"vertical-align: middle;\" src=\"img/icons/starred.png\" /><span style=\"display:inline-block; vertical-align:middle; line-height:30px; \">&nbsp;"._("Add to friends")."</span></div></a>";
+	$bd_data .= "<a style=\"cursor: pointer;\" onclick=\"$().tandem_add_friend(".$_GET['id'].")\"><div style=\"float: right; border: 1px solid black; padding: 5px; margin-left: 10px;\"><img style=\"vertical-align: middle;\" src=\"img/icons/starred.png\" /><span style=\"display:inline-block; vertical-align:middle; line-height:30px; \">&nbsp;"._("Add to favourites")."</span></div></a>";
 
 if ($db_conn->user_block_is_blocked($page->get_user_id(), $_GET['id']) == false)
 	$bd_data .= "<a class=\"block_link\" block_id=\"".$_GET['id']."\" style=\"cursor: pointer;\"><div style=\"float: right; border: 1px solid black; padding: 5px; margin-left: 10px;\"><img style=\"vertical-align: middle;\" src=\"img/icons/lock.png\" /><span style=\"display:inline-block; vertical-align:middle; line-height:30px; \">&nbsp;"._("Block user")."</span></div></a>";

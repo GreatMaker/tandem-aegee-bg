@@ -43,7 +43,7 @@ else
 
 	foreach ($data as $lang => $buddies)
 	{
-		$bd_data .= "<div style=\"border-bottom: 1px solid black; margin-bottom: 10px; \">".$db_conn->languages_get_lang_name($lang)."</div>";
+		$bd_data .= "<div style=\"border-bottom: 4px solid black; margin-bottom: 10px; margin-top: 15px; \"><strong>".$db_conn->languages_get_lang_name($lang)."</strong></div>";
 		
 		$cnt_buddy = 0;
 
@@ -87,12 +87,19 @@ else
 				$bd_data .= "<div style=\"float: left; text-align: right; width: 20%; clear: left;\"><strong>Age:</strong></div>";
 				$bd_data .= "<div style=\"float: left; margin-left: 5px; margin-bottom: 5px;\">".$user_data['age']."</div>";
 			}
+			
+			// Buddy sex
+			if (isset($user_data['gender']) && $user_data['gender'] != "")
+			{
+				$bd_data .= "<div style=\"float: left; text-align: right; width: 20%; clear: left;\"><strong>Sex:</strong></div>";
+				$bd_data .= "<div style=\"float: left; margin-left: 5px; margin-bottom: 5px;\">".$user_data['gender']."</div>";
+			}
 
 			// Buddy about..
 			if (isset($user_data['about']) && $user_data['about'] != "")
 			{
 				$bd_data .= "<div style=\"float: left; text-align: right; width: 20%; clear: left;\"><strong>About me:</strong></div>";
-				$bd_data .= "<div style=\"float: left; margin-left: 5px; margin-bottom: 5px;\">".nl2br($user_data['about'])."</div>";
+				$bd_data .= "<div style=\"float: left; margin-left: 5px; margin-bottom: 5px; width: 79%;\">".nl2br($user_data['about'])."</div>";
 			}
 
 			// Buddy languages
@@ -124,7 +131,7 @@ else
 			}
 
 			$bd_data .= "<div style=\"float: left; text-align: right; width: 20%; clear: left;\"><strong>Languages:</strong></div>";
-			$bd_data .= "<div style=\"float: left; margin-left: 5px; margin-bottom: 5px;\">".$langs_str_s."<br />".$langs_str_l."</div>";
+			$bd_data .= "<div style=\"float: left; margin-left: 5px; margin-bottom: 5px; width: 79%;\">".$langs_str_s."<br />".$langs_str_l."</div>";
 
 			// Buddy common interests
 			$user_c_interests = $db_conn->matching_get_common_interests($current_user_data['id'], $buddy_id);
@@ -144,7 +151,7 @@ else
 				}
 
 				$bd_data .= "<div style=\"float: left; text-align: right; width: 20%; clear: left;\"><strong>Common interests:</strong></div>";
-				$bd_data .= "<div style=\"float: left; margin-left: 5px; margin-bottom: 5px;\">".$user_int_str."</div>";
+				$bd_data .= "<div style=\"float: left; margin-left: 5px; margin-bottom: 5px; width: 79%;\">".$user_int_str."</div>";
 			}
 
 			$bd_data .= "</div>";

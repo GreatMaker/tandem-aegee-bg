@@ -47,8 +47,8 @@
 <div id="footer">
 	<div class="footer-content">
 		<div class="footer-width">
-			<a href="http://www.aegeebergamo.eu" title="AEGEE-Bergamo"><img src="img/logo_aegee-bergamo_mini.png" alt="AEGEE-Bergamo" border="0" /></a>&nbsp;
-			<a href="http://www.unibg.it" title="UniBG"><img src="img/logo_UNIbg_mini.png" alt="UniBG" border="0" /></a>
+			<div style="float: left;"><a href="http://www.aegeebergamo.eu" title="AEGEE-Bergamo"><img src="img/logo_aegee-bergamo_mini.png" alt="AEGEE-Bergamo" border="0" /></a></div>
+			<div style="float: right;"><a href="http://www.unibg.it" title="UniBG"><img src="img/logo_UNIbg_mini.png" alt="UniBG" border="0" /></a></div>
 		</div>
 	</div> <!-- footer-content -->
 

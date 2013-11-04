@@ -121,7 +121,7 @@ else
 	// Languages you speak note
 	$lang_speak_note = new form_field("lang_speak_note");
 	$lang_speak_note->set_type(form_field::FIELD_NOTE);
-	$lang_speak_note->set_value(_("These are the languages you fluently speak, and which you want to tutor."));
+	$lang_speak_note->set_value(_("These are the languages you are mother tongue, and which you want to tutor."));
 
 	// Language you want to learn
 	$lang_learn = new form_field("lang_learn", _("Language"));
