@@ -33,6 +33,23 @@ class matching_engine
 					  AND user_languages.lang_code IN (SELECT lang_code FROM user_learn_languages) AND  (user_languages.mother_tongue = 1 OR (user_languages.mother_tongue = 0 AND user_languages.level > (SELECT level FROM user_learn_languages WHERE lang_code = user_languages.lang_code)))
 					  ORDER BY user_languages.lang_code, user_languages.mother_tongue DESC, user_languages.level DESC";
 
+			$query = "SELECT users.id, user_languages.lang_code, user_languages.mother_tongue, user_languages.level FROM (SELECT @user_id:=".$user_id.") u, users JOIN user_languages ON users.id = user_languages.user_id 
+					  WHERE user_languages.mother_tongue = 1 AND user_languages.lang_code IN (SELECT lang_code FROM user_learn_languages) AND users.id IN (SELECT b.id FROM (SELECT @user_id:=".$user_id.") a, users_available b 
+JOIN user_languages ON b.id = user_languages.user_id 
+WHERE (user_languages.lang_code IN (SELECT lang_code FROM user_learn_languages) AND user_languages.mother_tongue = 1)
+AND b.id IN (
+SELECT b.id FROM (SELECT @user_id:=".$user_id.") a, users_available b 
+JOIN user_languages ON b.id = user_languages.user_id 
+WHERE (user_languages.lang_code IN (SELECT lang_code FROM user_speak_languages) AND user_languages.mother_tongue = 0)
+))
+						ORDER BY user_languages.lang_code, user_languages.mother_tongue DESC, user_languages.level DESC";
+			
+			$query = "SELECT users.id, user_languages.lang_code, user_languages.mother_tongue, user_languages.level FROM (SELECT @user_id:=".$user_id.") u, users JOIN user_languages ON users.id = user_languages.user_id 
+					  WHERE user_languages.mother_tongue = 1 AND user_languages.lang_code IN (SELECT lang_code FROM user_learn_languages) AND users.id IN (SELECT b.id FROM users_available b 
+					  JOIN user_languages ON b.id = user_languages.user_id 
+					  WHERE (user_languages.lang_code IN (SELECT lang_code FROM user_speak_languages) AND user_languages.mother_tongue = 0) )
+					  ORDER BY user_languages.lang_code, user_languages.mother_tongue DESC, user_languages.level DESC";
+			
 			if ($res = $this->dbConnection->query($query))
 			{
 				$data = $res->fetchAll(PDO::FETCH_ASSOC);

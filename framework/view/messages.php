@@ -66,5 +66,5 @@ $page->AddToBody($data);
 
 // add jquery
 $page->AddJQuery("$(\"#usr_msg_list\").bind(\"mousedown\", function (e) {e.metaKey = false;}).selectable({selected: function(event, ui){\$().tandem_load_messages(ui.selected.id);$(\"#dest_id\").val(ui.selected.id);}});
-	$('#reply_send').click(function(e) {e.preventDefault(); $().tandem_message_fast($('#dest_id').val(), $('#reply_msg').val()); $().tandem_load_messages($('#dest_id').val()); $('#reply_msg').val(\"\"); });");
+	$('#reply_send').click(function(e) {e.preventDefault(); $().tandem_message_fast($('#dest_id').val(), $('#reply_msg').val()); \$().tandem_load_messages($('#dest_id').val()); $('#reply_msg').val(\"\"); });");
 ?>

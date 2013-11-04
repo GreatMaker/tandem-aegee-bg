@@ -20,6 +20,9 @@ $page->AddJS("jquery-ui-1.10.1.custom.min.js");
 $page->AddJS("jquery.tandem.js");
 $page->AddCSS("ui-lightness/jquery-ui-1.10.1.custom.css");
 
+// Add contents from database
+$page->add_db_contents($page_req);
+
 // Force message dialog
 if ((isset($_GET["option"]) && $_GET["option"] == "message") && ($_GET["to"] != ""))
 {

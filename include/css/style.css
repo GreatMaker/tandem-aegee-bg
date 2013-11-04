@@ -402,9 +402,11 @@ li ol, li ul {
 }
 
 .footer-content {
-	padding: 25px;
-	background: #444;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	/*background: #444;*/
 	border-top: 10px solid #262626;
+	overflow: hidden;
 }
 
 #footer .footer-content p {
