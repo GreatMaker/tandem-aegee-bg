@@ -81,7 +81,7 @@ class register_ctrl extends ctrl_abstract
 		}
 
 		// check spoken langs
-		$values = array();
+		$values_spoken = array();
 
 		foreach ($this->post_data['p_lang_speak'] as $id => $data)
 		{
@@ -89,14 +89,14 @@ class register_ctrl extends ctrl_abstract
 				throw new Exception("Select a valid language you speak");
 
 			// check unique
-			if (in_array($data['lang_speak'], $values))
+			if (in_array($data['lang_speak'], $values_spoken))
 				throw new Exception("Duplicate entry for spoken languages");
 
-			$values[] = $data['lang_speak'];
+			$values_spoken[] = $data['lang_speak'];
 		}
 		
-		// check spoken langs
-		$values = array();
+		// check learn langs
+		$values_learn = array();
 
 		foreach ($this->post_data['p_lang_learn'] as $id => $data)
 		{
@@ -104,10 +104,18 @@ class register_ctrl extends ctrl_abstract
 				throw new Exception("Select a valid language you want to learn");
 
 			// check unique
-			if (in_array($data['lang_learn'], $values))
+			if (in_array($data['lang_learn'], $values_learn))
 				throw new Exception("Duplicate entry for learning languages");
 
-			$values[] = $data['lang_learn'];
+			$values_learn[] = $data['lang_learn'];
+		}
+
+		// check both mother tongue and learn languages
+		$res = array_intersect($values_spoken, $values_learn);
+
+		if (count($res) > 0)
+		{
+			throw new Exception("You cannot set a language as native and to learn as well!");
 		}
 
 		return;

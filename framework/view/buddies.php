@@ -43,7 +43,7 @@ else
 
 	foreach ($data as $lang => $buddies)
 	{
-		$bd_data .= "<div style=\"border-bottom: 4px solid black; margin-bottom: 10px; margin-top: 15px; \"><strong>".$db_conn->languages_get_lang_name($lang)."</strong></div>";
+		$bd_data .= "<div style=\"background-color: orange; border: 1px solid black; padding-left: 5px; margin-bottom: 10px; margin-top: 15px; \"><strong><span style=\"color: #F2F2F2;\">".$db_conn->languages_get_lang_name($lang)."</span></strong></div>";
 		
 		$cnt_buddy = 0;
 

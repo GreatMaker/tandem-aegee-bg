@@ -129,57 +129,60 @@ if (count($user_c_interests) > 0)
 		$user_int_cnt++;
 	}
 
-	$bd_data .= "<div style=\"float: left; text-align: right; width: 20%; clear: left;\"><strong>"._("interests").":</strong></div>";
+	$bd_data .= "<div style=\"float: left; text-align: right; width: 20%; clear: left;\"><strong>"._("Interests").":</strong></div>";
 	$bd_data .= "<div style=\"float: left; margin-left: 5px; margin-bottom: 5px; width: 79%;\">".$user_int_str."</div>";
 }
 
 $bd_data .= "</div>";
 $bd_data .= "</div><br />";
 
-// Buttons
-$bd_data .= "<div style=\"clear: both; margin-right: 10px; overflow:auto;\">";
+if ($page->get_user_id() != $_GET['id'])
+{
+	// Buttons
+	$bd_data .= "<div style=\"clear: both; margin-right: 10px; overflow:auto;\">";
 
-if ($db_conn->user_friends_is_friend($page->get_user_id(), $_GET['id']) == false)
-	$bd_data .= "<a style=\"cursor: pointer;\" onclick=\"$().tandem_add_friend(".$_GET['id'].")\"><div style=\"float: right; border: 1px solid black; padding: 5px; margin-left: 10px;\"><img style=\"vertical-align: middle;\" src=\"img/icons/starred.png\" /><span style=\"display:inline-block; vertical-align:middle; line-height:30px; \">&nbsp;"._("Add to favourites")."</span></div></a>";
+	if ($db_conn->user_friends_is_friend($page->get_user_id(), $_GET['id']) == false)
+		$bd_data .= "<a style=\"cursor: pointer;\" onclick=\"$().tandem_add_friend(".$_GET['id'].")\"><div style=\"float: right; border: 1px solid black; padding: 5px; margin-left: 10px;\"><img style=\"vertical-align: middle;\" src=\"img/icons/starred.png\" /><span style=\"display:inline-block; vertical-align:middle; line-height:30px; \">&nbsp;"._("Add to favourites")."</span></div></a>";
 
-if ($db_conn->user_block_is_blocked($page->get_user_id(), $_GET['id']) == false)
-	$bd_data .= "<a class=\"block_link\" block_id=\"".$_GET['id']."\" style=\"cursor: pointer;\"><div style=\"float: right; border: 1px solid black; padding: 5px; margin-left: 10px;\"><img style=\"vertical-align: middle;\" src=\"img/icons/lock.png\" /><span style=\"display:inline-block; vertical-align:middle; line-height:30px; \">&nbsp;"._("Block user")."</span></div></a>";
-else
-	$bd_data .= "<a style=\"cursor: pointer;\" onclick=\"$().tandem_unblock_user(".$_GET['id'].")\"><div style=\"float: right; border: 1px solid black; padding: 5px; margin-left: 10px;\"><img style=\"vertical-align: middle;\" src=\"img/icons/unlock.png\" /><span style=\"display:inline-block; vertical-align:middle; line-height:30px; \">&nbsp;"._("Unblock user")."</span></div></a>";
+	if ($db_conn->user_block_is_blocked($page->get_user_id(), $_GET['id']) == false)
+		$bd_data .= "<a class=\"block_link\" block_id=\"".$_GET['id']."\" style=\"cursor: pointer;\"><div style=\"float: right; border: 1px solid black; padding: 5px; margin-left: 10px;\"><img style=\"vertical-align: middle;\" src=\"img/icons/lock.png\" /><span style=\"display:inline-block; vertical-align:middle; line-height:30px; \">&nbsp;"._("Block user")."</span></div></a>";
+	else
+		$bd_data .= "<a style=\"cursor: pointer;\" onclick=\"$().tandem_unblock_user(".$_GET['id'].")\"><div style=\"float: right; border: 1px solid black; padding: 5px; margin-left: 10px;\"><img style=\"vertical-align: middle;\" src=\"img/icons/unlock.png\" /><span style=\"display:inline-block; vertical-align:middle; line-height:30px; \">&nbsp;"._("Unblock user")."</span></div></a>";
 
-$bd_data .= "<a class=\"dialog_link\" from=\"".$page->get_user_id()."\" to=\"".$_GET['id']."\" style=\"cursor: pointer;\"><div style=\"float: right; border: 1px solid black; padding: 5px; margin-left: 10px;\"><img style=\"vertical-align: middle;\" src=\"img/icons/message.png\" /><span style=\"display:inline-block; vertical-align:middle; line-height:30px; \">&nbsp;"._("Send message")."</span></div></a>";
-$bd_data .= "</div>";
+	$bd_data .= "<a class=\"dialog_link\" from=\"".$page->get_user_id()."\" to=\"".$_GET['id']."\" style=\"cursor: pointer;\"><div style=\"float: right; border: 1px solid black; padding: 5px; margin-left: 10px;\"><img style=\"vertical-align: middle;\" src=\"img/icons/message.png\" /><span style=\"display:inline-block; vertical-align:middle; line-height:30px; \">&nbsp;"._("Send message")."</span></div></a>";
+	$bd_data .= "</div>";
 
-// send message dialog
-$page->AddJQuery("
-	message_field_html = $('#dialog-message').html();
-	$(\"#dialog-message\").dialog({
-		autoOpen: false,
-		resizable: false, width: 520, height: 320,
-		modal: true,
-		buttons: {\"Send\": { text: \""._("Send")."\", id: \"btn_send\", click: function () { $().tandem_message($(this).data('msg_data').msg_from, $(this).data('msg_data').msg_to, $('#message_field').val());} }},
-		close: function() {if($('#form_message').length) {\$(this).find('form')[0].reset();} $('#btn_send').show();}
-	});
-	$(\"#block-message\").dialog({
-		autoOpen: false,
-		resizable: false, height: 170,
-		modal: true,
-		buttons: {\"Block\": { text: \""._("Block")."\", id: \"btn_block\", click: function () { $().tandem_block_user($(this).data('msg_data').block);} }}
-	});
-	$('.dialog_link').click(function(event){
-		event.preventDefault();
-		\$(\"#dialog-message\").html(message_field_html);
-		var from =$(this).attr(\"from\");
-		var to =$(this).attr(\"to\");
-		\$(\"#dialog-message\").data(\"msg_data\", {msg_from: from, msg_to: to}).dialog(\"open\");
-		return false; });
-		
-    $('.block_link').click(function(event){
-		event.preventDefault();
-		var block_id =$(this).attr(\"block_id\");
-		\$(\"#block-message\").data(\"msg_data\", {block: block_id}).dialog(\"open\");
-		return false; });
-");
+	// send message dialog
+	$page->AddJQuery("
+		message_field_html = $('#dialog-message').html();
+		$(\"#dialog-message\").dialog({
+			autoOpen: false,
+			resizable: false, width: 520, height: 320,
+			modal: true,
+			buttons: {\"Send\": { text: \""._("Send")."\", id: \"btn_send\", click: function () { $().tandem_message($(this).data('msg_data').msg_from, $(this).data('msg_data').msg_to, $('#message_field').val());} }},
+			close: function() {if($('#form_message').length) {\$(this).find('form')[0].reset();} $('#btn_send').show();}
+		});
+		$(\"#block-message\").dialog({
+			autoOpen: false,
+			resizable: false, height: 170,
+			modal: true,
+			buttons: {\"Block\": { text: \""._("Block")."\", id: \"btn_block\", click: function () { $().tandem_block_user($(this).data('msg_data').block);} }}
+		});
+		$('.dialog_link').click(function(event){
+			event.preventDefault();
+			\$(\"#dialog-message\").html(message_field_html);
+			var from =$(this).attr(\"from\");
+			var to =$(this).attr(\"to\");
+			\$(\"#dialog-message\").data(\"msg_data\", {msg_from: from, msg_to: to}).dialog(\"open\");
+			return false; });
+
+		$('.block_link').click(function(event){
+			event.preventDefault();
+			var block_id =$(this).attr(\"block_id\");
+			\$(\"#block-message\").data(\"msg_data\", {block: block_id}).dialog(\"open\");
+			return false; });
+	");
+}
 
 // set page
 $page->AddToBody("<br />");

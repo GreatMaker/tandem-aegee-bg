@@ -3,6 +3,12 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title><%TITLE></title>
+	<meta name="description" content="Tandem Project Bergamo is based on the idea that the best way to learn a language, is to practise it. In this project we want to provide a platform for university students to meet with native speakers from all around to put their knowledge into practise, improve their skills and in return teach someone else your own native language.">
+	<meta name="keywords" content="tandem, project, bergamo, tandem bergamo, tandem project, languages, exchange, scambio, lingue">
+	<meta name="author" content="AEGEE-Bergamo">
+	<meta charset="UTF-8">
+	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+	<link rel="icon" type="image/x-icon" href="http://tandem.unibg.it/favicon.ico" />
     <link rel="stylesheet" href="include/css/style.css" type="text/css" />
 	<%CSS>
 	<script src="include/js/jquery-1.10.2.min.js" type="text/javascript"></script>

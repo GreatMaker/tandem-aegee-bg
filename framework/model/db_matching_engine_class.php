@@ -48,7 +48,7 @@ WHERE (user_languages.lang_code IN (SELECT lang_code FROM user_speak_languages) 
 					  WHERE user_languages.mother_tongue = 1 AND user_languages.lang_code IN (SELECT lang_code FROM user_learn_languages) AND users.id IN (SELECT b.id FROM users_available b 
 					  JOIN user_languages ON b.id = user_languages.user_id 
 					  WHERE (user_languages.lang_code IN (SELECT lang_code FROM user_speak_languages) AND user_languages.mother_tongue = 0) )
-					  ORDER BY user_languages.lang_code, user_languages.mother_tongue DESC, user_languages.level DESC";
+					  ORDER BY user_languages.lang_code, user_languages.mother_tongue DESC, user_languages.level DESC, users.id DESC";
 			
 			if ($res = $this->dbConnection->query($query))
 			{

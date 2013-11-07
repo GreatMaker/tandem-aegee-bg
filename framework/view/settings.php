@@ -164,7 +164,7 @@ else
 	$settings->add($about);
 	$settings->add($interests);
 	
-	$settings->fieldset_open(_("Languages you speak"), "f_lang_speak");
+	$settings->fieldset_open(_("Languages you speak as native"), "f_lang_speak");
 	$settings->add($lang_speak, true, true);
 	$settings->add($lang_speak_note);
 	$settings->fieldset_close();
