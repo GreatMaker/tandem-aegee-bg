@@ -125,7 +125,7 @@ class userdetails_box_class extends box_class
         $data .= "<div class='user_image'>".$img_user."</div>\n";
 
 		// user name cell
-		$data .= "<div class='user_name'><span class='user_name'>".$user_data['name']." ".$user_data['surname']."</span></div></div>\n";
+		$data .= "<div class='user_name'><a href=\"index.php?page=profile&id=".$user_data['id']."\" style=\"text-decoration:none;\"><span class='user_name'>".$user_data['name']." ".$user_data['surname']."</span></a></div></div>\n";
 
 		// Button box
 		$data .= "<div class=\"grid grid-pad\">\n";
