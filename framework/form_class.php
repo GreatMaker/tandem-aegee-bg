@@ -226,7 +226,7 @@ class form_class
 		}
 		else if ($type == form_field::FIELD_BUTTON)
 		{
-			$this->form_data .= "<input name=\"".$name."\" style=\"margin-left: 0px;\" class=\"formbutton\" value=\"".$value."\" type=\"submit\" style=\"".$style."\" />";
+			$this->form_data .= "<input name=\"".$name."\" class=\"formbutton\" value=\"".$value."\" type=\"submit\" style=\"margin-left: 0px;".$style."\" />";
 		}
 		else if ($type == form_field::FIELD_LEGEND)
 		{
@@ -295,7 +295,7 @@ class form_class
 	public function get_form()
 	{
 		// insert hidden form name info
-		$this->form_data .= "\n<input type=\"hidden\" name=\"hidden_form_name\" value=\"".$this->form_name."\">";
+		$this->form_data .= "\n<input type=\"hidden\" name=\"hidden_form_name\" value=\"".$this->form_name."\" />";
 
 		$this->form_data .= "</form>\n";
 

@@ -34,9 +34,9 @@ if (isset($user_data['facebook']) && $user_data['facebook'] != "")
 else
 {
 	if ($user_data['gender'] == "M")
-		$usr_img = "<img src='img/user_def_male.png' />";
+		$usr_img = "<img src='/img/user_def_male.png' />";
 	else
-		$usr_img = "<img src='img/user_def_female.png' />";
+		$usr_img = "<img src='/img/user_def_female.png' />";
 }
 
 // user real name
@@ -142,14 +142,14 @@ if ($page->get_user_id() != $_GET['id'])
 	$bd_data .= "<div style=\"clear: both; margin-right: 10px; overflow:auto;\">";
 
 	if ($db_conn->user_friends_is_friend($page->get_user_id(), $_GET['id']) == false)
-		$bd_data .= "<a style=\"cursor: pointer;\" onclick=\"$().tandem_add_friend(".$_GET['id'].")\"><div style=\"float: right; border: 1px solid black; padding: 5px; margin-left: 10px;\"><img style=\"vertical-align: middle;\" src=\"img/icons/starred.png\" /><span style=\"display:inline-block; vertical-align:middle; line-height:30px; \">&nbsp;"._("Add to favourites")."</span></div></a>";
+		$bd_data .= "<a style=\"cursor: pointer;\" onclick=\"$().tandem_add_friend(".$_GET['id'].")\"><div style=\"float: right; border: 1px solid black; padding: 5px; margin-left: 10px;\"><img style=\"vertical-align: middle;\" src=\"/img/icons/starred.png\" /><span style=\"display:inline-block; vertical-align:middle; line-height:30px; \">&nbsp;"._("Add to favourites")."</span></div></a>";
 
 	if ($db_conn->user_block_is_blocked($page->get_user_id(), $_GET['id']) == false)
-		$bd_data .= "<a class=\"block_link\" block_id=\"".$_GET['id']."\" style=\"cursor: pointer;\"><div style=\"float: right; border: 1px solid black; padding: 5px; margin-left: 10px;\"><img style=\"vertical-align: middle;\" src=\"img/icons/lock.png\" /><span style=\"display:inline-block; vertical-align:middle; line-height:30px; \">&nbsp;"._("Block user")."</span></div></a>";
+		$bd_data .= "<a class=\"block_link\" block_id=\"".$_GET['id']."\" style=\"cursor: pointer;\"><div style=\"float: right; border: 1px solid black; padding: 5px; margin-left: 10px;\"><img style=\"vertical-align: middle;\" src=\"/img/icons/lock.png\" /><span style=\"display:inline-block; vertical-align:middle; line-height:30px; \">&nbsp;"._("Block user")."</span></div></a>";
 	else
-		$bd_data .= "<a style=\"cursor: pointer;\" onclick=\"$().tandem_unblock_user(".$_GET['id'].")\"><div style=\"float: right; border: 1px solid black; padding: 5px; margin-left: 10px;\"><img style=\"vertical-align: middle;\" src=\"img/icons/unlock.png\" /><span style=\"display:inline-block; vertical-align:middle; line-height:30px; \">&nbsp;"._("Unblock user")."</span></div></a>";
+		$bd_data .= "<a style=\"cursor: pointer;\" onclick=\"$().tandem_unblock_user(".$_GET['id'].")\"><div style=\"float: right; border: 1px solid black; padding: 5px; margin-left: 10px;\"><img style=\"vertical-align: middle;\" src=\"/img/icons/unlock.png\" /><span style=\"display:inline-block; vertical-align:middle; line-height:30px; \">&nbsp;"._("Unblock user")."</span></div></a>";
 
-	$bd_data .= "<a class=\"dialog_link\" from=\"".$page->get_user_id()."\" to=\"".$_GET['id']."\" style=\"cursor: pointer;\"><div style=\"float: right; border: 1px solid black; padding: 5px; margin-left: 10px;\"><img style=\"vertical-align: middle;\" src=\"img/icons/message.png\" /><span style=\"display:inline-block; vertical-align:middle; line-height:30px; \">&nbsp;"._("Send message")."</span></div></a>";
+	$bd_data .= "<a class=\"dialog_link\" from=\"".$page->get_user_id()."\" to=\"".$_GET['id']."\" style=\"cursor: pointer;\"><div style=\"float: right; border: 1px solid black; padding: 5px; margin-left: 10px;\"><img style=\"vertical-align: middle;\" src=\"/img/icons/message.png\" /><span style=\"display:inline-block; vertical-align:middle; line-height:30px; \">&nbsp;"._("Send message")."</span></div></a>";
 	$bd_data .= "</div>";
 
 	// send message dialog

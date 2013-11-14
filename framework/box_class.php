@@ -101,23 +101,23 @@ class userdetails_box_class extends box_class
 
 		// user image
 		if (isset($user_data['facebook']) && $user_data['facebook'] != "")
-			$img_user = "<img src='http://graph.facebook.com/".$user_data['facebook']."/picture' style='border: 1px solid;' border=\"0\" />";
+			$img_user = "<img src='http://graph.facebook.com/".$user_data['facebook']."/picture' alt='User image' style='border: 1px solid;' border=\"0\" />";
 		else
 		{
 			if ($user_data['gender'] == "M")
-				$img_user = "<img src='img/user_def_male.png' style='border: 1px solid;' border=\"0\" />";
+				$img_user = "<img src='/img/user_def_male.png' alt='User image' style='border: 1px solid;' border=\"0\" />";
 			else
-				$img_user = "<img src='img/user_def_female.png' style='border: 1px solid;' border=\"0\" />";
+				$img_user = "<img src='/img/user_def_female.png' alt='User image' style='border: 1px solid;' border=\"0\" />";
 		}
 
 		// user visible
 		if ($user_data['invisible'] == 0)
 		{
-			$img_invisible = "<img class='user_button' src='img/icons/visible.png' alt='Set Invisible' title='Set Invisible' border=\"0\" />";
+			$img_invisible = "<img class='user_button' src='/img/icons/visible.png' alt='Set Invisible' title='Set Invisible' border=\"0\" />";
 		}
 		else
 		{
-			$img_invisible = "<img class='user_button' src='img/icons/invisible.png' alt='Set Visible' title='Set Visible' border=\"0\" />";
+			$img_invisible = "<img class='user_button' src='/img/icons/invisible.png' alt='Set Visible' title='Set Visible' border=\"0\" />";
 		}
 
 		$data .= "<div class='user_data'>";
@@ -133,13 +133,13 @@ class userdetails_box_class extends box_class
 		if ($user_data['admin'] == 0)
 		{
 			// Buddies
-			$data .= "<div class=\"col-1-3\" style=\"text-align: center; height: 60px; padding: 5px;\"><a href=\"index.php?page=buddies\" style=\"text-decoration:none;\"><img class='user_button' src='img/icons/tandem.png' alt=\"Tandem\" title=\"Tandem\" border=\"0\" /><br />"._("Buddies")."</a></div>\n";
+			$data .= "<div class=\"col-1-3\" style=\"text-align: center; height: 60px; padding: 5px;\"><a href=\"index.php?page=buddies\" style=\"text-decoration:none;\"><img class='user_button' src='/img/icons/tandem.png' alt=\"Tandem\" title=\"Tandem\" border=\"0\" /><br />"._("Buddies")."</a></div>\n";
 
 			// Friends
-			$data .= "<div class=\"col-1-3\" style=\"text-align: center; height: 60px; padding: 5px;\"><a href=\"index.php?page=friends\" style=\"text-decoration:none;\"><img class='user_button' src='img/icons/friends.png' alt=\"Favourites\" title=\"Favourites\" border=\"0\" /><br />"._("Favourites")."</a></div>\n";
+			$data .= "<div class=\"col-1-3\" style=\"text-align: center; height: 60px; padding: 5px;\"><a href=\"index.php?page=friends\" style=\"text-decoration:none;\"><img class='user_button' src='/img/icons/friends.png' alt=\"Favourites\" title=\"Favourites\" border=\"0\" /><br />"._("Favourites")."</a></div>\n";
 
 			// Messages
-			$data .= "<div class=\"col-1-3\" style=\"text-align: center; height: 60px; padding: 5px;\"><a href=\"index.php?page=messages\" style=\"text-decoration:none;\"><img class='user_button' src='img/icons/comments.png' alt=\"Messages\" title=\"Messages\" border=\"0\" /><br />"._("Messages")."</a></div>\n";
+			$data .= "<div class=\"col-1-3\" style=\"text-align: center; height: 60px; padding: 5px;\"><a href=\"index.php?page=messages\" style=\"text-decoration:none;\"><img class='user_button' src='/img/icons/comments.png' alt=\"Messages\" title=\"Messages\" border=\"0\" /><br />"._("Messages")."</a></div>\n";
 
 			// Visible/Invisible
 			//$data .= "<a style=\"cursor:pointer\" onclick=\"$().tandem_toggle_visible();\">".$img_invisible."</a>\n";
@@ -150,10 +150,10 @@ class userdetails_box_class extends box_class
 		}
 
 		// settings
-		$data .= "<div class=\"col-1-3\" style=\"text-align: center; height: 60px; padding: 5px;\"><a href=\"index.php?page=settings\" style=\"text-decoration:none;\"><img class='user_button' src='img/icons/settings.png' alt=\"Settings\" title=\"Settings\" border=\"0\" /><br />"._("Settings")."</a></div>\n";
+		$data .= "<div class=\"col-1-3\" style=\"text-align: center; height: 60px; padding: 5px;\"><a href=\"index.php?page=settings\" style=\"text-decoration:none;\"><img class='user_button' src='/img/icons/settings.png' alt=\"Settings\" title=\"Settings\" border=\"0\" /><br />"._("Settings")."</a></div>\n";
 
 		// logout
-		$data .= "<div class=\"col-1-3\" style=\"text-align: center; height: 60px; padding: 5px;\"><a style=\"cursor:pointer\" onclick=\"$().tandem_logout();\"><img class='user_button' src='img/icons/logout.png' alt=\"Logout\" title=\"Logout\" border=\"0\" /><br />"._("Logout")."</a></div>\n";
+		$data .= "<div class=\"col-1-3\" style=\"text-align: center; height: 60px; padding: 5px;\"><a style=\"cursor:pointer\" onclick=\"$().tandem_logout();\"><img class='user_button' src='/img/icons/logout.png' alt=\"Logout\" title=\"Logout\" border=\"0\" /><br />"._("Logout")."</a></div>\n";
 		$data .= "</div>\n";
 
 		// insert JS
@@ -193,7 +193,7 @@ class facebook_box_class extends box_class
 	{
 		parent::__construct("");
 
-		$page->AddHead("<script>(function(d, s, id) {
+		$page->AddHead("<script type=\"text/javascript\">(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
   js = d.createElement(s); js.id = id;

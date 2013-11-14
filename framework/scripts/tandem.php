@@ -219,9 +219,9 @@ else if ($_POST['func'] == "tandem_load_messages")
 		else
 		{
 			if ($m_data['gender'] == "M")
-				$usr_img = "<img src='img/user_def_male.png' height=\"40\" width=\"40\" />";
+				$usr_img = "<img src='/img/user_def_male.png' height=\"40\" width=\"40\" />";
 			else
-				$usr_img = "<img src='img/user_def_female.png' height=\"40\" width=\"40\" />";
+				$usr_img = "<img src='/img/user_def_female.png' height=\"40\" width=\"40\" />";
 		}
 
 		// timestamp

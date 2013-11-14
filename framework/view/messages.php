@@ -40,9 +40,9 @@ foreach ($bd_data as $id => $buddy_id)
 	else
 	{
 		if ($user_data['gender'] == "M")
-			$usr_img = "<img src='img/user_def_male.png' style='border: 1px solid black;'/>";
+			$usr_img = "<img src='/img/user_def_male.png' style='border: 1px solid black;'/>";
 		else
-			$usr_img = "<img src='img/user_def_female.png' style='border: 1px solid black;'/>";
+			$usr_img = "<img src='/img/user_def_female.png' style='border: 1px solid black;'/>";
 	}
 
 	// user real name
