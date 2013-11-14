@@ -116,7 +116,7 @@ else
 	$lang_speak->set_type(form_field::FIELD_OPTION);
 	$lang_speak->set_data($db_conn->languages_get_data());
 	$lang_speak->set_style("width:180px;");
-	$lang_speak->set_extra("<span class=\"inline\" style=\"vertical-align: middle;\"> <a id=\"minus_speak\" style=\"vertical-align: middle;\"><img src=\"img/icons/minus.png\" height=\"20\" width=\"20\"></a> <a id=\"plus_speak\" style=\"vertical-align: middle;\"><img src=\"img/icons/plus.png\"  height=\"20\" width=\"20\"></a></span>");
+	$lang_speak->set_extra("<span class=\"inline\" style=\"vertical-align: middle;\"> <a id=\"minus_speak\" style=\"vertical-align: middle;\"><img src=\"/img/icons/minus.png\" height=\"20\" width=\"20\"></a> <a id=\"plus_speak\" style=\"vertical-align: middle;\"><img src=\"/img/icons/plus.png\"  height=\"20\" width=\"20\"></a></span>");
 
 	// Languages you speak note
 	$lang_speak_note = new form_field("lang_speak_note");
@@ -133,7 +133,7 @@ else
 	$lang_learn_level = new form_field("lang_learn_level", "");
 	$lang_learn_level->set_type(form_field::FIELD_OPTION);
 	$lang_learn_level->set_data($db_conn->languages_get_levels());
-	$lang_learn_level->set_extra("<span class=\"inline\" style=\"vertical-align: middle;\"> <a id=\"minus_learn\" style=\"vertical-align: middle;\"><img src=\"img/icons/minus.png\" height=\"20\" width=\"20\"></a> <a id=\"plus_learn\" style=\"vertical-align: middle;\"><img src=\"img/icons/plus.png\"  height=\"20\" width=\"20\"></a></span>");
+	$lang_learn_level->set_extra("<span class=\"inline\" style=\"vertical-align: middle;\"> <a id=\"minus_learn\" style=\"vertical-align: middle;\"><img src=\"/img/icons/minus.png\" height=\"20\" width=\"20\"></a> <a id=\"plus_learn\" style=\"vertical-align: middle;\"><img src=\"/img/icons/plus.png\"  height=\"20\" width=\"20\"></a></span>");
 
 	// Languages you want to learn note
 	$lang_learn_note = new form_field("lang_learn_note");

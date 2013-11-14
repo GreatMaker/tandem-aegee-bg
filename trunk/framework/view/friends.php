@@ -29,7 +29,7 @@ $page->get_db($db_conn);
 $page->AddToBody("<h2 style=\"display: inline;\">"._("Friends List")."</h2>");
 
 // trash bin
-$page->AddToBody("<div id=\"trash_bin\" style=\"border: 1px dashed; float:right;\"><img src='img/icons/trash.png' style=\"margin: 10px;\"/></div>");
+$page->AddToBody("<div id=\"trash_bin\" style=\"border: 1px dashed; float:right;\"><img src='/img/icons/trash.png' style=\"margin: 10px;\"/></div>");
 
 $page->AddToBody("<br />"._("Click on a friend to open the profile, to remove a friend drag it on the trash bin!"));
 // current user data
@@ -52,9 +52,9 @@ foreach ($data as $friend_id => $friend_data)
 	else
 	{
 		if ($user_data['gender'] == "M")
-			$usr_img = "<img src='img/user_def_male.png' style='border: 1px solid;'/>";
+			$usr_img = "<img src='/img/user_def_male.png' style='border: 1px solid;'/>";
 		else
-			$usr_img = "<img src='img/user_def_female.png' style='border: 1px solid;'/>";
+			$usr_img = "<img src='/img/user_def_female.png' style='border: 1px solid;'/>";
 	}
 
 	// user real name

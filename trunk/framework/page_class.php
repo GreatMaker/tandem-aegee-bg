@@ -105,7 +105,7 @@ class page_class
         if (isset($this->page_js))
             $this->page_js .= "\n";
 
-        $this->page_js .= "<script type=\"text/javascript\" src=\"include/js/".$js."\"></script>";
+        $this->page_js .= "<script type=\"text/javascript\" src=\"/include/js/".$js."\"></script>";
     }
     
     // Push CSS into the page
@@ -114,7 +114,7 @@ class page_class
         if (isset($this->page_css))
             $this->page_css .= "\n";
 
-        $this->page_css .= "<link rel=\"stylesheet\" href=\"include/css/".$css."\" type=\"text/css\" />";
+        $this->page_css .= "<link rel=\"stylesheet\" href=\"/include/css/".$css."\" type=\"text/css\" />";
     }
 
 	// Push jquery init into the page
@@ -201,7 +201,7 @@ class page_class
 			{
 				$link = $social_data['link_1'].$social_data['link_2'];
 
-				$social_content .= "<a href=\"".$link."\" title=\"".$social_data['name_ext']."\"><img src=\"img/icons/social/".$social_data['icon']."\" border=\"0\" /></a>&nbsp;";
+				$social_content .= "<a href=\"".$link."\" title=\"".$social_data['name_ext']."\"><img src=\"/img/icons/social/".$social_data['icon']."\" alt=\"".$social_data['name_ext']."\" border=\"0\" /></a>&nbsp;";
 			}
 
 			$this->page_social = $social_content;

@@ -45,7 +45,7 @@ class mailman_reg_class
 	public function send_message()
 	{
 		$this->message  = "<html><body style=\"background-color: #E6E6E6; color: #666666; font-family: Verdana,Geneva,sans-serif; font-size: 13px;\">
-		<img src=\"http://tandem.unibg.it/new/img/logo_tandem.png\" />
+		<img src=\"http://tandem.unibg.it/img/logo_tandem.png\" />
 		<div style=\"width: 600px; padding: 10px; background-color: #FFFFFF; border-color: #CCCCCC #C0C0C0 #C0C0C0 #CCCCCC; border-image: none; border-style: solid; border-width: 1px;\">
 			<div style=\"clear: both; overflow:auto;\">
 				<div style=\"clear: both; font-size: 15px; margin-left: 10px;\">
@@ -57,7 +57,7 @@ class mailman_reg_class
 				</div>
 			</div>
 			<div style=\"clear: both; margin-right: 10px; overflow:auto;\">
-			<a href=\"http://tandem.unibg.it/new/index.php?page=home\">
+			<a href=\"http://tandem.unibg.it/index.php?page=home\">
 			<div style=\"float: right; border: 1px solid black; padding: 5px;  margin: 5px;\">Login</div>
 			</a>
 			</div>
@@ -129,7 +129,7 @@ class mailman_class
 	public function send_message()
 	{
 		$this->message  = "<html><body style=\"background-color: #E6E6E6; color: #666666; font-family: Verdana,Geneva,sans-serif; font-size: 13px;\">
-		<img src=\"http://tandem.unibg.it/new/img/logo_tandem.png\" />
+		<img src=\"http://tandem.unibg.it/img/logo_tandem.png\" />
 		<div style=\"width: 600px; padding: 10px; background-color: #FFFFFF; border-color: #CCCCCC #C0C0C0 #C0C0C0 #CCCCCC; border-image: none; border-style: solid; border-width: 1px;\">
 			<div style=\"clear: both; overflow:auto;\">
 				<div style=\"clear: both; font-size: 15px; margin-left: 10px;\">
@@ -145,10 +145,10 @@ class mailman_class
 				</div>
 			</div>
 			<div style=\"clear: both; margin-right: 10px; overflow:auto;\">
-			<a href=\"http://tandem.unibg.it/new/index.php?page=profile&id=".$this->sender_id."\">
+			<a href=\"http://tandem.unibg.it/index.php?page=profile&id=".$this->sender_id."\">
 			<div style=\"float: right; border: 1px solid black; padding: 5px; margin: 5px;\">Profile</div>
 			</a>
-			<a href=\"http://tandem.unibg.it/new/index.php?page=home&option=message&to=".$this->sender_id."\">
+			<a href=\"http://tandem.unibg.it/index.php?page=home&option=message&to=".$this->sender_id."\">
 			<div style=\"float: right; border: 1px solid black; padding: 5px;  margin: 5px;\">Reply</div>
 			</a>
 			</div>
