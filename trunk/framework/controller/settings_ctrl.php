@@ -85,6 +85,13 @@ class settings_ctrl extends ctrl_abstract
 		{
 			fix_facebook_link($this->post_data['fb']);
 		}
+		
+		// if manual user, check if change password is requeste and if check is ok
+		if (isset($this->post_data['new_password']) && $this->post_data['new_password'] != "")
+		{
+			if ($this->post_data['new_password'] != $this->post_data['new_password_conf'])
+				throw new Exception("Password check failed");
+		}
 
 		// check spoken langs
 		$values_spoken = array();

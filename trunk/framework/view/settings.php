@@ -95,6 +95,11 @@ else
 	$fb->set_type(form_field::FIELD_TEXT);
 	$fb->set_value($user_data['facebook']);
 	$fb->set_style("width: 350px;");
+	
+	// facebook note
+	$fb_note = new form_field("fb_note");
+	$fb_note->set_type(form_field::FIELD_NOTE);
+	$fb_note->set_value(_("Insert FB username or ID (Ex. http://www.facebook.com/<strong>username</strong> or http://www.facebook.com/profile.php?id=<strong>123456789</strong>)"));
 
 	// About you field
 	$about = new form_field("about", _("About you"));
@@ -139,6 +144,16 @@ else
 	$lang_learn_note = new form_field("lang_learn_note");
 	$lang_learn_note->set_type(form_field::FIELD_NOTE);
 	$lang_learn_note->set_value(_("These are the languages you want to learn, set your skills level as well."));
+	
+	// Change password (only for manual users)
+	$change_pass = new form_field("new_password", _("New Password"));
+	$change_pass->set_type(form_field::FIELD_PASSWORD);
+	$change_pass->set_style("width: 150px;");
+	
+	// Change password (only for manual users)
+	$change_pass_conf = new form_field("new_password_conf", _("Confirm Password"));
+	$change_pass_conf->set_type(form_field::FIELD_PASSWORD);
+	$change_pass_conf->set_style("width: 150px;");
 
 	// send button
 	$send = new form_field("send", "");
@@ -161,6 +176,7 @@ else
 	$settings->add($bdate);
 	$settings->add($email);
 	$settings->add($fb);
+	$settings->add($fb_note);
 	$settings->add($about);
 	$settings->add($interests);
 	
@@ -176,6 +192,14 @@ else
 	$settings->paragraph_close();
 	$settings->add($lang_learn_note);
 	$settings->fieldset_close();
+	
+	if ($db_conn->user_is_manual($user_data['username']))
+	{
+		$settings->fieldset_open(_("Change password"), "f_change_pass");
+		$settings->add($change_pass);
+		$settings->add($change_pass_conf);
+		$settings->fieldset_close();
+	}
 
 	$settings->add($id);
 	$settings->add($username);

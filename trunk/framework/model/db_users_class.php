@@ -79,7 +79,14 @@ class users_table
 	{
 		try
         {
-			$query = "UPDATE users SET email = ?, birthdate = STR_TO_DATE(?, '%d/%m/%Y'), gender = ?, facebook = ?, about = ? WHERE id = ?";
+			$query = "UPDATE users SET email = ?, birthdate = STR_TO_DATE(?, '%d/%m/%Y'), gender = ?, facebook = ?, about = ? ";
+
+			if (isset($data['new_password']) && $data['new_password'] != "")
+			{
+				$query .= ", password = '".md5($data['new_password'])."' ";
+			}
+
+			$query .= "WHERE id = ?";
 
 			$res = $this->dbConnection->prepare($query);
 
@@ -121,6 +128,29 @@ class users_table
 		try
         {
 			$query = "SELECT COUNT(*) FROM users WHERE username = '".$username."'";
+
+			if ($res = $this->dbConnection->query($query))
+			{
+				/* Check the number of rows that match the SELECT statement */
+				$cnt = $res->fetchColumn();
+
+				if ($cnt > 0)
+					return true;
+			}
+
+            return false;
+		}
+		catch (PDOException $e)
+        {
+            $this->dbConnection->SetError(_("Error user information"));
+        }
+	}
+
+	public function user_is_manual($username)
+	{
+		try
+        {
+			$query = "SELECT COUNT(*) FROM users WHERE username = '".$username."' AND password IS NOT NULL";
 
 			if ($res = $this->dbConnection->query($query))
 			{
