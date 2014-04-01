@@ -54,6 +54,12 @@ $fb = new form_field("fb", _("Facebook"));
 $fb->set_type(form_field::FIELD_TEXT);
 $fb->set_style("width: 350px;");
 
+// facebook note
+$fb_note = new form_field("fb_note");
+$fb_note->set_type(form_field::FIELD_NOTE);
+$fb_note->set_value(_("Insert FB username or ID (Ex. http://www.facebook.com/<strong>username</strong> or http://www.facebook.com/profile.php?id=<strong>123456789</strong>)"));
+
+
 // About you field
 $about = new form_field("about", _("About you"));
 $about->set_type(form_field::FIELD_TEXTAREA);
@@ -114,6 +120,7 @@ $registration->add($sex);
 $registration->add($bdate);
 $registration->add($email);
 $registration->add($fb);
+$registration->add($fb_note);
 $registration->add($about);
 $registration->add($interests);
 
