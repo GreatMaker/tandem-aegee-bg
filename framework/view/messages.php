@@ -10,7 +10,7 @@
  */
 
 // set template file
-$page->set_template('framework/templates/main.tpl');
+$page->set_template('framework/templates/main_html5.tpl');
 
 // set page title
 $page->set_title('Messages');
