@@ -201,7 +201,7 @@ class page_class
 			{
 				$link = $social_data['link_1'].$social_data['link_2'];
 
-				$social_content .= "<a href=\"".$link."\" title=\"".$social_data['name_ext']."\"><img src=\"/img/icons/social/".$social_data['icon']."\" alt=\"".$social_data['name_ext']."\" border=\"0\" /></a>&nbsp;";
+				$social_content .= "<a href=\"".$link."\" title=\"".$social_data['name_ext']."\"><img src=\"/img/icons/social/".$social_data['icon']."\" alt=\"".$social_data['name_ext']."\" style=\"border: 0;\" /></a>&nbsp;";
 			}
 
 			$this->page_social = $social_content;
@@ -244,9 +244,14 @@ class page_class
 		{
 			foreach ($data as $id => $content_data)
 			{
-				$this->page_body .= "<div id=\"content\">\n";
+				/*$this->page_body .= "<div id=\"content\">\n";
 				$this->page_body .= "\t".$content_data['html']."\n";
-				$this->page_body .= "</div>\n";
+				$this->page_body .= "</div>\n";*/
+				
+				// HTML5
+				$this->page_body .= "<article>\n";
+				$this->page_body .= "\t".$content_data['html']."\n";
+				$this->page_body .= "</article>\n";
 			}
 		}
 	}
@@ -332,7 +337,8 @@ class page_class
 		else
 		{
 			// fix div
-			$this->page_body = "<div id=\"content\">".$this->page_body."</div>";
+			//$this->page_body = "<div id=\"content\">".$this->page_body."</div>";
+			$this->page_body = "<article>".$this->page_body."</article>"; // HTML5
 		}
 		
 		// set page content

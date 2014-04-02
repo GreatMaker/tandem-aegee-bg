@@ -10,7 +10,7 @@
  */
 
 // set template file
-$page->set_template('framework/templates/main.tpl');
+$page->set_template('framework/templates/main_html5.tpl');
 
 // get user data
 $user_data = $page->get_user_data();
