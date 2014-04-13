@@ -134,8 +134,11 @@ class login_ctrl extends ctrl_abstract
 				// get username data
 				$userdata = $this->db->user_get_data($this->post_data['username']);
 
-				// setcookie
-				$this->cookie->SetData($userdata);
+				if ($userdata['active'] == 1)
+				{	
+					// setcookie
+					$this->cookie->SetData($userdata);
+				}
 
 				// redirect to home
 				$this->ret['redirect'] = "index.php?page=home";
