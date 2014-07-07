@@ -22,7 +22,7 @@ class users_table
 	{
 		try
         {
-			$query = "INSERT INTO users (name, surname, username, email, birthdate, gender, facebook, about) VALUES (?, ?, ?, ?, STR_TO_DATE(?, '%d/%m/%Y'), ?, ?, ?)";
+			$query = "INSERT INTO users (name, surname, username, email, birthdate, gender, facebook, about, matriculation) VALUES (?, ?, ?, ?, STR_TO_DATE(?, '%d/%m/%Y'), ?, ?, ?, ?)";
 
 			$res = $this->dbConnection->prepare($query);
 
@@ -34,6 +34,7 @@ class users_table
 			$res->bindParam(6, $data['sex']);
 			$res->bindParam(7, $data['fb']);
 			$res->bindParam(8, $data['about']);
+			$res->bindParam(9, $data['id']);
 
 			$res->execute();
 		}
