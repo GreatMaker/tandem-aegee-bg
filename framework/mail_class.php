@@ -165,4 +165,70 @@ class mailman_class
 		mail($this->receiver_mail, $this->object, $this->message, $headers);
 	}
 }
+
+class mailman_generic_class
+{
+	private $object;
+	private $message;
+	private $receiver_mail;
+	private $data;
+
+	public function __construct()
+    {
+		$this->message = "";
+	}
+
+	public function set_data($data)
+	{
+		$this->data = $data;
+	}
+
+	public function set_object($obj)
+	{
+		$this->object = $obj;
+	}
+
+	public function set_receiver_mail($recv_mail)
+	{
+		$this->receiver_mail = $recv_mail;
+	}
+
+	public function set_message($msg)
+	{
+		$this->message = $msg;
+	}
+
+	public function send_message()
+	{
+		$headers  = "From: Tandem Project Bergamo <tandem@tandem.unibg.it>" . "\r\n";
+		$headers .= "Reply-To: no-reply@tandem.unibg.it" . "\r\n";
+		$headers .= "MIME-Version: 1.0\r\n";
+		$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+
+		$this->message  = "
+		<html>
+		<head></head>
+		<body>
+		  <table>
+		    <tr>
+			  <td>Nome</td>
+			  <td>Cognome</td>
+			  <td>Email</td>
+			  <td>Facoltà</td>
+			  <td>Lingue</td>
+		    </tr>
+			<tr>
+			  <td>".$this->data['name']."</td>
+			  <td>".$this->data['surname']."</td>
+			  <td>".$this->data['email']."</td>
+			  <td>".$this->data['faculty']."</td>
+			  <td>".$this->data['languages']."</td>
+		    </tr>
+		  </table>
+		</body>
+		</html>";
+
+		mail($this->receiver_mail, $this->object, $this->message, $headers);
+	}
+}
 ?>
