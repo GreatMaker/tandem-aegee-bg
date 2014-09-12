@@ -21,6 +21,53 @@ $page->get_db($db_conn);
 
 $page->AddToBody("<h2>"._("Finish registration")."</h2>");
 
+$page->AddJSPlain("function statusChangeCallback(response)
+                        {
+                            console.log('statusChangeCallback');
+                            console.log(response);
+                            if (response.status === 'connected') {
+                              testAPI();
+                            } else if (response.status === 'not_authorized') {
+                              alert('Please log into this app.');
+                            } else {
+                              alert('Please log into Facebook.');
+                            }
+                        }
+                        function checkLoginState() {
+                            FB.getLoginStatus(function(response) {
+                              statusChangeCallback(response);
+                            });
+                          }
+                            window.fbAsyncInit = function() {
+                            FB.init({
+                              appId      : '775794482459380',
+                              cookie     : true,  // enable cookies to allow the server to access 
+                              xfbml      : true,  // parse social plugins on this page
+                              version    : 'v2.1' // use version 2.1
+                            });
+                            //FB.getLoginStatus(function(response) {
+                            //  statusChangeCallback(response);
+                            //});
+                            };
+                            
+                            // Load the SDK asynchronously
+                            (function(d, s, id) {
+                              var js, fjs = d.getElementsByTagName(s)[0];
+                              if (d.getElementById(id)) return;
+                              js = d.createElement(s); js.id = id;
+                              js.src = \"//connect.facebook.net/en_US/sdk.js\";
+                              fjs.parentNode.insertBefore(js, fjs);
+                            }(document, 'script', 'facebook-jssdk'));
+                            
+                            function testAPI() {
+                                console.log('Welcome!  Fetching your information.... ');
+                                FB.api('/me', function(response) {
+                                  console.log('Successful login for: ' + response.name);
+                                  document.getElementById('fb').value = response.id;
+                                });
+                              }
+                        ");
+
 $registration = new form_class("registration", "framework/controller/form_process.php", form_class::METHOD_POST, form_class::TYPE_FIELDSET);
 
 // name field
@@ -54,11 +101,15 @@ $fb = new form_field("fb", _("Facebook"));
 $fb->set_type(form_field::FIELD_TEXT);
 $fb->set_style("width: 350px;");
 
+// facebook login
+$fb_login = new form_field("fb_login", _("Facebook login"), true);
+$fb_login->set_type(form_field::FIELD_NOTE);
+$fb_login->set_value("<fb:login-button scope=\"public_profile,email\" onlogin=\"checkLoginState();\"></fb:login-button>");
+
 // facebook note
 $fb_note = new form_field("fb_note");
 $fb_note->set_type(form_field::FIELD_NOTE);
-$fb_note->set_value(_("Insert FB username or ID (Ex. http://www.facebook.com/<strong>username</strong> or http://www.facebook.com/profile.php?id=<strong>123456789</strong>)"));
-
+$fb_note->set_value(_("Pressing on login will only get your user profile photo"));
 
 // About you field
 $about = new form_field("about", _("About you"));
@@ -120,6 +171,7 @@ $registration->add($sex);
 $registration->add($bdate);
 $registration->add($email);
 $registration->add($fb);
+$registration->add($fb_login);
 $registration->add($fb_note);
 $registration->add($about);
 $registration->add($interests);
