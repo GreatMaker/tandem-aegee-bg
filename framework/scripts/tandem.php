@@ -227,14 +227,14 @@ else if ($_POST['func'] == "tandem_load_messages")
 		// timestamp
 		$timestamp = "<span style=\"color: grey; font-size: 7pt;\">".$m_data['timestamp']."</span>";
 
-		if ($m_data['id'] == $page->get_user_id())
-		{
+		//if ($m_data['id'] == $page->get_user_id())
+		//{
 			$ret['list'] .= "<div style=\"margin: 10px; min-height:60px; height:auto !important;height:60px; clear:right;\">
 			<div style=\"float: left;\">".$usr_img."</div>
 			<div style=\"display: block; margin-left: 48px;\"><strong>".$m_data['name']."&nbsp;".$m_data['surname']."</strong></div>
 			<div style=\"display: block; margin-left: 48px;\">".nl2br($m_data['message'])."<br />".$timestamp."</div>
 			</div>";
-		}
+		/*}
 		else
 		{
 			$ret['list'] .= "<div style=\"margin: 10px; min-height:60px; height:auto !important;height:60px; clear:right;\">
@@ -242,7 +242,7 @@ else if ($_POST['func'] == "tandem_load_messages")
 			<div style=\"display: block; margin-right: 48px; text-align: right;\"><strong>".$m_data['name']."&nbsp;".$m_data['surname']."</strong></div>
 			<div style=\"display: block; margin-right: 48px; text-align: right;\">".nl2br($m_data['message'])."<br />".$timestamp."</div>
 			</div>";
-		}
+		}*/
 	}
 }
 else
