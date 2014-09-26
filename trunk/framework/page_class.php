@@ -9,6 +9,10 @@
  * or send a letter to Creative Commons, 444 Castro Street, Suite 900, Mountain View, California, 94041, USA.
  */
 
+header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
+header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
+header('Content-Type: text/html; charset=utf-8');
+
 require('config.php');
 require('cookie_class.php');
 require('language_class.php');
@@ -201,7 +205,7 @@ class page_class
 			{
 				$link = $social_data['link_1'].$social_data['link_2'];
 
-				$social_content .= "<a href=\"".$link."\" title=\"".$social_data['name_ext']."\"><img src=\"/img/icons/social/".$social_data['icon']."\" alt=\"".$social_data['name_ext']."\" style=\"border: 0;\" /></a>&nbsp;";
+				$social_content .= "<a href=\"".$link."\" title=\"".$social_data['name_ext']."\"><img src=\"/img/icons/social/".$social_data['icon']."\" width=\"30\" height=\"30\" alt=\"".$social_data['name_ext']."\" style=\"border: 0;\" /></a>&nbsp;";
 			}
 
 			$this->page_social = $social_content;
