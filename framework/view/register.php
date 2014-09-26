@@ -97,7 +97,7 @@ $email->set_type(form_field::FIELD_TEXT);
 $email->set_style("width: 250px;");
 
 // facebook field
-$fb = new form_field("fb", _("Facebook"));
+$fb = new form_field("fb", _("Facebook"), true);
 $fb->set_type(form_field::FIELD_TEXT);
 $fb->set_style("width: 350px;");
 
